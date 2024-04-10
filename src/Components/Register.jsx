@@ -45,7 +45,7 @@ const Register = ({ setToggleLogin }) => {
   // USE THIS FORM TO BUILD OUT YOUR FORM PROPERLY BY ADDING LABELS AND INPUTS AS WELL AS WHATEVER CSS FRAMEWORK YOU MAY USE OR VANILLA CSS. THIS IS JUST A BOILERPLATE CODE
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center" }} className="bg-purple-400">
       <p>
         Already have an account? <Link to="/login">Login</Link>
       </p>

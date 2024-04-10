@@ -28,20 +28,23 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
   }, [toggleLogin]);
 
   return (
-    <div className="navbar-container">
-      <h1>Navbar Component</h1>
-      <h2>
+    <div className="navbar-container py-8 bg-yellow-400 flex">
+      {/* <h1>Navbar Component</h1> */}
+      <h2 className="ml-8 text-2xl">
         <Link style={{ textDecoration: "none" }} to="/">
-          Your image or Logo (click here to go to Landing Page)
+          Navbar
         </Link>
       </h2>
 
       {!toggleLogin ? (
-        <Link to={"/login"}>
+        <Link
+          to={"/login"}
+          className="bg-white hover:bg-green-400 rounded px-2 pt-1 ml-auto mr-8"
+        >
           <span>Login</span>
         </Link>
       ) : (
-        <div>
+        <div className="bg-white hover:bg-red-400 rounded px-2 pt-1 ml-auto mr-8">
           {user && <span>Hello, {user.username.toUpperCase()}? | </span>}
           <Link onClick={handleLogout}>
             <span>Logout</span>

@@ -62,7 +62,7 @@ const Login = ({ setToggleLogin }) => {
   }
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center" }} className="bg-blue-400">
       <h1>Login Component</h1>
       <br />
       <h2>

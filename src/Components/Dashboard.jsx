@@ -7,7 +7,7 @@ const Dashboard = ({ handleLogout }) => {
     <div>
       <br />
       <br />
-      <h2>Dashboard Component</h2>
+      <h2 className="bg-red-400">Dashboard Component</h2>
 
       {user && (
         <h1>
