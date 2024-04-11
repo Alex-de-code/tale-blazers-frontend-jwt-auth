@@ -109,8 +109,8 @@ const Login = ({ setToggleLogin }) => {
               className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3"
             />
           </label>
-          <div className="flex justify-center">
-            <button className="bg-green-400 hover:bg-slate-200 rounded px-2 py-3 shadow w-3/4">
+          <div className="flex justify-center ">
+            <button className="bg-green-400 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4">
               Submit
             </button>
           </div>
