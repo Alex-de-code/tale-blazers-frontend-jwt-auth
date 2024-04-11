@@ -62,49 +62,65 @@ const Login = ({ setToggleLogin }) => {
   }
 
   return (
-    <div style={{ textAlign: "center" }} className="bg-blue-400">
-      <h1>Login Component</h1>
-      <br />
-      <h2>
+    <div className="bg-slate-300">
+      <h1 className="text-3xl text-center py-10">Login Component</h1>
+      <h2 className="text-center mb-10">
         Use the DemoUser button to login and save time during your presentation
       </h2>
-      <button onClick={handleDemoSignIn}>Demo User</button>
-      <br />
-      <br />
-      <br />
+      <div className="flex justify-center">
+        <button
+          onClick={handleDemoSignIn}
+          className="bg-lime-300 hover:bg-emerald-300 rounded px-2 py-2"
+        >
+          Demo User
+        </button>
+      </div>
 
-      <h3> Remove the 'br' tags and these instructions if you use this code</h3>
+      <h3 className="text-center my-10">
+        Below is the regular login form which should be functional
+      </h3>
+      <div className="flex justify-center">
+        <form
+          onSubmit={handleSubmit}
+          className="w-96 grid gap-4 bg-white pt-8 pb-16 rounded-2xl shadow-2xl border-2
+          border-slate-200"
+        >
+          <h2 className="text-2xl text-center font-semibold">Login</h2>
+          <label htmlFor="username" className="flex justify-center">
+            <input
+              id="username"
+              value={user.username}
+              type="text"
+              placeholder="username"
+              autoComplete="username"
+              onChange={handleChange}
+              className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3"
+            />
+          </label>
 
-      <br />
-      <br />
-      <br />
-      <h3>Below is the regular login form which should be functional</h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">
-          <input
-            id="username"
-            value={user.username}
-            type="text"
-            placeholder="username"
-            autoComplete="username"
-            onChange={handleChange}
-          />
-        </label>
-
-        <label htmlFor="password">
-          <input
-            id="password"
-            value={user.password}
-            type="password"
-            placeholder="password"
-            onChange={handleChange}
-            autoComplete="current-password"
-          />
-        </label>
-        <button>Submit</button>
-      </form>
+          <label htmlFor="password" className="flex justify-center">
+            <input
+              id="password"
+              value={user.password}
+              type="password"
+              placeholder="password"
+              onChange={handleChange}
+              autoComplete="current-password"
+              className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3"
+            />
+          </label>
+          <div className="flex justify-center">
+            <button className="bg-green-400 hover:bg-slate-200 rounded px-2 py-3 shadow w-3/4">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
       <p>
-        No Account? <Link to="/register">Register</Link>
+        No Account?{" "}
+        <Link to="/register" className="hover:text-blue-600">
+          Register
+        </Link>
       </p>
     </div>
   );

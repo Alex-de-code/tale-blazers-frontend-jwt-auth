@@ -12,7 +12,7 @@ function LandingPage() {
       <div className="flex justify-center">
         <Link
           to="/dashboard"
-          className="bg-blue-400 hover:bg-orange-400 rounded px-2 py-2 "
+          className="bg-blue-400 hover:bg-orange-400 rounded px-2 py-2"
         >
           Dashboard
         </Link>
