@@ -2,7 +2,7 @@ import React from "react";
 
 const StoryBeginnings = ({ storyBeginnings }) => {
   return (
-    <div>
+    <div className="">
       <div className="text-3xl bg-teal-400 text-center  mb-10">
         StoryBeginings Index
       </div>

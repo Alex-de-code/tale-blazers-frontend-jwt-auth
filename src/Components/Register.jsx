@@ -5,7 +5,13 @@ const URL = import.meta.env.VITE_BASE_URL;
 
 const Register = ({ setToggleLogin }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({ username: "", password: "", email: "" });
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+    email: "",
+    profile_picture: "",
+    bio: "",
+  });
 
   function handleChange(event) {
     setUser({ ...user, [event.target.id]: event.target.value });
@@ -81,6 +87,27 @@ const Register = ({ setToggleLogin }) => {
             placeholder="password"
             onChange={handleChange}
             autoComplete="current-password"
+          />
+        </label>
+
+        <label htmlFor="profile_picture">
+          <input
+            id="profile_picture"
+            value={user.profile_picture}
+            type="text"
+            pattern="http[s]*://.+"
+            placeholder="http://"
+            onChange={handleChange}
+          />
+        </label>
+
+        <label htmlFor="bio">
+          <input
+            id="bio"
+            value={user.bio}
+            type="text"
+            placeholder="The bee's knees!"
+            onChange={handleChange}
           />
         </label>
 

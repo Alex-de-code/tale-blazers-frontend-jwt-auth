@@ -19,7 +19,7 @@ function LandingPage() {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <h1 className="text-3xl text-center my-10">Landing Page</h1>
 
       <h3 className="text-center mb-10">
