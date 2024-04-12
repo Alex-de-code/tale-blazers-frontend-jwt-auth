@@ -62,7 +62,7 @@ const Login = ({ setToggleLogin }) => {
   }
 
   return (
-    <div className="bg-slate-300">
+    <div className="bg-slate-300 pb-24">
       <h1 className="text-3xl text-center py-10">Login Component</h1>
       <h2 className="text-center mb-10">
         Use the DemoUser button to login and save time during your presentation
@@ -82,7 +82,7 @@ const Login = ({ setToggleLogin }) => {
       <div className="flex justify-center">
         <form
           onSubmit={handleSubmit}
-          className="w-96 grid gap-4 bg-white pt-8 pb-16 rounded-2xl shadow-2xl border-2
+          className="w-96 grid gap-4 bg-white pt-8 pb-12 rounded-2xl shadow-2xl border-2
           border-slate-200"
         >
           <h2 className="text-2xl text-center font-semibold">Login</h2>
@@ -109,19 +109,21 @@ const Login = ({ setToggleLogin }) => {
               className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3"
             />
           </label>
-          <div className="flex justify-center ">
+          <div className="flex justify-center">
             <button className="bg-green-400 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4">
               Submit
             </button>
           </div>
+          <div className="text-center mt-3">
+            <p>
+              No Account?{" "}
+              <Link to="/register" className="text-blue-600">
+                Register
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
-      <p>
-        No Account?{" "}
-        <Link to="/register" className="hover:text-blue-600">
-          Register
-        </Link>
-      </p>
     </div>
   );
 };

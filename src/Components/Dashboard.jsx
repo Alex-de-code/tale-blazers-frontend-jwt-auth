@@ -4,7 +4,7 @@ const API = import.meta.env.VITE_BASE_URL;
 
 const Dashboard = ({ handleLogout }) => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
-  // console.log("This is first user:", user);
+  console.log("This is first user:", user);
   // const [userData, setUserData] = useState();
 
   useEffect(() => {

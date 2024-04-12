@@ -7,6 +7,7 @@ import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
+import StoryDetails from "./Components/StoryDetails";
 
 function App() {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ function App() {
             path="/dashboard"
             element={<Dashboard handleLogout={handleLogout} />}
           />
+          <Route path="/storydetails" element={<StoryDetails />} />
         </Route>
       </Routes>
     </>
