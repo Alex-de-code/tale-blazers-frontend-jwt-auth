@@ -5,7 +5,7 @@ import StoryBeginningsIndex from "./StoryBeginningsIndex";
 function LandingPage({ storyBeginnings }) {
   return (
     <div className="">
-      <h1 className="text-3xl text-center my-10">Landing Page</h1>
+      <h1 className="text-3xl text-center my-10 ">Landing Page</h1>
 
       <h3 className="text-center mb-10">
         Dashboard is a protected component. If you are not logged in and you try

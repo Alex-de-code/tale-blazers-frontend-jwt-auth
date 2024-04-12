@@ -62,9 +62,11 @@ const Login = ({ setToggleLogin }) => {
   }
 
   return (
-    <div className="bg-slate-300 pb-24">
-      <h1 className="text-3xl text-center py-10">Login Component</h1>
-      <h2 className="text-center mb-10">
+    <div className="bg-slate-900 pb-24">
+      <h1 className="text-3xl text-center py-10 text-slate-200">
+        Login Component
+      </h1>
+      <h2 className="text-center mb-10 text-slate-200">
         Use the DemoUser button to login and save time during your presentation
       </h2>
       <div className="flex justify-center">
@@ -76,7 +78,7 @@ const Login = ({ setToggleLogin }) => {
         </button>
       </div>
 
-      <h3 className="text-center my-10">
+      <h3 className="text-center my-10 text-slate-200">
         Below is the regular login form which should be functional
       </h3>
       <div className="flex justify-center">
@@ -85,7 +87,7 @@ const Login = ({ setToggleLogin }) => {
           className="w-96 grid gap-4 bg-white pt-8 pb-12 rounded-2xl shadow-2xl border-2
           border-slate-200"
         >
-          <h2 className="text-2xl text-center font-semibold">Login</h2>
+          <h2 className="text-2xl text-center font-semibold ">Login</h2>
           <label htmlFor="username" className="flex justify-center">
             <input
               id="username"

@@ -42,7 +42,7 @@ const StoryDetails = () => {
       {console.log(singleStoryBeginning)}
       {console.log(allStoryEndingsForSingleStory)}
       <div className="bg-black text-white p-5 text-center">
-        Story Detials View
+        Story Details View
       </div>
       <div></div>
     </div>
