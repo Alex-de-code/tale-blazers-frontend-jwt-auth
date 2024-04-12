@@ -9,9 +9,13 @@ import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
 import StoryDetails from "./Components/StoryDetails";
 
+const API = import.meta.env.VITE_BASE_URL;
+
 function App() {
   const navigate = useNavigate();
   const [toggleLogin, setToggleLogin] = useState(false);
+  //state for storyBeginnings data
+  const [storyBeginnings, setStoryBeginnings] = useState([]);
 
   async function handleLogout() {
     localStorage.removeItem("token");
@@ -20,6 +24,18 @@ function App() {
 
     navigate("/login");
   }
+
+  useEffect(() => {
+    fetch(`${API}/api/story_beginnings`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        return res.json();
+      })
+      .then((data) => setStoryBeginnings(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
   return (
     <>
@@ -30,7 +46,10 @@ function App() {
       />
 
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/"
+          element={<LandingPage storyBeginnings={storyBeginnings} />}
+        />
         <Route
           path="/login"
           element={<Login setToggleLogin={setToggleLogin} />}
@@ -46,7 +65,7 @@ function App() {
             path="/dashboard"
             element={<Dashboard handleLogout={handleLogout} />}
           />
-          <Route path="/storydetails" element={<StoryDetails />} />
+          <Route path="/storydetails/:id" element={<StoryDetails />} />
         </Route>
       </Routes>
     </>

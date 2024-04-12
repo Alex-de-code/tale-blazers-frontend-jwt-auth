@@ -1,23 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StoryBeginningsIndex from "./StoryBeginningsIndex";
-const API = import.meta.env.VITE_BASE_URL;
 
-function LandingPage() {
-  const [storyBeginnings, setStoryBeginnings] = useState([]);
-
-  useEffect(() => {
-    fetch(`${API}/api/story_beginnings`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        return res.json();
-      })
-      .then((data) => setStoryBeginnings(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
-
+function LandingPage({ storyBeginnings }) {
   return (
     <div className="">
       <h1 className="text-3xl text-center my-10">Landing Page</h1>
