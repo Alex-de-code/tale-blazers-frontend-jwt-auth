@@ -53,8 +53,8 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
             <span>Login</span>
           </Link>
         ) : (
-          <div className="bg-white hover:bg-red-400 rounded px-2 pt-1 ml-auto mr-8">
-            {user && <span>Hello, {user.username.toUpperCase()}? | </span>}
+          <div className="bg-white hover:bg-red-400 rounded p-1 ml-auto mr-8 mb-1 mt-1">
+            {/* {user && <span>Hello, {user.username.toUpperCase()}? | </span>} */}
             <Link onClick={handleLogout}>
               <span>Logout</span>
             </Link>

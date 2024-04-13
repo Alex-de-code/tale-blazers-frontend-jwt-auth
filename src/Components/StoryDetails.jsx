@@ -38,13 +38,23 @@ const StoryDetails = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-slate-900">
       {console.log(singleStoryBeginning)}
       {console.log(allStoryEndingsForSingleStory)}
       <div className="bg-black text-white p-5 text-center">
         Story Details View
       </div>
-      <div></div>
+      <div className="flex justify-center my-10">
+        <div className="bg-slate-600 w-96 rounded-3xl my-10 shadow-xl">
+          <h2 className="text-2xl bg-slate-700 py-2 text-slate-200 font-semibold p-3 shadow">
+            {singleStoryBeginning.title}
+          </h2>
+          <hr className="border-2 border-teal-500" />
+          <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 ">
+            {singleStoryBeginning.body}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
