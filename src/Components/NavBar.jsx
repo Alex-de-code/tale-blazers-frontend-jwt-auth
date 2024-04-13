@@ -28,30 +28,36 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
   }, [toggleLogin]);
 
   return (
-    <div className="navbar-container py-8 bg-yellow-400 flex">
+    <div className="py-4 bg-yellow-400 flex flex-row justify-between">
       {/* <h1>Navbar Component</h1> */}
       <h2 className="ml-8 text-2xl">
-        <Link style={{ textDecoration: "none" }} to="/">
-          Navbar
-        </Link>
+        <Link to="/">Tale Blazers</Link>
       </h2>
 
-      {!toggleLogin ? (
+      <span className="flex">
         <Link
-          to={"/login"}
-          className="bg-white hover:bg-green-400 rounded px-2 pt-1 ml-auto mr-8"
+          to="/dashboard"
+          className="bg-blue-400 hover:bg-orange-400 rounded px-2 pt-1 flex justify-around mr-2"
         >
-          <span>Login</span>
+          Dashboard
         </Link>
-      ) : (
-        <div className="bg-white hover:bg-red-400 rounded px-2 pt-1 ml-auto mr-8">
-          {user && <span>Hello, {user.username.toUpperCase()}? | </span>}
-          <Link onClick={handleLogout}>
-            <span>Logout</span>
+
+        {!toggleLogin ? (
+          <Link
+            to={"/login"}
+            className="bg-white hover:bg-green-400 rounded px-2 pt-1 ml-auto mr-8"
+          >
+            <span>Login</span>
           </Link>
-        </div>
-      )}
-      <hr />
+        ) : (
+          <div className="bg-white hover:bg-red-400 rounded px-2 pt-1 ml-auto mr-8">
+            {user && <span>Hello, {user.username.toUpperCase()}? | </span>}
+            <Link onClick={handleLogout}>
+              <span>Logout</span>
+            </Link>
+          </div>
+        )}
+      </span>
     </div>
   );
 };
