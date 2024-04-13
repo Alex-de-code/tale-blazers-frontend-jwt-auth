@@ -31,18 +31,16 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
   return (
     <div className="py-4 bg-slate-500 flex flex-row justify-between">
       {/* <h1>Navbar Component</h1> */}
-      <div className="flex">
-        <Flame className="ml-8 text-teal-400" size={36} />
-        <h2 className="text-2xl mt-1">
-          <Link to="/" className="text-slate-100">
-            Tale Blazers
-          </Link>
-        </h2>
-      </div>
+      <Link to="/" className="text-slate-100">
+        <div className="flex">
+          <Flame className="ml-8 text-teal-400" size={36} />
+          <h2 className="text-2xl mt-1">Tale Blazers</h2>
+        </div>
+      </Link>
       <span className="flex">
         <Link
           to="/dashboard"
-          className="bg-blue-400 hover:bg-orange-400 rounded px-2 pt-1 flex justify-around mr-2"
+          className="bg-blue-400 hover:bg-orange-400 rounded p-1 flex justify-around mb-1 mr-4 mt-1"
         >
           Dashboard
         </Link>
@@ -50,7 +48,7 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
         {!toggleLogin ? (
           <Link
             to={"/login"}
-            className="bg-white hover:bg-green-400 rounded px-2 pt-1 ml-auto mr-8"
+            className="bg-white hover:bg-green-400 rounded p-1 ml-auto mb-1 mr-8 mt-1"
           >
             <span>Login</span>
           </Link>
