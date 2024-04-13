@@ -34,10 +34,10 @@ const StoryBeginnings = ({ storyBeginnings }) => {
 
   return (
     <div className="">
-      <div className="text-3xl bg-teal-400 text-center  mb-10">
+      <div className="text-3xl bg-teal-400 text-center  pb-10">
         StoryBeginings Index
       </div>
-      <div className="">
+      <div className="pb-24">
         {storyBeginnings.map(
           ({ id, user_id, title, genre, description, body, created_at }) => (
             <div
@@ -55,7 +55,7 @@ const StoryBeginnings = ({ storyBeginnings }) => {
                       {genre}
                     </div>
                   </div>
-                  <div className="text-center shadow p-3 bg-slate-900 text-slate-100">
+                  <div className="text-center shadow p-3 bg-slate-700 text-slate-100">
                     <span className="line-clamp-1">{description}</span>
                   </div>
                 </div>
