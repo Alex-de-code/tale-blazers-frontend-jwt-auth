@@ -1,3 +1,4 @@
+import { Flame } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
@@ -28,12 +29,16 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
   }, [toggleLogin]);
 
   return (
-    <div className="py-4 bg-yellow-400 flex flex-row justify-between">
+    <div className="py-4 bg-slate-500 flex flex-row justify-between">
       {/* <h1>Navbar Component</h1> */}
-      <h2 className="ml-8 text-2xl">
-        <Link to="/">Tale Blazers</Link>
-      </h2>
-
+      <div className="flex">
+        <Flame className="ml-8 text-teal-400" size={36} />
+        <h2 className="text-2xl mt-1">
+          <Link to="/" className="text-slate-100">
+            Tale Blazers
+          </Link>
+        </h2>
+      </div>
       <span className="flex">
         <Link
           to="/dashboard"
