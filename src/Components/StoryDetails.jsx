@@ -53,7 +53,14 @@ const StoryDetails = () => {
   }, []);
 
   return (
-    <div className="bg-slate-900 h-screen">
+    <div
+      className="bg-slate-900 h-screen"
+      // style={{
+      //   backgroundImage: `url(${`https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1712988101/pattern_ptsyaw.png`})`,
+      //   backgroundSize: "cover",
+      //   backgroundBlendMode: blur,
+      // }}
+    >
       {/* {console.log(singleStoryBeginning)}
       {console.log(allStoryEndingsForSingleStory)} */}
       <div className="bg-black text-white p-5 text-center">
