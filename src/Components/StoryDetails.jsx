@@ -1,4 +1,11 @@
-import { CirclePlus, CircleX, Info, MoveLeft, MoveRight } from "lucide-react";
+import {
+  CirclePlus,
+  CircleX,
+  Info,
+  MoveLeft,
+  MoveRight,
+  PencilLine,
+} from "lucide-react";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -171,10 +178,17 @@ const StoryDetails = () => {
           <MoveLeft size={48} />
         </button>
 
-        <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-3xl">
-          <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
-            {allStoryEndingsForSingleStory[currentIndex]?.title}
-          </h2>
+        <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
+          <div className="flex flex-row">
+            <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
+              {allStoryEndingsForSingleStory[currentIndex]?.title}
+            </h2>
+            <div className="ml-auto mr-3 flex items-center">
+              <button className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 rounded-full inline-flex items-center">
+                <PencilLine size={26} />
+              </button>
+            </div>
+          </div>
           <hr className="border-2 border-slate-700" />
           <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
             <span
