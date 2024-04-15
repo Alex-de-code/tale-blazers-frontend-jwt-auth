@@ -53,10 +53,10 @@ const Register = ({ setToggleLogin }) => {
   return (
     <div style={{ textAlign: "center" }} className="bg-slate-900 h-screen">
       <div className="text-center pt-16 pb-10">
-        <h1 className="text-3xl text-slate-200">
+        <h1 className="text-3xl md:text-5xl text-slate-200">
           Excited to begin your journey on Tale Blazers?
         </h1>
-        <h2 className="text-xl text-slate-200 mt-1">
+        <h2 className="text-xl md:text-2xl text-slate-200 mt-2">
           Register here to become a part of our growing community!
         </h2>
       </div>
