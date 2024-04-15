@@ -35,7 +35,7 @@ const Login = ({ setToggleLogin }) => {
       if (data.token) {
         localStorage.setItem("token", data.token);
         await setToggleLogin(true);
-        navigate("/dashboard");
+        navigate("/");
       } else {
         console.log("JWT Login Failed");
       }
@@ -59,6 +59,7 @@ const Login = ({ setToggleLogin }) => {
     e.preventDefault();
     const user = { username: "demo", password: "password" };
     postFetch(user);
+    // navigate("/");
   }
 
   return (
