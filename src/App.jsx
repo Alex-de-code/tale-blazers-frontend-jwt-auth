@@ -8,6 +8,7 @@ import Dashboard from "./Components/Dashboard";
 import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
 import StoryDetails from "./Components/StoryDetails";
+import "./App.css";
 
 const API = import.meta.env.VITE_BASE_URL;
 

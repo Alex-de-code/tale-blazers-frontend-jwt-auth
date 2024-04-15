@@ -77,6 +77,7 @@ const Register = ({ setToggleLogin }) => {
               onChange={handleChange}
               autoComplete="username"
               className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3"
+              required
             />
           </label>
 
@@ -89,6 +90,7 @@ const Register = ({ setToggleLogin }) => {
               onChange={handleChange}
               autoComplete="email"
               className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3"
+              required
             />
           </label>
 
@@ -101,6 +103,7 @@ const Register = ({ setToggleLogin }) => {
               onChange={handleChange}
               autoComplete="current-password"
               className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3"
+              required
             />
           </label>
 

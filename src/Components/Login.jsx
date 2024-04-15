@@ -68,7 +68,7 @@ const Login = ({ setToggleLogin }) => {
           Welcome back, we missed you!
         </h1>
         <h2 className="text-xl text-slate-200 mt-1">
-          Login to catch up on everything Tale Blazers.
+          Login to catch up on everything Tale Blazer.
         </h2>
       </div>
       <div className="flex justify-center">
