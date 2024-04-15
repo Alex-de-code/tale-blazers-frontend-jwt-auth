@@ -1,50 +1,13 @@
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
-
-// import { useNavigate } from "react-router-dom";
 
 const StoryBeginnings = ({ storyBeginnings }) => {
-  // const navigate = useNavigate();
-
-  // const history = useHistory();
-
-  // const handleStoryClick = (
-  //   id,
-  //   title,
-  //   genre,
-  //   description,
-  //   body,
-  //   created_at
-  // ) => {
-  //   // Navigate to the '/storydetails' route and pass props
-  //   history.push({
-  //     pathname: "/storydetails",
-  //     state: {
-  //       id,
-  //       user_id,
-  //       title,
-  //       genre,
-  //       description,
-  //       body,
-  //       created_at,
-  //     },
-  //   });
-  // };
-
   return (
     <div className="">
-      <div className="text-3xl bg-teal-400 text-center  pb-10">
-        StoryBeginings Index
-      </div>
       <div className="pb-24">
         {storyBeginnings.map(
           ({ id, user_id, title, genre, description, body, created_at }) => (
-            <div
-              key={id}
-              // onClick={() => handleStoryClick(id, title, genre, description)}
-              className=""
-            >
+            <div key={id}>
               <Link to={`/storydetails/${id}`}>
                 <div className="shadow-2xl mb-10 w-5/6 mx-auto md:w-1/3 hover:scale-110 transition-transform duration-300">
                   <div className="flex justify-between bg-slate-800 shadow">
