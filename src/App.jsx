@@ -9,6 +9,7 @@ import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
 import StoryDetails from "./Components/StoryDetails";
 import "./App.css";
+import StoryEndingsForm from "./Components/StoryEndingsForm";
 
 const API = import.meta.env.VITE_BASE_URL;
 
@@ -67,6 +68,10 @@ function App() {
             element={<Dashboard handleLogout={handleLogout} />}
           />
           <Route path="/storydetails/:id" element={<StoryDetails />} />
+          <Route
+            path="/storyendings_form/:id/new"
+            element={<StoryEndingsForm />}
+          />
         </Route>
       </Routes>
     </>

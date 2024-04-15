@@ -10,6 +10,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const API = import.meta.env.VITE_BASE_URL;
 
@@ -17,12 +18,22 @@ const StoryDetails = () => {
   const [singleStoryBeginning, setSingleStoryBeginning] = useState([]);
   const [allStoryEndingsForSingleStory, setAllStoryEndingsForSingleStory] =
     useState([]);
-  const { user } = useOutletContext(); // Access user data provided by the Outlet's context
-
   // this usestate if for the modal with storyBeginning info
   const [openModal, setOpenModal] = useState(false);
   // this usestate sets index of storyEndings and for carousel
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { user } = useOutletContext(); // Access user data provided by the Outlet's context
+  const navigate = useNavigate();
+  const navigateToNewStoryEndingForm = (storyBeginningId) => {
+    navigate(`/storyendings_form/${storyBeginningId}/new`);
+    console.log("This is the id of the storyBeginning", storyBeginningId);
+  };
+  const [storyCreator, setStoryCreator] = useState({
+    username: "",
+    profile_picture: "",
+    created_at: "",
+    bio: "",
+  });
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -68,12 +79,14 @@ const StoryDetails = () => {
       })
         .then((response) => response.json())
         .then((storyBeginning) => {
-          setSingleStoryBeginning(storyBeginning);
+          console.log("We did it!", storyBeginning.creator);
+          setSingleStoryBeginning(storyBeginning.story);
+          setStoryCreator(storyBeginning.creator);
           return storyBeginning;
         })
         .then((storyBeginning) => {
           //passing story beginning object
-          fetch(`${API}/api/story_endings/${storyBeginning.id}`)
+          fetch(`${API}/api/story_endings/${storyBeginning.story.id}`)
             .then((response) => response.json())
             .then((storyEndings) => {
               setAllStoryEndingsForSingleStory(storyEndings);
@@ -85,7 +98,7 @@ const StoryDetails = () => {
 
   return (
     <div
-      className="bg-slate-900 h-screen"
+      className="bg-slate-900 h-auto"
       style={{
         backgroundImage: `url(${`https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png`})`,
         backgroundSize: "cover",
@@ -111,7 +124,10 @@ const StoryDetails = () => {
                   onClick={handleModal}
                 />
               </button>
-              <button className="">
+              <button
+                className=""
+                onClick={() => navigateToNewStoryEndingForm(id)}
+              >
                 <CirclePlus
                   size={36}
                   className="bg-teal-400 hover:bg-slate-300 rounded-full p-1"
@@ -156,13 +172,13 @@ const StoryDetails = () => {
               </div>
               <span className="flex flex-row bg-black/70 rounded-full items-center pr-3">
                 <img
-                  src={user.profile_picture}
+                  src={storyCreator.profile_picture}
                   alt="profile img"
-                  className=" w-12 rounded-full"
+                  className=" w-14 rounded-full"
                 />
-                <h2 className="flex items-center ml-3 text-slate-100 text-2xl">
-                  {user.username[0].toUpperCase()}
-                  {user.username.slice(1).toLowerCase()}
+                <h2 className="flex items-center ml-3 text-slate-100 text-2xl pr-14">
+                  {storyCreator.username[0].toUpperCase()}
+                  {storyCreator.username.slice(1).toLowerCase()}
                 </h2>
               </span>
             </div>
@@ -184,7 +200,7 @@ const StoryDetails = () => {
               {allStoryEndingsForSingleStory[currentIndex]?.title}
             </h2>
             <div className="ml-auto mr-3 flex items-center">
-              <button className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 rounded-full inline-flex items-center">
+              <button className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center">
                 <PencilLine size={26} />
               </button>
             </div>
