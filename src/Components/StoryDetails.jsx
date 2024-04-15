@@ -79,11 +79,11 @@ const StoryDetails = () => {
   return (
     <div
       className="bg-slate-900 h-screen"
-      // style={{
-      //   backgroundImage: `url(${`https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1712988101/pattern_ptsyaw.png`})`,
-      //   backgroundSize: "cover",
-      //   backgroundBlendMode: blur,
-      // }}
+      style={{
+        backgroundImage: `url(${`https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png`})`,
+        backgroundSize: "cover",
+        backgroundBlendMode: blur,
+      }}
     >
       {/* {console.log(singleStoryBeginning)}
       {console.log(allStoryEndingsForSingleStory)} */}
@@ -117,6 +117,9 @@ const StoryDetails = () => {
             {singleStoryBeginning.body}
           </p>
         </div>
+      </div>
+      <div className="flex justify-center">
+        {/* <hr class="border-transparent border-2 ring-8 ring-teal-400/70 w-96 lg:w-188" /> */}
       </div>
 
       {openModal && (
@@ -167,6 +170,7 @@ const StoryDetails = () => {
         >
           <MoveLeft size={48} />
         </button>
+
         <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-3xl">
           <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
             {allStoryEndingsForSingleStory[currentIndex]?.title}
