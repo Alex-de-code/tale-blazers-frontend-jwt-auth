@@ -65,10 +65,10 @@ const Login = ({ setToggleLogin }) => {
   return (
     <div className="bg-slate-900 h-screen">
       <div className="text-center pt-16 pb-10">
-        <h1 className="text-3xl text-slate-200">
+        <h1 className="text-3xl md:text-5xl text-slate-200">
           Welcome back, we missed you!
         </h1>
-        <h2 className="text-xl text-slate-200 mt-1">
+        <h2 className="text-xl md:text-2xl text-slate-200 mt-1">
           Login to catch up on everything Tale Blazers.
         </h2>
       </div>
