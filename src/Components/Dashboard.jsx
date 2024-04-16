@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
-const API = import.meta.env.VITE_BASE_URL;
+const URL = import.meta.env.VITE_BASE_URL;
 
 const Dashboard = ({ handleLogout }) => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
@@ -15,7 +15,7 @@ const Dashboard = ({ handleLogout }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch(`${API}/api/auth/user`, {
+      fetch(`${URL}/api/auth/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

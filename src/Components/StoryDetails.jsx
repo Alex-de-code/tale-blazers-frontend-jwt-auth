@@ -5,6 +5,7 @@ import {
   MoveLeft,
   MoveRight,
   PencilLine,
+  Trash2,
 } from "lucide-react";
 import React from "react";
 import { useState, useEffect } from "react";
@@ -12,7 +13,7 @@ import { useParams } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const API = import.meta.env.VITE_BASE_URL;
+const URL = import.meta.env.VITE_BASE_URL;
 
 const StoryDetails = () => {
   const [singleStoryBeginning, setSingleStoryBeginning] = useState([]);
@@ -74,12 +75,70 @@ const StoryDetails = () => {
 
   const { id } = useParams();
 
+  // DELETE f(x)
+  // const handleDelete = (id) => {
+  //   const token = localStorage.getItem("token");
+
+  //   fetch(`${URL}/api/story_endings/single/${id}`, {
+  //     method: "DELETE",
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         setAllStoryEndingsForSingleStory(
+  //           allStoryEndingsForSingleStory.filter(
+  //             (storyEnding) => storyEnding.id !== id
+  //           )
+  //         );
+  //       } else {
+  //         throw new Error("Failed to delete entry");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error deleting entry:", error);
+  //       console.error("Response status:", response.status);
+  //     });
+  // };
+
+  const handleDelete = (storyEndingId) => {
+    if (allStoryEndingsForSingleStory.length > 0) {
+      const token = localStorage.getItem("token");
+      console.log("deleteing");
+      if (token) {
+        fetch(`${URL}/api/story_endings/single/${storyEndingId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              // If deletion is successful, you might want to refresh the list of story endings
+              // You can either refetch the data or remove the deleted story ending from the state
+              const updatedEndings = allStoryEndingsForSingleStory.filter(
+                (ending) => ending.id !== storyEndingId
+              );
+              setAllStoryEndingsForSingleStory(updatedEndings);
+              setCurrentIndex(currentIndex - 1);
+            } else {
+              throw new Error("Failed to delete story ending");
+            }
+          })
+          .catch((error) =>
+            console.error("Error deleting story ending:", error)
+          );
+      }
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       // this currently fetches all story endings, but what we actually want is to only fetch the story endings based on a story_beginning ID
       // this is set up in the backend but we need to pass the story_beginning Id of a clicked story_beginning to this view
-      fetch(`${API}/api/story_beginnings/${id}`, {
+      fetch(`${URL}/api/story_beginnings/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -93,7 +152,7 @@ const StoryDetails = () => {
         })
         .then((storyBeginning) => {
           //passing story beginning object
-          fetch(`${API}/api/story_endings/${storyBeginning.story.id}`)
+          fetch(`${URL}/api/story_endings/${storyBeginning.story.id}`)
             .then((response) => response.json())
             .then((storyEndings) => {
               setAllStoryEndingsForSingleStory(storyEndings);
@@ -206,12 +265,20 @@ const StoryDetails = () => {
             <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
               {allStoryEndingsForSingleStory[currentIndex]?.title}
             </h2>
-            <div className="ml-auto mr-3 flex items-center">
+            <div className="ml-auto mr-2 flex items-center">
               <button
                 onClick={() => navigateToNewStoryEndingFormEdit(id)}
-                className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
               >
                 <PencilLine size={26} />
+              </button>
+              <button
+                onClick={() =>
+                  handleDelete(allStoryEndingsForSingleStory[currentIndex]?.id)
+                }
+                className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+              >
+                <Trash2 size={26} />
               </button>
             </div>
           </div>
