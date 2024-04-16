@@ -24,10 +24,12 @@ const StoryDetails = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const navigate = useNavigate();
+
   const navigateToNewStoryEndingForm = (storyBeginningId) => {
     navigate(`/storyendings_form/${storyBeginningId}/new`);
     console.log("This is the id of the storyBeginning", storyBeginningId);
   };
+
   const [storyCreator, setStoryCreator] = useState({
     username: "",
     profile_picture: "",

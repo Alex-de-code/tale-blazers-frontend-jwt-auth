@@ -69,7 +69,7 @@ function App() {
           />
           <Route path="/storydetails/:id" element={<StoryDetails />} />
           <Route
-            path="/storyendings_form/:id/new"
+            path="/storyendings_form/:storyBeginningId/new"
             element={<StoryEndingsForm />}
           />
         </Route>
