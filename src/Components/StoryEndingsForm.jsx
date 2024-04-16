@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams, useNavigate } from "react-router-dom";
 
 const URL = import.meta.env.VITE_BASE_URL;
 
 const StoryEndingsForm = () => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
-  const { storyBeginningId } = useParams();
+  const { storyBeginningId, storyEndingId } = useParams();
+  console.log("This is the useParams():", useParams());
   //state for form inputs
   const [newOrUpdatedEnding, setNewOrUpdatedEnding] = useState({
-    id: "",
     title: "",
     body: "",
     story_beginnings_id: +storyBeginningId,
@@ -17,7 +17,11 @@ const StoryEndingsForm = () => {
   //state for setting storybeginning to display next to form view
   const [storyBeginning, setStoryBeginning] = useState({});
 
+  //state for setting storyending when in edit form view
+  // const [singleStoryEnding, setSingleStoryEnding] = useState({});
+
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const handleTextChange = (event) => {
     setNewOrUpdatedEnding({
@@ -39,7 +43,7 @@ const StoryEndingsForm = () => {
   };
 
   const updateStoryEnding = () => {
-    fetch(`${URL}/api/story_endings/${id}`, {
+    fetch(`${URL}/api/story_endings/single/${storyEndingId}`, {
       method: "PUT",
       body: JSON.stringify(newOrUpdatedEnding),
       headers: {
@@ -52,7 +56,12 @@ const StoryEndingsForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submit was clicked");
+    // console.log("submit was clicked");
+    if (storyEndingId) {
+      updateStoryEnding();
+    } else {
+      addStoryEnding();
+    }
   };
 
   useEffect(() => {
@@ -76,6 +85,30 @@ const StoryEndingsForm = () => {
         );
     }
   }, [storyBeginningId]);
+
+  // STORY ENDING!!!!!!
+  useEffect(() => {
+    if (storyEndingId) {
+      fetch(`${URL}/api/story_endings/single/${storyEndingId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((singleStoryEnding) => {
+          setNewOrUpdatedEnding({
+            ...newOrUpdatedEnding,
+            title: singleStoryEnding.title,
+            body: singleStoryEnding.body,
+          });
+        })
+        .catch((error) =>
+          console.error("Error fetching storyEnding data:", error)
+        );
+    }
+  }, []);
 
   // console.log("new/update ending:", newOrUpdatedEnding);
   return (
@@ -131,10 +164,10 @@ const StoryEndingsForm = () => {
                 <div className="flex justify-center">
                   <input
                     id="title"
-                    // value={newOrUpdatedEnding.title}
+                    value={newOrUpdatedEnding.title}
                     type="text"
                     placeholder="name your ending"
-                    // onChange={handleChange}
+                    onChange={handleTextChange}
                     className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
                     required
                   />
@@ -143,17 +176,15 @@ const StoryEndingsForm = () => {
               <label htmlFor="body" className="grid grid-row-2">
                 <span className="ml-16 pl-2">Body:</span>
                 <div className="flex items-center">
-                  <textarea className="border-2 border-black mx-10 rounded shadow-mdresize-none w-100 h-100">
-                    <input
-                      id="body"
-                      // value={newOrUpdatedEnding.body}
-                      type="text"
-                      placeholder=""
-                      // onChange={handleChange}
-                      className=""
-                      required
-                    />
-                  </textarea>
+                  <textarea
+                    id="body"
+                    type="text"
+                    value={newOrUpdatedEnding.body}
+                    placeholder=""
+                    onChange={handleTextChange}
+                    required
+                    // className="border-2 border-black mx-10 rounded shadow-mdresize-none w-100 h-100"
+                  ></textarea>
                 </div>
               </label>
               <div className="flex justify-center">

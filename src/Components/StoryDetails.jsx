@@ -25,9 +25,14 @@ const StoryDetails = () => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const navigate = useNavigate();
 
-  const navigateToNewStoryEndingForm = (storyBeginningId) => {
+  const navigateToNewStoryEndingFormCreate = (storyBeginningId) => {
     navigate(`/storyendings_form/${storyBeginningId}/new`);
-    console.log("This is the id of the storyBeginning", storyBeginningId);
+  };
+
+  const navigateToNewStoryEndingFormEdit = (storyEndingId) => {
+    navigate(
+      `/storyendings_form/${singleStoryBeginning.id}/edit/${storyEndingId}`
+    );
   };
 
   const [storyCreator, setStoryCreator] = useState({
@@ -128,7 +133,7 @@ const StoryDetails = () => {
               </button>
               <button
                 className=""
-                onClick={() => navigateToNewStoryEndingForm(id)}
+                onClick={() => navigateToNewStoryEndingFormCreate(id)}
               >
                 <CirclePlus
                   size={36}
@@ -202,7 +207,10 @@ const StoryDetails = () => {
               {allStoryEndingsForSingleStory[currentIndex]?.title}
             </h2>
             <div className="ml-auto mr-3 flex items-center">
-              <button className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center">
+              <button
+                onClick={() => navigateToNewStoryEndingFormEdit(id)}
+                className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+              >
                 <PencilLine size={26} />
               </button>
             </div>

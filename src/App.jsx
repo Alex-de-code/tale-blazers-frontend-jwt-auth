@@ -72,6 +72,10 @@ function App() {
             path="/storyendings_form/:storyBeginningId/new"
             element={<StoryEndingsForm />}
           />
+          <Route
+            path="storyendings_form/:storyBeginningId/edit/:storyEndingId"
+            element={<StoryEndingsForm />}
+          />
         </Route>
       </Routes>
     </>
