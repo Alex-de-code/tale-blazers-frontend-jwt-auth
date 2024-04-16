@@ -55,6 +55,22 @@ export default {
         188: "47rem",
         192: "48rem",
       },
+      keyframes: {
+        wiggle: {
+          "0%, 100%": {
+            transform: "rotate(-3deg)",
+          },
+          "50%": {
+            transform: "rotate(3deg)",
+          },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 5s ease-in-out infinite",
+      },
+      animation: {
+        float: "custom-float 3s ease-in-out infinite", // Adjust animation speed as needed
+      },
     },
   },
   plugins: [],
