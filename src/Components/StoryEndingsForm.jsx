@@ -161,7 +161,7 @@ const StoryEndingsForm = () => {
           <div className="flex justify-center mt-10">
             <form
               onSubmit={handleSubmit}
-              className="w-96 md:w-124 grid gap-4 bg-white pt-8 pb-12 mb-24 rounded-3xl shadow-2xl  animate-float hover:animate-none"
+              className="w-96 md:w-124 grid gap-4 bg-white  pt-8 pb-12 mb-24 rounded-3xl shadow-2xl  animate-float hover:animate-none"
             >
               <h2 className="text-2xl text-center font-semibold text-black">
                 Create Your Ending
@@ -198,7 +198,7 @@ const StoryEndingsForm = () => {
                 </div>
               </label>
               <div className="flex justify-center">
-                <button className="bg-teal-400 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4">
+                <button className="bg-orange-500 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4">
                   Submit
                 </button>
               </div>

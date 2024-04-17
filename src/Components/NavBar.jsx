@@ -30,12 +30,13 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
   }, [toggleLogin]);
 
   return (
-    <div className="py-4 bg-slate-500 flex flex-row justify-between">
+    <div className="py-4 bg-slate-900/90 flex flex-row justify-between">
       {/* <h1>Navbar Component</h1> */}
       <Link to="/" className="text-slate-100">
-        <div className="flex">
+        <div className="flex items-center ">
           <Flame className="ml-8 text-teal-400" size={36} />
-          <h2 className="text-2xl mt-1">Tale Blazers</h2>
+          <span className="text-teal-400 text-2xl mr-1">Tale</span>{" "}
+          <span className="text-orange-500 text-2xl">Blazers</span>
         </div>
       </Link>
       <span className="flex">

@@ -16,7 +16,10 @@ function LandingPage({ storyBeginnings }) {
             Blaze Trails through the Boundless Realms of
             <div className="flex items-center justify-center mt-4">
               <Flame className=" text-teal-400" size={48} />
-              <h2 className="text-4xl mt-1">Tale Blazers</h2>
+              <h2 className="text-4xl mt-1">
+                <span className="text-teal-400">Tale</span>{" "}
+                <span className="text-orange-500">Blazers</span>
+              </h2>
             </div>
           </h2>
         </div>
