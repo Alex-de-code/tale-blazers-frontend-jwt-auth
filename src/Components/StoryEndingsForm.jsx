@@ -135,7 +135,7 @@ const StoryEndingsForm = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-6 md:h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-6 md:h-auto pb-16">
         <div className="col-span-1 md:col-span-3 bg-slate-900">
           <h1 className="text-2xl md:text-3xl text-white font-bold mb-2 text-center bg-center pt-24">
             How it started...
