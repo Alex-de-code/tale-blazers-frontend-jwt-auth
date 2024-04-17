@@ -112,24 +112,32 @@ const StoryEndingsForm = () => {
 
   // console.log("new/update ending:", newOrUpdatedEnding);
   return (
-    <div className="">
-      <div className="bg-slate-900">
-        <div className="px-4 py-12 text-center">
-          <div className="mb-4">
-            <h1 className="text-4xl md:text-5xl text-white font-bold leading-tight mb-0 inline-block bg-slate-900 rounded-full px-1">
-              Chart Your Own Course:
-            </h1>
-          </div>
-          <div>
-            <p className="text-lg md:text-xl text-white mb-0 inline-block bg-slate-900 rounded-full">
-              Write Endings as Bold as the Story's Origins!
-            </p>
+    <div className="bg-slate-900">
+      <div className="">
+        <div
+          className="px-4 py-16 text-center"
+          style={{
+            backgroundImage: `url(${`https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713373914/wave-5_dp0bbg.png`})`,
+            backgroundSize: "cover",
+          }}
+        >
+          <div className=" p-10 backdrop-blur-sm inline-block rounded-xl">
+            <div className="mb-4">
+              <h1 className="text-4xl md:text-5xl text-white font-bold">
+                Chart Your Own Course:
+              </h1>
+            </div>
+            <div>
+              <p className="text-lg md:text-xl text-white ">
+                Write Endings as Bold as the Story's Origins!
+              </p>
+            </div>
           </div>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-6 md:h-screen">
         <div className="col-span-1 md:col-span-3 bg-slate-900">
-          <h1 className="text-2xl md:text-3xl text-white font-bold mb-2 text-center bg-center pt-10">
+          <h1 className="text-2xl md:text-3xl text-white font-bold mb-2 text-center bg-center pt-24">
             How it started...
           </h1>
           <div className="flex justify-center">
@@ -147,43 +155,45 @@ const StoryEndingsForm = () => {
           </div>
         </div>
         <div className="col-span-1 md:col-span-3 bg-slate-900">
-          <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center bg-center pt-10 text-teal-400">
+          <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center bg-center text-teal-400 pt-24">
             How it ends.
           </h1>
           <div className="flex justify-center mt-10">
             <form
               onSubmit={handleSubmit}
-              className="w-96 md:w-124 grid gap-4 bg-white pt-8 pb-12 rounded-3xl shadow-2xl 
-           border-4 border-slate-500 animate-float hover:animate-none"
+              className="w-96 md:w-124 grid gap-4 bg-white pt-8 pb-12 rounded-3xl shadow-2xl  animate-float hover:animate-none"
             >
               <h2 className="text-2xl text-center font-semibold text-black">
-                Story Ending Submission Form
+                Create Your Ending
               </h2>
               <label htmlFor="title" className="grid grid-row-2">
-                <span className="ml-16 pl-2">Title:</span>
+                <span className="ml-16">Title:</span>
                 <div className="flex justify-center">
                   <input
                     id="title"
+                    name="title"
                     value={newOrUpdatedEnding.title}
                     type="text"
-                    placeholder="name your ending"
+                    placeholder="name it"
                     onChange={handleTextChange}
-                    className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
+                    className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3"
                     required
                   />
                 </div>
               </label>
               <label htmlFor="body" className="grid grid-row-2">
-                <span className="ml-16 pl-2">Body:</span>
-                <div className="flex items-center">
+                <span className="ml-16">Body:</span>
+                <div className="flex items-center justify-center">
                   <textarea
                     id="body"
+                    name="body"
                     type="text"
                     value={newOrUpdatedEnding.body}
-                    placeholder=""
+                    placeholder="tell it"
                     onChange={handleTextChange}
+                    // className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
                     required
-                    // className="border-2 border-black mx-10 rounded shadow-mdresize-none w-100 h-100"
+                    className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3"
                   ></textarea>
                 </div>
               </label>

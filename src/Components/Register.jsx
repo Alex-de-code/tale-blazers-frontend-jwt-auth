@@ -51,8 +51,8 @@ const Register = ({ setToggleLogin }) => {
   // USE THIS FORM TO BUILD OUT YOUR FORM PROPERLY BY ADDING LABELS AND INPUTS AS WELL AS WHATEVER CSS FRAMEWORK YOU MAY USE OR VANILLA CSS. THIS IS JUST A BOILERPLATE CODE
 
   return (
-    <div style={{ textAlign: "center" }} className="bg-slate-900 h-screen">
-      <div className="text-center pt-16 pb-10">
+    <div style={{ textAlign: "center" }} className="bg-slate-900 h-auto pb-48">
+      <div className="text-center pt-24 pb-10 ">
         <h1 className="text-3xl md:text-5xl text-slate-200">
           Excited to begin your journey on Tale Blazers?
         </h1>
