@@ -234,7 +234,7 @@ const StoryDetails = () => {
             </p>
             <div className="flex flex-row">
               <div className="text-xl text-slate-50 flex items-center mr-5">
-                Written by:{" "}
+                Blazer:{" "}
               </div>
               <span className="flex flex-row bg-black/70 rounded-full items-center pr-3">
                 <img
