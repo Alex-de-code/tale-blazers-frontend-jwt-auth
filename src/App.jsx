@@ -10,6 +10,7 @@ import LandingPage from "./Components/LandingPage";
 import StoryDetails from "./Components/StoryDetails";
 import "./App.css";
 import StoryEndingsForm from "./Components/StoryEndingsForm";
+import Footer from "./Components/Footer.jsx";
 
 const API = import.meta.env.VITE_BASE_URL;
 
@@ -78,6 +79,7 @@ function App() {
           />
         </Route>
       </Routes>
+      <Footer />
     </>
   );
 }

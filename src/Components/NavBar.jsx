@@ -1,7 +1,8 @@
-import { Flame } from "lucide-react";
+import { Flame, LogIn, LogOut, UserRound } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
+import Login from "./Login";
 
 const URL = import.meta.env.VITE_BASE_URL;
 
@@ -40,9 +41,10 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
       <span className="flex">
         <Link
           to="/dashboard"
-          className="bg-blue-400 hover:bg-orange-400 rounded p-1 flex justify-around mb-1 mr-4 mt-1"
+          className="bg-white hover:bg-teal-400 rounded p-1 flex justify-around mb-1 mr-4 mt-1"
         >
-          Dashboard
+          {/* Dashboard */}
+          <UserRound />
         </Link>
 
         {!toggleLogin ? (
@@ -50,13 +52,18 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
             to={"/login"}
             className="bg-white hover:bg-green-400 rounded p-1 ml-auto mb-1 mr-8 mt-1"
           >
-            <span>Login</span>
+            <span className="flex flex-row">
+              Login <LogIn className="ml-1" />
+            </span>
           </Link>
         ) : (
           <div className="bg-white hover:bg-red-400 rounded p-1 ml-auto mr-8 mb-1 mt-1">
             {/* {user && <span>Hello, {user.username.toUpperCase()}? | </span>} */}
             <Link onClick={handleLogout}>
-              <span>Logout</span>
+              {/* <span>Logout</span> */}
+              <span className="flex flex-row">
+                Log out <LogOut className="ml-1" />
+              </span>
             </Link>
           </div>
         )}
