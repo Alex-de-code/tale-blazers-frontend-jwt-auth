@@ -52,7 +52,7 @@ const Dashboard = ({ handleLogout }) => {
               <img
                 src={user.profile_picture}
                 alt="user image"
-                className="w-48 rounded-full border-4 border-slate-300 "
+                className="w-48 rounded-full border-4 border-white"
               />
             </div>
             <h1 className="text-2xl font-bold my-5 text-slate-200">
