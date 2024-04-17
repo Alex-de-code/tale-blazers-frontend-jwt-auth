@@ -65,7 +65,7 @@ const Login = ({ setToggleLogin }) => {
   return (
     <div className="bg-slate-900 h-auto pb-48">
       <div className="text-center pt-24 pb-10">
-        <h1 className="text-3xl md:text-5xl text-slate-200">
+        <h1 className="text-3xl md:text-5xl text-white">
           Welcome back, we missed you!
         </h1>
         <h2 className="text-xl md:text-2xl text-slate-200 mt-2">

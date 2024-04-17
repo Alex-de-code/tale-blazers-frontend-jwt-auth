@@ -1,5 +1,5 @@
-# JWT Auth Frontend
+# Tale Blazers Frontend
 
 [Frontend Auth Instructions](./instructions.md)
 
-Create Your Readme.md info here
+Readme.md info here
