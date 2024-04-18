@@ -75,33 +75,6 @@ const StoryDetails = () => {
 
   const { id } = useParams();
 
-  // DELETE f(x)
-  // const handleDelete = (id) => {
-  //   const token = localStorage.getItem("token");
-
-  //   fetch(`${URL}/api/story_endings/single/${id}`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         setAllStoryEndingsForSingleStory(
-  //           allStoryEndingsForSingleStory.filter(
-  //             (storyEnding) => storyEnding.id !== id
-  //           )
-  //         );
-  //       } else {
-  //         throw new Error("Failed to delete entry");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error deleting entry:", error);
-  //       console.error("Response status:", response.status);
-  //     });
-  // };
-
   const handleDelete = (storyEndingId) => {
     if (allStoryEndingsForSingleStory.length > 0) {
       const token = localStorage.getItem("token");
@@ -267,7 +240,11 @@ const StoryDetails = () => {
             </h2>
             <div className="ml-auto mr-2 flex items-center">
               <button
-                onClick={() => navigateToNewStoryEndingFormEdit(id)}
+                onClick={() =>
+                  navigateToNewStoryEndingFormEdit(
+                    allStoryEndingsForSingleStory[currentIndex]?.id
+                  )
+                }
                 className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
               >
                 <PencilLine size={26} />

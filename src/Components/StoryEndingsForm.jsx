@@ -6,7 +6,7 @@ const URL = import.meta.env.VITE_BASE_URL;
 const StoryEndingsForm = () => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const { storyBeginningId, storyEndingId } = useParams();
-  console.log("This is the useParams():", useParams());
+
   //state for form inputs
   const [newOrUpdatedEnding, setNewOrUpdatedEnding] = useState({
     title: "",

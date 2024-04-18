@@ -11,9 +11,9 @@ const Footer = () => {
               TB
             </div>
           </Link>
-          <Link to={"/aboutthedevs"}>
+          {/* <Link to={"/aboutthedevs"}>
             <div className="hover:text-orange-500 text-white">About</div>
-          </Link>
+          </Link> */}
           <Link
             to={
               "https://github.com/Alex-de-code/tale-blazers-frontend-jwt-auth"

@@ -31,7 +31,6 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
 
   return (
     <div className="py-4 bg-slate-900/90 flex flex-row justify-between">
-      {/* <h1>Navbar Component</h1> */}
       <Link to="/" className="text-slate-100">
         <div className="flex items-center ">
           <Flame className="ml-8 text-teal-400" size={36} />
@@ -44,7 +43,6 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
           to="/dashboard"
           className="bg-white hover:bg-teal-400 rounded p-1 flex justify-around mb-1 mr-4 mt-1"
         >
-          {/* Dashboard */}
           <UserRound />
         </Link>
 
@@ -61,7 +59,6 @@ const NavBar = ({ toggleLogin, handleLogout }) => {
           <div className="bg-white hover:bg-red-400 rounded p-1 ml-auto mr-8 mb-1 mt-1">
             {/* {user && <span>Hello, {user.username.toUpperCase()}? | </span>} */}
             <Link onClick={handleLogout}>
-              {/* <span>Logout</span> */}
               <span className="flex flex-row">
                 Log out <LogOut className="ml-1" />
               </span>
