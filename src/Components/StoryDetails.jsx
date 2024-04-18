@@ -17,12 +17,21 @@ const URL = import.meta.env.VITE_BASE_URL;
 
 const StoryDetails = () => {
   const [singleStoryBeginning, setSingleStoryBeginning] = useState([]);
-  const [allStoryEndingsForSingleStory, setAllStoryEndingsForSingleStory] =
-    useState([]);
+
   // this usestate if for the modal with storyBeginning info
   const [openModal, setOpenModal] = useState(false);
+
+  // ___________________________________states
+
+  // this usestate is where we house our array of storyendings for our specific storybeginning id
+  const [allStoryEndingsForSingleStory, setAllStoryEndingsForSingleStory] =
+    useState([]);
+
   // this usestate sets index of storyEndings and for carousel
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // _____________________________________
+
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const navigate = useNavigate();
 
@@ -61,17 +70,31 @@ const StoryDetails = () => {
     console.log(openModal);
   };
 
+  // _____________________ CODE TALK HERE ________________________________
+
   const goToPreviousEnding = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? allStoryEndingsForSingleStory.length - 1 : prevIndex - 1
+    setCurrentIndex(
+      (prevIndex) =>
+        //check if previous index is 0, if it is set currentIndex to the length of allstoryEndings minus one
+        prevIndex === 0
+          ? allStoryEndingsForSingleStory.length - 1
+          : prevIndex - 1
+      // else decrease currentIndex by one
     );
   };
 
   const goToNextEnding = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === allStoryEndingsForSingleStory.length - 1 ? 0 : prevIndex + 1
+    setCurrentIndex(
+      (prevIndex) =>
+        //check if previous index is equal to length of allStoryendings minus one, if yes set CurrenIndex to zero
+        prevIndex === allStoryEndingsForSingleStory.length - 1
+          ? 0
+          : prevIndex + 1
+      //else increase currentindex by 1
     );
   };
+
+  // __________________________________________________________________________________
 
   const { id } = useParams();
 
