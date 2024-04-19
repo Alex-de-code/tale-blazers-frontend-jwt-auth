@@ -43,26 +43,29 @@ Ready to unleash your creativity? Let's start blazing trails together!
 
 This project was built using the following technologies:
 
-- **React**: A JavaScript library for building user interfaces.
-- **React DOM**: Provides DOM-specific methods that can be used at the top level of a web app to interact with the DOM.
-- **React Router**: Declarative routing for React.
-- **React Icons**: SVG icons library for React projects.
-- **Lucide React**: A collection of simply beautiful open-source icons for React projects.
-- **Cors**: Middleware for enabling Cross-Origin Resource Sharing.
-- **Vite**: Next-generation frontend tooling for React development.
-- **Tailwind CSS**: A utility-first CSS framework for creating custom designs quickly.
-- **PostCSS**: A tool for transforming CSS with JavaScript plugins.
-- **Autoprefixer**: A PostCSS plugin to parse CSS and add vendor prefixes to CSS rules.
-- **ESLint**: A pluggable linting utility for JavaScript and JSX.
-- **ESLint Plugins**:
-  - `eslint-plugin-react`: ESLint plugin for React specific linting rules.
-  - `eslint-plugin-react-hooks`: ESLint plugin for React Hooks specific linting rules.
-  - `eslint-plugin-react-refresh`: ESLint plugin for React Refresh specific linting rules.
-- **TypeScript Definitions**:
-  - `@types/react`: TypeScript type definitions for React.
-  - `@types/react-dom`: TypeScript type definitions for React DOM.
-- **Vite Plugins**:
-  - `@vitejs/plugin-react`: Vite plugin for React support.
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
+- [React DOM](https://reactjs.org/docs/react-dom.html) - Provides DOM-specific methods that can be used at the top level of a web app to interact with the DOM.
+- [React Router](https://reactrouter.com/) - Declarative routing for React.
+- [React Icons](https://react-icons.github.io/react-icons/) - SVG icons library for React projects.
+- [Lucide React](https://lucide.dev/) - A collection of simply beautiful open-source icons for React projects.
+- [Node.js](https://nodejs.org/) - A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- [Express](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js.
+- [PostgreSQL](https://www.postgresql.org/) - An open-source relational database system.
+- [JWT (JSON Web Tokens)](https://jwt.io/) - A compact, URL-safe means of representing claims to be transferred between two parties.
+- [bcrypt](https://www.npmjs.com/package/bcrypt) - A library to hash passwords securely.
+- [dotenv](https://www.npmjs.com/package/dotenv) - A zero-dependency module that loads environment variables from a `.env` file into `process.env`.
+- [pg-promise](https://www.npmjs.com/package/pg-promise) - A PostgreSQL interface for Node.js that promises to keep promises.
+- [cookie-parser](https://www.npmjs.com/package/cookie-parser) - Parse Cookie header and populate req.cookies with an object keyed by the cookie names.
+- [Render](https://render.com/) - A cloud platform to host static sites and web applications.
+- [Netlify](https://www.netlify.com/) - An intuitive platform for deploying modern web projects.
+- [Postico](https://eggerapps.at/postico/) - A modern PostgreSQL client for macOS.
+- [ElephantSQL](https://www.elephantsql.com/) - A PostgreSQL database service for developers.
+- CSS - Cascading Style Sheets for styling web pages.
+- JavaScript - The programming language of the web.
+- [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) - Cross-Origin Resource Sharing for secure cross-origin requests.
+- [Vite](https://vitejs.dev/) - A build tool that aims to provide a faster and leaner development experience for modern web projects.
+- [Lucide Icons](https://lucide.dev/) A high quality open-source library that provides 1000+ vector (svg) files
 
 ## License
 
