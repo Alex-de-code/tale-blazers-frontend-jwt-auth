@@ -2,7 +2,7 @@
 
 Welcome to Tale Blazers, the ultimate platform for storytelling enthusiasts! Whether you're an experienced writer or just beginning your journey, Tale Blazers offers a unique space where creativity knows no bounds.
 
-- [LIVE SITE URL](https://taleblazers.netlify.app/)
+- [Link to Website](https://taleblazers.netlify.app/)
 
 ## About Tale Blazers
 
