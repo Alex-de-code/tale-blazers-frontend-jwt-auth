@@ -122,7 +122,7 @@ const Login = ({ setToggleLogin }) => {
           onClick={handleDemoSignIn}
           className="bg-lime-300 hover:bg-emerald-300 rounded mt-10 px-2 py-2"
         >
-          Demo User
+          Guest
         </button>
       </div>
     </div>
