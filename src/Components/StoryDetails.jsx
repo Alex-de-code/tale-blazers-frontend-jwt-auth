@@ -277,13 +277,13 @@ const StoryDetails = () => {
             <div className="flex flex-row py-1 justify-between">
               <button
                 onClick={goToPreviousEnding}
-                className="mx-2 text-white px-2 hover:animate-ping"
+                className="mx-2 text-white px-1 hover:animate-ping"
               >
                 <MoveLeft size={48} />
               </button>
               <button
                 onClick={goToNextEnding}
-                className="mx-2 text-white px-2 hover:animate-ping"
+                className="mx-2 text-white px-1 hover:animate-ping"
               >
                 <MoveRight size={48} />
               </button>
