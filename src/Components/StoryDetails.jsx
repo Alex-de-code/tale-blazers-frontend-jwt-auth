@@ -274,18 +274,20 @@ const StoryDetails = () => {
           </div>
           <hr className="border-2 border-slate-700" />
           <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
-            <button
-              onClick={goToPreviousEnding}
-              className="mx-2 text-white py-2 px-4 hover:animate-ping"
-            >
-              <MoveLeft size={48} />
-            </button>
-            <button
-              onClick={goToNextEnding}
-              className="mx-2 text-white py-auto px-4 hover:animate-ping"
-            >
-              <MoveRight size={48} />
-            </button>
+            <div className="flex flex-row justify-between">
+              <button
+                onClick={goToPreviousEnding}
+                className="mx-2 text-white py-2 px-4 hover:animate-ping"
+              >
+                <MoveLeft size={48} />
+              </button>
+              <button
+                onClick={goToNextEnding}
+                className="mx-2 text-white py-auto px-4 hover:animate-ping"
+              >
+                <MoveRight size={48} />
+              </button>
+            </div>
             <span
               dangerouslySetInnerHTML={{
                 __html: allStoryEndingsForSingleStory[currentIndex]?.body,
