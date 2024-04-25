@@ -286,6 +286,7 @@ const StoryDetails = () => {
           <hr className="border-2 border-slate-700" />
           <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
             <span
+              className="overflow-y-auto"
               dangerouslySetInnerHTML={{
                 __html: allStoryEndingsForSingleStory[currentIndex]?.body,
               }}
