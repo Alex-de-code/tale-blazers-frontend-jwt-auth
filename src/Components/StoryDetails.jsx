@@ -170,7 +170,7 @@ const StoryDetails = () => {
       }}
     >
       <div className="flex justify-center pt-16">
-        <div className="bg-slate-600 h- w-96 lg:w-192 rounded-t-3xl mt-24 mb-5 shadow-xl">
+        <div className="bg-slate-600 w-96 lg:w-192 rounded-t-3xl mt-24 mb-5 shadow-xl">
           <span className="flex flex-row bg-slate-700 rounded-t-3xl">
             <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl">
               {singleStoryBeginning.title}
@@ -245,7 +245,7 @@ const StoryDetails = () => {
         </div>
       )}
 
-      <div className="flex justify-center mt-5">
+      <div className="flex justify-center mt-5 lg:flex-row flex-col">
         <button
           onClick={goToPreviousEnding}
           className="mx-2 text-white py-2 px-4 hover:animate-ping"
@@ -253,34 +253,30 @@ const StoryDetails = () => {
           <MoveLeft size={48} />
         </button>
 
-        <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl  flex flex-col">
-          <div className="flex-grow">
-            <div className="flex flex-row">
-              <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
-                {allStoryEndingsForSingleStory[currentIndex]?.title}
-              </h2>
-              <div className="ml-auto mr-2 flex items-center">
-                <button
-                  onClick={() =>
-                    navigateToNewStoryEndingFormEdit(
-                      allStoryEndingsForSingleStory[currentIndex]?.id
-                    )
-                  }
-                  className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
-                >
-                  <PencilLine size={26} />
-                </button>
-                <button
-                  onClick={() =>
-                    handleDelete(
-                      allStoryEndingsForSingleStory[currentIndex]?.id
-                    )
-                  }
-                  className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
-                >
-                  <Trash2 size={26} />
-                </button>
-              </div>
+        <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl lg:ml-2 mt-2 lg:mt-0">
+          <div className="flex flex-row">
+            <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
+              {allStoryEndingsForSingleStory[currentIndex]?.title}
+            </h2>
+            <div className="ml-auto mr-2 flex items-center">
+              <button
+                onClick={() =>
+                  navigateToNewStoryEndingFormEdit(
+                    allStoryEndingsForSingleStory[currentIndex]?.id
+                  )
+                }
+                className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
+              >
+                <PencilLine size={26} />
+              </button>
+              <button
+                onClick={() =>
+                  handleDelete(allStoryEndingsForSingleStory[currentIndex]?.id)
+                }
+                className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+              >
+                <Trash2 size={26} />
+              </button>
             </div>
           </div>
           <hr className="border-2 border-slate-700" />
