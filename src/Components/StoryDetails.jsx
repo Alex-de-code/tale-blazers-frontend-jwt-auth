@@ -280,6 +280,12 @@ const StoryDetails = () => {
             >
               <MoveLeft size={48} />
             </button>
+            <button
+              onClick={goToNextEnding}
+              className="mx-2 text-white py-auto px-4 hover:animate-ping"
+            >
+              <MoveRight size={48} />
+            </button>
             <span
               dangerouslySetInnerHTML={{
                 __html: allStoryEndingsForSingleStory[currentIndex]?.body,
@@ -287,12 +293,6 @@ const StoryDetails = () => {
             ></span>
           </p>
         </div>
-        <button
-          onClick={goToNextEnding}
-          className="mx-2 text-white py-auto px-4 hover:animate-ping"
-        >
-          <MoveRight size={48} />
-        </button>
       </div>
       <div className="text-white text-center ">
         (Entry {currentIndex + 1} of {allStoryEndingsForSingleStory.length})
