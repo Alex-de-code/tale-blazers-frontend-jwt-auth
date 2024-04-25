@@ -165,7 +165,7 @@ const StoryDetails = () => {
       style={{
         backgroundImage: `url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png')`,
         backgroundRepeat: "no-repeat, repeat-y",
-        backgroundSize: "contain, auto",
+        backgroundSize: "contain, contain",
         backgroundPosition: "center top, center bottom",
       }}
     >
