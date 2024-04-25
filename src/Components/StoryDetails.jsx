@@ -245,15 +245,8 @@ const StoryDetails = () => {
         </div>
       )}
 
-      <div className="flex justify-center mt-5 lg:flex-row flex-col">
-        <button
-          onClick={goToPreviousEnding}
-          className="mx-2 text-white py-2 px-4 hover:animate-ping"
-        >
-          <MoveLeft size={48} />
-        </button>
-
-        <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl lg:ml-2 mt-2 lg:mt-0">
+      <div className="flex justify-center mt-5 ">
+        <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
           <div className="flex flex-row">
             <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
               {allStoryEndingsForSingleStory[currentIndex]?.title}
@@ -281,6 +274,12 @@ const StoryDetails = () => {
           </div>
           <hr className="border-2 border-slate-700" />
           <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
+            <button
+              onClick={goToPreviousEnding}
+              className="mx-2 text-white py-2 px-4 hover:animate-ping"
+            >
+              <MoveLeft size={48} />
+            </button>
             <span
               dangerouslySetInnerHTML={{
                 __html: allStoryEndingsForSingleStory[currentIndex]?.body,
