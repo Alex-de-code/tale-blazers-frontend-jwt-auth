@@ -1,4 +1,5 @@
 import {
+  AlignCenter,
   CirclePlus,
   CircleX,
   Info,
@@ -164,7 +165,7 @@ const StoryDetails = () => {
       style={{
         backgroundImage: `url(${`https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png`})`,
         backgroundSize: "cover",
-        backgroundBlendMode: blur,
+        backgroundPosition: "center",
       }}
     >
       {/* {console.log(singleStoryBeginning)}
