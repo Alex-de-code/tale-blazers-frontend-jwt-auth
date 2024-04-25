@@ -161,12 +161,12 @@ const StoryDetails = () => {
 
   return (
     <div
-      className="bg-slate-900 h-screen pb-60 overflow-y-auto"
-      style={{
-        backgroundImage: `url(${`https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png`})`,
-        backgroundSize: "repeat",
-        backgroundPosition: "center",
-      }}
+      className="bg-slate-900 h-auto pb-60"
+      // style={{
+      //   backgroundImage: `url(${`https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png`})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      // }}
     >
       {/* {console.log(singleStoryBeginning)}
       {console.log(allStoryEndingsForSingleStory)} */}
@@ -174,7 +174,7 @@ const StoryDetails = () => {
         Story Details View
       </div> */}
       <div className="flex justify-center pt-16">
-        <div className="bg-slate-600 w-96 lg:w-192 rounded-t-3xl mt-24 mb-5 shadow-xl">
+        <div className="bg-slate-600 h- w-96 lg:w-192 rounded-t-3xl mt-24 mb-5 shadow-xl">
           <span className="flex flex-row bg-slate-700 rounded-t-3xl">
             <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl">
               {singleStoryBeginning.title}
