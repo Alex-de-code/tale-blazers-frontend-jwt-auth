@@ -164,7 +164,7 @@ const StoryDetails = () => {
       className="bg-slate-900 h-screen pb-60"
       style={{
         backgroundImage: `url(${`https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png`})`,
-        backgroundSize: "cover",
+        backgroundSize: "repeat",
         backgroundPosition: "center",
       }}
     >
