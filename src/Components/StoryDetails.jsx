@@ -163,7 +163,7 @@ const StoryDetails = () => {
     <div
       className="bg-slate-900 h-auto pb-60"
       style={{
-        backgroundImage: `url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png')`,
+        backgroundImage: `url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/e_mirror/v1713153837/pattrern_7_ns9zmj.png')`,
         backgroundRepeat: "no-repeat, repeat-y",
         backgroundSize: "contain, contain",
         backgroundPosition: "center top, center bottom",
