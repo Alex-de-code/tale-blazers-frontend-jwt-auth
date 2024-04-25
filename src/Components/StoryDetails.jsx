@@ -249,7 +249,7 @@ const StoryDetails = () => {
         </div>
       )}
 
-      <div className="flex justify-center my-5">
+      <div className="flex justify-center mt-5">
         <button
           onClick={goToPreviousEnding}
           className="mx-2 text-white py-2 px-4 hover:animate-ping"
