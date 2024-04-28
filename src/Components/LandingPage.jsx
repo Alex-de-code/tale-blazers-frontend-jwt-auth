@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StoryBeginningsIndex from "./StoryBeginningsIndex";
-import { Flame } from "lucide-react";
+import { CirclePlus, Flame, Plus, SquarePlus } from "lucide-react";
 
 function LandingPage({ storyBeginnings }) {
   return (
     <>
       <div className="bg-slate-900">
-        {/* <h1 className="text-3xl text-center py-5 bg-slate-400">Landing Page</h1> */}
         <div className=" py-20 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
             Journey Ahead:
@@ -23,6 +22,9 @@ function LandingPage({ storyBeginnings }) {
             </div>
           </h2>
         </div>
+        <button className="flex justify-center text-slate-50 w-5/6 rounded-xl mx-auto md:w-1/3 mb-10 text-2xl bg-slate-800 border-2 border-orange-500 py-2 hover:scale-110 transition-transform duration-300">
+          Contribute Your Story!
+        </button>
         <StoryBeginningsIndex storyBeginnings={storyBeginnings} />
       </div>
     </>
