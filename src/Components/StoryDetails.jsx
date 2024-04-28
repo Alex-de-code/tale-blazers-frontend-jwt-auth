@@ -142,7 +142,7 @@ const StoryDetails = () => {
       })
         .then((response) => response.json())
         .then((storyBeginning) => {
-          console.log("We did it!", storyBeginning.creator);
+          // console.log("We did it!", storyBeginning.creator);
           setSingleStoryBeginning(storyBeginning.story);
           setStoryCreator(storyBeginning.creator);
           return storyBeginning;
