@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
+import ReactModal from "react-modal";
+import { Ban, CircleX } from "lucide-react";
 
 const URL = import.meta.env.VITE_BASE_URL;
+
+// Set the app element for react-modal
+ReactModal.setAppElement("#root");
 
 const StoryBeginningsForm = ({ setStoryBeginnings }) => {
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //state for form inputs
   const [newBeginning, SetNewBeginning] = useState({
@@ -42,8 +49,18 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submit was clicked");
+    // console.log("submit was clicked");
+    // addStoryBeginning();
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmation = () => {
     addStoryBeginning();
+    setIsModalOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -129,6 +146,46 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
           </form>
         </div>
       </div>
+      <ReactModal
+        isOpen={isModalOpen}
+        onRequestClose={handleCloseModal}
+        contentLabel="Confirmation Modal"
+        // className={"bg-red-500"}
+        className={
+          "fixed inset-0 flex justify-center items-center bg-black/40 bg-opacity-50 backdrop-blur-sm"
+        }
+      >
+        <div className="relative bg-black/60 p-8 rounded-xl border-2 border-red-500 w-100">
+          <button
+            onClick={() => handleCloseModal()}
+            className="absolute top-1 right-1 text-gray-400 hover:text-white font-semibold p-2 rounded-full inline-flex items-center"
+          >
+            <CircleX size={48} />
+          </button>
+          <h2 className="text-white text-lg p-3">
+            Are you certain about submitting? Once submitted, you won't be able
+            to modify or delete the story, affecting other contributing users.
+            Take a moment to review meticulously and ensure your story aligns
+            with your intentions. When prepared, click 'Submit' to publish or
+            'Cancel' to return to the story form.
+          </h2>
+          <div className="flex items-center justify-around">
+            <button
+              onClick={handleConfirmation}
+              className="text-2xl text-green-400 hover:text-white"
+            >
+              Submit
+            </button>
+            <button
+              onClick={handleCloseModal}
+              className="text-2xl text-red-500 hover:text-white"
+            >
+              Cancel
+            </button>
+            {/* <Ban size={56} /> */}
+          </div>
+        </div>
+      </ReactModal>
     </div>
   );
 };
