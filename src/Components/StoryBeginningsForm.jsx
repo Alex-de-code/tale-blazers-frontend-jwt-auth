@@ -72,7 +72,7 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
         <div className="flex justify-center mt-10">
           <form
             onSubmit={handleSubmit}
-            className="w-96 md:w-124 grid gap-4 bg-white  pt-8 pb-12 mb-24 rounded-3xl shadow-2xl"
+            className="w-124 md:w-3/4 grid gap-4 bg-white  pt-8 pb-12 mb-48 rounded-3xl shadow-2xl"
           >
             <h2 className="text-2xl text-center font-semibold text-black">
               Create Your Beginning
