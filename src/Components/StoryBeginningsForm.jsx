@@ -3,8 +3,8 @@ import { useNavigate, useOutletContext } from "react-router";
 
 const URL = import.meta.env.VITE_BASE_URL;
 
-const StoryBeginningsForm = () => {
-  const { user } = useOutletContext; // Access user data provided by the Outlet's context
+const StoryBeginningsForm = ({ setStoryBeginnings }) => {
+  const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const navigate = useNavigate();
 
   //state for form inputs
@@ -28,28 +28,37 @@ const StoryBeginningsForm = () => {
         "Content-Type": "application/json",
       },
     })
-      .then(() => navigate(`/storydetails/${newBeginning.id}`))
+      .then((response) => response.json())
+      .then((storyBeginning) => {
+        // Update the story beginnings state with the new story beginning
+        setStoryBeginnings((prevStoryBeginnings) => [
+          ...prevStoryBeginnings,
+          storyBeginning,
+        ]);
+        navigate(`/storydetails/${storyBeginning.id}`);
+      })
       .catch((error) => console.error("catch", error));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("submit was clicked");
+    addStoryBeginning();
   };
 
   return (
     <div>
       <div className="col-span-1 md:col-span-3 bg-slate-900">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center bg-center text-teal-400 pt-24">
-          How it ends.
+        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center bg-center text-orange-500 pt-24">
+          Start Your Legacy!
         </h1>
         <div className="flex justify-center mt-10">
           <form
             onSubmit={handleSubmit}
-            className="w-96 md:w-124 grid gap-4 bg-white  pt-8 pb-12 mb-24 rounded-3xl shadow-2xl  animate-float hover:animate-none"
+            className="w-96 md:w-124 grid gap-4 bg-white  pt-8 pb-12 mb-24 rounded-3xl shadow-2xl"
           >
             <h2 className="text-2xl text-center font-semibold text-black">
-              Create Your Ending
+              Create Your Beginning
             </h2>
             <label htmlFor="title" className="grid grid-row-2">
               <span className="ml-16">Title:</span>
@@ -57,9 +66,39 @@ const StoryBeginningsForm = () => {
                 <input
                   id="title"
                   name="title"
-                  value={newOrUpdatedEnding.title}
+                  value={newBeginning.title}
                   type="text"
                   placeholder="name it"
+                  onChange={handleTextChange}
+                  className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3"
+                  required
+                />
+              </div>
+            </label>
+            <label htmlFor="genre" className="grid grid-row-2">
+              <span className="ml-16">Genre:</span>
+              <div className="flex justify-center">
+                <input
+                  id="genre"
+                  name="genre"
+                  value={newBeginning.genre}
+                  type="text"
+                  placeholder="give one for now"
+                  onChange={handleTextChange}
+                  className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3"
+                  required
+                />
+              </div>
+            </label>
+            <label htmlFor="description" className="grid grid-row-2">
+              <span className="ml-16">Description:</span>
+              <div className="flex justify-center">
+                <input
+                  id="description"
+                  name="description"
+                  value={newBeginning.description}
+                  type="text"
+                  placeholder="just a taste"
                   onChange={handleTextChange}
                   className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3"
                   required
@@ -73,8 +112,8 @@ const StoryBeginningsForm = () => {
                   id="body"
                   name="body"
                   type="text"
-                  value={newOrUpdatedEnding.body}
-                  placeholder="tell it"
+                  value={newBeginning.body}
+                  placeholder="craft the tale"
                   onChange={handleTextChange}
                   // className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
                   required
@@ -83,7 +122,7 @@ const StoryBeginningsForm = () => {
               </div>
             </label>
             <div className="flex justify-center">
-              <button className="bg-orange-500 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4">
+              <button className="bg-teal-400 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4">
                 Submit
               </button>
             </div>

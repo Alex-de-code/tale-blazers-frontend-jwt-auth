@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import StoryBeginningsIndex from "./StoryBeginningsIndex";
 import { Flame, Search } from "lucide-react";
 
 function LandingPage({ storyBeginnings }) {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="bg-slate-900">
@@ -37,7 +39,10 @@ function LandingPage({ storyBeginnings }) {
             />
           </div>
         </div>
-        <button className="flex justify-center text-slate-50 w-5/6 rounded-xl mx-auto md:w-2/5 mb-20 text-2xl bg-slate-800 border-2 border-orange-500 py-2 hover:scale-110 transition-transform duration-300">
+        <button
+          onClick={() => navigate(`/storybeginnings_form/new`)}
+          className="flex justify-center text-slate-50 w-5/6 rounded-xl mx-auto md:w-2/5 mb-20 text-2xl bg-slate-800 border-2 border-orange-500 py-2 hover:scale-110 transition-transform duration-300"
+        >
           Contribute Your Story!
         </button>
         <StoryBeginningsIndex storyBeginnings={storyBeginnings} />
