@@ -72,13 +72,13 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
         <div className="flex justify-center mt-10">
           <form
             onSubmit={handleSubmit}
-            className="w-124 md:w-3/4 grid gap-4 bg-white  pt-8 pb-12 mb-48 rounded-3xl shadow-2xl"
+            className="w-124 md:w-3/4 grid gap-4 bg-white pt-8 pb-12 mb-48 rounded-3xl shadow-2xl"
           >
             <h2 className="text-2xl text-center font-semibold text-black">
               Create Your Beginning
             </h2>
             <label htmlFor="title" className="grid grid-row-2">
-              <span className="ml-16">Title:</span>
+              <span className="ml-16 ">Title:</span>
               <div className="flex justify-center">
                 <input
                   id="title"
@@ -87,7 +87,7 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
                   type="text"
                   placeholder="name it"
                   onChange={handleTextChange}
-                  className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3"
+                  className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-orange-500"
                   required
                 />
               </div>
@@ -95,16 +95,36 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
             <label htmlFor="genre" className="grid grid-row-2">
               <span className="ml-16">Genre:</span>
               <div className="flex justify-center">
-                <input
+                <select
                   id="genre"
                   name="genre"
                   value={newBeginning.genre}
-                  type="text"
-                  placeholder="give one for now"
                   onChange={handleTextChange}
-                  className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3"
+                  className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-orange-500"
                   required
-                />
+                >
+                  <option value="">Select Genre</option>
+                  <option value="Action">Action</option>
+                  <option value="Adventure">Adventure</option>
+                  <option value="Comedy">Comedy</option>
+                  <option value="Crime">Crime</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Fantasy">Fantasy</option>
+                  <option value="Historical Fiction">Historical Fiction</option>
+                  <option value="Horror">Horror</option>
+                  <option value="Mystery">Mystery</option>
+                  <option value="Romance">Romance</option>
+                  <option value="Science Fiction">Science Fiction</option>
+                  <option value="Thriller">Thriller</option>
+                  <option value="Magical Realism">Magical Realism</option>
+                  <option value="Paranormal">Paranormal</option>
+                  <option value="Supernatural">Supernatural</option>
+                  <option value="Urban Fantasy">Urban Fantasy</option>
+                  <option value="Slice of Life">Slice of Life</option>
+                  <option value="Literary Fiction">Literary Fiction</option>
+                  <option value="Experimental">Experimental</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
             </label>
             <label htmlFor="description" className="grid grid-row-2">
@@ -117,7 +137,7 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
                   type="text"
                   placeholder="just a taste"
                   onChange={handleTextChange}
-                  className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3"
+                  className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-orange-500"
                   required
                 />
               </div>
@@ -134,7 +154,7 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
                   onChange={handleTextChange}
                   // className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
                   required
-                  className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3"
+                  className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-orange-500"
                 ></textarea>
               </div>
             </label>
