@@ -244,61 +244,66 @@ const StoryDetails = () => {
           </div>
         </div>
       )}
-
-      <div className="flex justify-center mt-5 ">
-        <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
-          <div className="flex flex-row">
-            <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
-              {allStoryEndingsForSingleStory[currentIndex]?.title}
-            </h2>
-            <div className="ml-auto mr-2 flex items-center">
-              <button
-                onClick={() =>
-                  navigateToNewStoryEndingFormEdit(
-                    allStoryEndingsForSingleStory[currentIndex]?.id
-                  )
-                }
-                className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
-              >
-                <PencilLine size={26} />
-              </button>
-              <button
-                onClick={() =>
-                  handleDelete(allStoryEndingsForSingleStory[currentIndex]?.id)
-                }
-                className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
-              >
-                <Trash2 size={26} />
-              </button>
+      {allStoryEndingsForSingleStory.length > 0 && (
+        <div>
+          <div className="flex justify-center mt-5 ">
+            <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
+              <div className="flex flex-row">
+                <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
+                  {allStoryEndingsForSingleStory[currentIndex]?.title}
+                </h2>
+                <div className="ml-auto mr-2 flex items-center">
+                  <button
+                    onClick={() =>
+                      navigateToNewStoryEndingFormEdit(
+                        allStoryEndingsForSingleStory[currentIndex]?.id
+                      )
+                    }
+                    className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
+                  >
+                    <PencilLine size={26} />
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleDelete(
+                        allStoryEndingsForSingleStory[currentIndex]?.id
+                      )
+                    }
+                    className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                  >
+                    <Trash2 size={26} />
+                  </button>
+                </div>
+              </div>
+              <hr className="border-2 border-slate-700" />
+              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
+                <div className="flex flex-row py-1 justify-between">
+                  <button
+                    onClick={goToPreviousEnding}
+                    className="mx-2 text-white hover:animate-ping"
+                  >
+                    <MoveLeft size={48} />
+                  </button>
+                  <button
+                    onClick={goToNextEnding}
+                    className="mx-2 text-white hover:animate-ping"
+                  >
+                    <MoveRight size={48} />
+                  </button>
+                </div>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: allStoryEndingsForSingleStory[currentIndex]?.body,
+                  }}
+                ></span>
+              </p>
             </div>
           </div>
-          <hr className="border-2 border-slate-700" />
-          <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
-            <div className="flex flex-row py-1 justify-between">
-              <button
-                onClick={goToPreviousEnding}
-                className="mx-2 text-white hover:animate-ping"
-              >
-                <MoveLeft size={48} />
-              </button>
-              <button
-                onClick={goToNextEnding}
-                className="mx-2 text-white hover:animate-ping"
-              >
-                <MoveRight size={48} />
-              </button>
-            </div>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: allStoryEndingsForSingleStory[currentIndex]?.body,
-              }}
-            ></span>
-          </p>
+          <div className="text-white text-center mt-2">
+            (Entry {currentIndex + 1} of {allStoryEndingsForSingleStory.length})
+          </div>
         </div>
-      </div>
-      <div className="text-white text-center mt-2">
-        (Entry {currentIndex + 1} of {allStoryEndingsForSingleStory.length})
-      </div>
+      )}
     </div>
   );
 };
