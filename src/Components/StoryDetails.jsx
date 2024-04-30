@@ -160,153 +160,155 @@ const StoryDetails = () => {
   }, []);
 
   return (
-    <div
-      className="bg-slate-900 h-auto pb-48"
-      style={{
-        backgroundImage: `url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/e_mirror/v1713153837/pattrern_7_ns9zmj.png')`,
-        backgroundRepeat: "no-repeat, repeat-y",
-        backgroundSize: "contain, contain",
-        backgroundPosition: "center top, center bottom",
-      }}
-    >
-      <div className="flex justify-center pt-16">
-        <div className="bg-slate-600 w-96 lg:w-192 rounded-t-3xl mt-24 mb-5 shadow-xl">
-          <span className="flex flex-row bg-slate-700 rounded-t-3xl">
-            <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl">
-              {singleStoryBeginning.title}
-            </h2>
-            <div className="ml-auto mr-3 flex items-center">
-              <button className="ml-auto mr-3">
-                <Info
-                  size={36}
-                  className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-slate-900 rounded-full p-1"
-                  onClick={handleModal}
-                />
-              </button>
-              <button
-                className=""
-                onClick={() => navigateToNewStoryEndingFormCreate(id)}
-              >
-                <CirclePlus
-                  size={36}
-                  className="bg-teal-400 hover:bg-slate-300 rounded-full p-1"
-                />
-              </button>
-            </div>
-          </span>
-          <hr className="border-2 border-teal-500" />
-          <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
-            {singleStoryBeginning.body}
-          </p>
-        </div>
-      </div>
-      <div className="flex justify-center">
-        {/* <hr class="border-transparent border-2 ring-8 ring-teal-400/70 w-96 lg:w-188" /> */}
-      </div>
-
-      {openModal && (
-        <div className="fixed inset-0 flex justify-center items-center bg-black/40 bg-opacity-50 backdrop-blur-sm">
-          <div className="relative bg-black/40 p-8 rounded-xl border-2 border-teal-400 w-100">
-            <button
-              onClick={() => setOpenModal(false)}
-              className="absolute top-1 right-1 text-gray-400 hover:text-teal-400 font-semibold p-2 rounded-full inline-flex items-center"
-            >
-              <CircleX size={36} />
-            </button>
-            <h3 className="text-3xl font-semibold mb-2 text-slate-50 pt-2">
-              {singleStoryBeginning.title}
-            </h3>
-            <p className="text-xl text-slate-50 italic mb-3">
-              {formatDate(singleStoryBeginning.created_at)}
-            </p>
-            <p className="inline-block rounded-full mb-3 items-center text-xl bg-slate-200 py-1 px-2">
-              {singleStoryBeginning.genre}
-            </p>
-            <p className="text-xl text-slate-50 mb-3">
-              {singleStoryBeginning.description}
-            </p>
-            <div className="flex flex-row">
-              <div className="text-xl text-slate-50 flex items-center mr-5">
-                Blazer:{" "}
+    <div className="flex flex-col min-h-screen">
+      <div
+        className="bg-slate-900 flex-grow"
+        style={{
+          backgroundImage: `url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/e_mirror/v1713153837/pattrern_7_ns9zmj.png')`,
+          backgroundRepeat: "no-repeat, repeat-y",
+          backgroundSize: "100%, 100%",
+          backgroundPosition: "center top, center bottom",
+        }}
+      >
+        <div className="flex justify-center ">
+          <div className="bg-slate-600 w-96 lg:w-192 rounded-t-3xl mt-36 mb-5 shadow-xl">
+            <span className="flex flex-row bg-slate-700 rounded-t-3xl">
+              <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl">
+                {singleStoryBeginning.title}
+              </h2>
+              <div className="ml-auto mr-3 flex items-center">
+                <button className="ml-auto mr-3">
+                  <Info
+                    size={36}
+                    className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-slate-900 rounded-full p-1"
+                    onClick={handleModal}
+                  />
+                </button>
+                <button
+                  className=""
+                  onClick={() => navigateToNewStoryEndingFormCreate(id)}
+                >
+                  <CirclePlus
+                    size={36}
+                    className="bg-teal-400 hover:bg-slate-300 rounded-full p-1"
+                  />
+                </button>
               </div>
-              <span className="flex flex-row bg-black/70 rounded-full items-center pr-3">
-                <img
-                  src={storyCreator.profile_picture}
-                  alt="profile img"
-                  className=" w-14 rounded-full"
-                />
-                <h2 className="flex items-center ml-3 text-slate-100 text-2xl pr-14">
-                  {storyCreator.username[0].toUpperCase()}
-                  {storyCreator.username.slice(1).toLowerCase()}
-                </h2>
-              </span>
-            </div>
+            </span>
+            <hr className="border-2 border-teal-500" />
+            <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
+              {singleStoryBeginning.body}
+            </p>
           </div>
         </div>
-      )}
-      {allStoryEndingsForSingleStory.length > 0 && (
-        <div>
-          <div className="flex justify-center mt-5 ">
-            <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
+        {/* <div className="flex justify-center">
+          <hr class="border-transparent border-2 ring-8 ring-teal-400/70 w-96 lg:w-188" />
+        </div> */}
+        {openModal && (
+          <div className="fixed inset-0 flex justify-center items-center bg-black/40 bg-opacity-50 backdrop-blur-sm">
+            <div className="relative bg-black/40 p-8 rounded-xl border-2 border-teal-400 w-100">
+              <button
+                onClick={() => setOpenModal(false)}
+                className="absolute top-1 right-1 text-gray-400 hover:text-teal-400 font-semibold p-2 rounded-full inline-flex items-center"
+              >
+                <CircleX size={36} />
+              </button>
+              <h3 className="text-3xl font-semibold mb-2 text-slate-50 pt-2">
+                {singleStoryBeginning.title}
+              </h3>
+              <p className="text-xl text-slate-50 italic mb-3">
+                {formatDate(singleStoryBeginning.created_at)}
+              </p>
+              <p className="inline-block rounded-full mb-3 items-center text-xl bg-slate-200 py-1 px-2">
+                {singleStoryBeginning.genre}
+              </p>
+              <p className="text-xl text-slate-50 mb-3">
+                {singleStoryBeginning.description}
+              </p>
               <div className="flex flex-row">
-                <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
-                  {allStoryEndingsForSingleStory[currentIndex]?.title}
-                </h2>
-                {user.id ===
-                  allStoryEndingsForSingleStory[currentIndex]?.user_id && (
-                  <div className="ml-auto mr-2 flex items-center">
+                <div className="text-xl text-slate-50 flex items-center mr-5">
+                  Blazer:{" "}
+                </div>
+                <span className="flex flex-row bg-black/70 rounded-full items-center pr-3">
+                  <img
+                    src={storyCreator.profile_picture}
+                    alt="profile img"
+                    className=" w-14 rounded-full"
+                  />
+                  <h2 className="flex items-center ml-3 text-slate-100 text-2xl pr-14">
+                    {storyCreator.username[0].toUpperCase()}
+                    {storyCreator.username.slice(1).toLowerCase()}
+                  </h2>
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+        {allStoryEndingsForSingleStory.length > 0 && (
+          <div>
+            <div className="flex justify-center mt-5">
+              <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
+                <div className="flex flex-row">
+                  <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
+                    {allStoryEndingsForSingleStory[currentIndex]?.title}
+                  </h2>
+                  {user.id ===
+                    allStoryEndingsForSingleStory[currentIndex]?.user_id && (
+                    <div className="ml-auto mr-2 flex items-center">
+                      <button
+                        onClick={() =>
+                          navigateToNewStoryEndingFormEdit(
+                            allStoryEndingsForSingleStory[currentIndex]?.id
+                          )
+                        }
+                        className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
+                      >
+                        <PencilLine size={26} />
+                      </button>
+                      <button
+                        onClick={() =>
+                          handleDelete(
+                            allStoryEndingsForSingleStory[currentIndex]?.id
+                          )
+                        }
+                        className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                      >
+                        <Trash2 size={26} />
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <hr className="border-2 border-slate-700" />
+                <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
+                  <div className="flex flex-row py-1 justify-between">
                     <button
-                      onClick={() =>
-                        navigateToNewStoryEndingFormEdit(
-                          allStoryEndingsForSingleStory[currentIndex]?.id
-                        )
-                      }
-                      className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
+                      onClick={goToPreviousEnding}
+                      className="mx-2 text-white hover:animate-ping"
                     >
-                      <PencilLine size={26} />
+                      <MoveLeft size={48} />
                     </button>
                     <button
-                      onClick={() =>
-                        handleDelete(
-                          allStoryEndingsForSingleStory[currentIndex]?.id
-                        )
-                      }
-                      className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                      onClick={goToNextEnding}
+                      className="mx-2 text-white hover:animate-ping"
                     >
-                      <Trash2 size={26} />
+                      <MoveRight size={48} />
                     </button>
                   </div>
-                )}
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: allStoryEndingsForSingleStory[currentIndex]?.body,
+                    }}
+                  ></span>
+                </p>
               </div>
-              <hr className="border-2 border-slate-700" />
-              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
-                <div className="flex flex-row py-1 justify-between">
-                  <button
-                    onClick={goToPreviousEnding}
-                    className="mx-2 text-white hover:animate-ping"
-                  >
-                    <MoveLeft size={48} />
-                  </button>
-                  <button
-                    onClick={goToNextEnding}
-                    className="mx-2 text-white hover:animate-ping"
-                  >
-                    <MoveRight size={48} />
-                  </button>
-                </div>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: allStoryEndingsForSingleStory[currentIndex]?.body,
-                  }}
-                ></span>
-              </p>
+            </div>
+            <div className="text-white text-center mt-2 mb-36">
+              (Entry {currentIndex + 1} of{" "}
+              {allStoryEndingsForSingleStory.length})
             </div>
           </div>
-          <div className="text-white text-center mt-2">
-            (Entry {currentIndex + 1} of {allStoryEndingsForSingleStory.length})
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
