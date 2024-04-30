@@ -252,28 +252,31 @@ const StoryDetails = () => {
                 <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
                   {allStoryEndingsForSingleStory[currentIndex]?.title}
                 </h2>
-                <div className="ml-auto mr-2 flex items-center">
-                  <button
-                    onClick={() =>
-                      navigateToNewStoryEndingFormEdit(
-                        allStoryEndingsForSingleStory[currentIndex]?.id
-                      )
-                    }
-                    className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
-                  >
-                    <PencilLine size={26} />
-                  </button>
-                  <button
-                    onClick={() =>
-                      handleDelete(
-                        allStoryEndingsForSingleStory[currentIndex]?.id
-                      )
-                    }
-                    className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
-                  >
-                    <Trash2 size={26} />
-                  </button>
-                </div>
+                {user.id ===
+                  allStoryEndingsForSingleStory[currentIndex]?.user_id && (
+                  <div className="ml-auto mr-2 flex items-center">
+                    <button
+                      onClick={() =>
+                        navigateToNewStoryEndingFormEdit(
+                          allStoryEndingsForSingleStory[currentIndex]?.id
+                        )
+                      }
+                      className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
+                    >
+                      <PencilLine size={26} />
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleDelete(
+                          allStoryEndingsForSingleStory[currentIndex]?.id
+                        )
+                      }
+                      className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                    >
+                      <Trash2 size={26} />
+                    </button>
+                  </div>
+                )}
               </div>
               <hr className="border-2 border-slate-700" />
               <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
