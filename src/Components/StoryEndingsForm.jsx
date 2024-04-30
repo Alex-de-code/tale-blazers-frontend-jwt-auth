@@ -176,7 +176,7 @@ const StoryEndingsForm = () => {
                     type="text"
                     placeholder="name it"
                     onChange={handleTextChange}
-                    className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3"
+                    className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-teal-400"
                     required
                   />
                 </div>
@@ -193,7 +193,7 @@ const StoryEndingsForm = () => {
                     onChange={handleTextChange}
                     // className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
                     required
-                    className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3"
+                    className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-teal-400"
                   ></textarea>
                 </div>
               </label>

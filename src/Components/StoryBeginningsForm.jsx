@@ -66,19 +66,19 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
   return (
     <div>
       <div className="col-span-1 md:col-span-3 bg-slate-900">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center bg-center text-orange-500 pt-24">
+        <h1 className="text-3xl md:text-5xl font-bold mb-2 text-center bg-center text-orange-500 pt-24">
           Start Your Legacy!
         </h1>
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-14">
           <form
             onSubmit={handleSubmit}
-            className="w-124 md:w-3/4 grid gap-4 bg-white pt-8 pb-12 mb-48 rounded-3xl shadow-2xl"
+            className="w-124 md:w-3/4 grid gap-4 bg-slate-100 pt-8 pb-20 mb-48 rounded-3xl shadow-2xl"
           >
             <h2 className="text-2xl text-center font-semibold text-black">
               Create Your Beginning
             </h2>
             <label htmlFor="title" className="grid grid-row-2">
-              <span className="ml-16 ">Title:</span>
+              <span className="w-3/4 mx-auto text-lg">Title:</span>
               <div className="flex justify-center">
                 <input
                   id="title"
@@ -93,7 +93,7 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
               </div>
             </label>
             <label htmlFor="genre" className="grid grid-row-2">
-              <span className="ml-16">Genre:</span>
+              <span className="w-3/4 mx-auto text-lg">Genre:</span>
               <div className="flex justify-center">
                 <select
                   id="genre"
@@ -128,7 +128,7 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
               </div>
             </label>
             <label htmlFor="description" className="grid grid-row-2">
-              <span className="ml-16">Description:</span>
+              <span className="w-3/4 mx-auto text-lg">Description:</span>
               <div className="flex justify-center">
                 <input
                   id="description"
@@ -143,7 +143,7 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
               </div>
             </label>
             <label htmlFor="body" className="grid grid-row-2">
-              <span className="ml-16">Body:</span>
+              <span className="w-3/4 mx-auto text-lg">Body:</span>
               <div className="flex items-center justify-center">
                 <textarea
                   id="body"
@@ -159,7 +159,7 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
               </div>
             </label>
             <div className="flex justify-center">
-              <button className="bg-teal-400 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4">
+              <button className="bg-teal-400 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4 mt-6">
                 Submit
               </button>
             </div>
