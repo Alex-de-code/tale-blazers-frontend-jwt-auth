@@ -161,13 +161,13 @@ const StoryEndingsForm = () => {
           <div className="flex justify-center mt-10">
             <form
               onSubmit={handleSubmit}
-              className="w-96 md:w-124 grid gap-4 bg-white  pt-8 pb-12 mb-24 rounded-3xl shadow-2xl  animate-float hover:animate-none"
+              className="w-96 md:w-124 grid gap-4 bg-slate-100  pt-8 pb-12 mb-24 rounded-3xl shadow-2xl  animate-float hover:animate-none"
             >
               <h2 className="text-2xl text-center font-semibold text-black">
                 Create Your Ending
               </h2>
               <label htmlFor="title" className="grid grid-row-2">
-                <span className="ml-16">Title:</span>
+                <span className="w-3/4 mx-auto text-lg">Title:</span>
                 <div className="flex justify-center">
                   <input
                     id="title"
@@ -182,7 +182,7 @@ const StoryEndingsForm = () => {
                 </div>
               </label>
               <label htmlFor="body" className="grid grid-row-2">
-                <span className="ml-16">Body:</span>
+                <span className="w-3/4 mx-auto text-lg">Body:</span>
                 <div className="flex items-center justify-center">
                   <textarea
                     id="body"
