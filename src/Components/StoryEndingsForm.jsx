@@ -137,11 +137,11 @@ const StoryEndingsForm = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-6 md:h-auto pb-16">
         <div className="col-span-1 md:col-span-3 bg-slate-900">
-          <h1 className="text-2xl md:text-3xl text-white font-bold mb-2 text-center bg-center pt-24">
+          <h1 className="text-3xl text-white font-bold mb-2 text-center bg-center pt-24">
             How it started...
           </h1>
           <div className="flex justify-center">
-            <div className="bg-slate-600 w-96 md:w-124 rounded-3xl mt-10 mb-5 shadow-xl">
+            <div className="bg-slate-600 w-96 md:w-152 rounded-3xl mt-10 mb-5 shadow-xl">
               <span className="flex flex-row bg-slate-700 rounded-t-3xl">
                 <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl">
                   {storyBeginning.title}
@@ -155,13 +155,13 @@ const StoryEndingsForm = () => {
           </div>
         </div>
         <div className="col-span-1 md:col-span-3 bg-slate-900">
-          <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center bg-center text-teal-400 pt-24">
+          <h1 className="text-3xl font-bold mb-2 text-center bg-center text-teal-400 pt-24">
             How it ends.
           </h1>
           <div className="flex justify-center mt-10">
             <form
               onSubmit={handleSubmit}
-              className="w-96 md:w-124 grid gap-4 bg-slate-100  pt-8 pb-12 mb-24 rounded-3xl shadow-2xl  animate-float hover:animate-none"
+              className="w-96 md:w-152 grid gap-4 bg-slate-100  pt-8 pb-16 mb-24 rounded-3xl shadow-2xl  animate-float hover:animate-none"
             >
               <h2 className="text-2xl text-center font-semibold text-black">
                 Create Your Ending
@@ -198,7 +198,7 @@ const StoryEndingsForm = () => {
                 </div>
               </label>
               <div className="flex justify-center">
-                <button className="bg-orange-500 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4">
+                <button className="bg-orange-500 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4 mt-6">
                   Submit
                 </button>
               </div>
