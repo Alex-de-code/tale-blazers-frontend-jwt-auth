@@ -173,7 +173,7 @@ const StoryDetails = () => {
         <div className="flex justify-center ">
           <div className="bg-slate-600 w-96 lg:w-192 rounded-t-3xl mt-36 mb-5 shadow-xl">
             <span className="flex flex-row bg-slate-700 rounded-t-3xl">
-              <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl">
+              <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl overflow-wrap-normal break-all">
                 {singleStoryBeginning.title}
               </h2>
               <div className="ml-auto mr-3 flex items-center">
@@ -196,7 +196,7 @@ const StoryDetails = () => {
               </div>
             </span>
             <hr className="border-2 border-teal-500" />
-            <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
+            <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 overflow-wrap-normal break-all">
               {singleStoryBeginning.body}
             </p>
           </div>
@@ -249,7 +249,7 @@ const StoryDetails = () => {
             <div className="flex justify-center mt-5">
               <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
                 <div className="flex flex-row">
-                  <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow">
+                  <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow overflow-wrap-normal break-all">
                     {allStoryEndingsForSingleStory[currentIndex]?.title}
                   </h2>
                   {user.id ===
@@ -279,7 +279,7 @@ const StoryDetails = () => {
                   )}
                 </div>
                 <hr className="border-2 border-slate-700" />
-                <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
+                <div className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
                   <div className="flex flex-row py-1 justify-between">
                     <button
                       onClick={goToPreviousEnding}
@@ -298,8 +298,9 @@ const StoryDetails = () => {
                     dangerouslySetInnerHTML={{
                       __html: allStoryEndingsForSingleStory[currentIndex]?.body,
                     }}
+                    className="overflow-wrap-normal break-all"
                   ></span>
-                </p>
+                </div>
               </div>
             </div>
             <div className="text-white text-center mt-2 mb-36">
