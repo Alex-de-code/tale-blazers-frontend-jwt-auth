@@ -213,7 +213,7 @@ const StoryDetails = () => {
               >
                 <CircleX size={36} />
               </button>
-              <h3 className="text-3xl font-semibold mb-2 text-slate-50 pt-2">
+              <h3 className="text-3xl font-semibold mb-2 text-slate-50 pt-2 overflow-wrap-normal break-all">
                 {singleStoryBeginning.title}
               </h3>
               <p className="text-xl text-slate-50 italic mb-3">
@@ -222,11 +222,11 @@ const StoryDetails = () => {
               <p className="inline-block rounded-full mb-3 items-center text-xl bg-slate-200 py-1 px-2">
                 {singleStoryBeginning.genre}
               </p>
-              <p className="text-xl text-slate-50 mb-3">
+              <p className="text-xl text-slate-50 mb-3 overflow-wrap-normal break-all">
                 {singleStoryBeginning.description}
               </p>
               <div className="flex flex-row">
-                <div className="text-xl text-slate-50 flex items-center mr-5">
+                <div className="text-xl text-slate-50 flex items-center mr-5 overflow-wrap-normal break-all">
                   Blazer:{" "}
                 </div>
                 <span className="flex flex-row bg-black/70 rounded-full items-center pr-3">
