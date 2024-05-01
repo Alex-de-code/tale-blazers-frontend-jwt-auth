@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
 
-const StoryBeginnings = ({ storyBeginnings }) => {
+const StoryBeginnings = ({ filteredStories }) => {
   return (
     <div className="">
       <div className="pb-24">
-        {storyBeginnings.map(
+        {filteredStories.map(
           ({ id, user_id, title, genre, description, body, created_at }) => (
             <div key={id}>
               <Link to={`/storydetails/${id}`}>

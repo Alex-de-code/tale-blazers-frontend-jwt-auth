@@ -5,6 +5,28 @@ import { Flame, Search } from "lucide-react";
 
 function LandingPage({ storyBeginnings }) {
   const navigate = useNavigate();
+  // state for filtered stories for search
+  const [filteredStories, setFilteredStories] = useState([]);
+  // state for search input
+  const [input, setInput] = useState("");
+
+  function handleSearchChange(event) {
+    const search = event.target.value;
+    const result = search.length
+      ? storyBeginnings.filter((story) =>
+          story.title.toLowerCase().includes(search.toLowerCase())
+        )
+      : storyBeginnings;
+    setInput(search);
+    setFilteredStories(result);
+
+    console.log("This is the result", result);
+    console.log("This is filteredStories", filteredStories);
+  }
+
+  useEffect(() => {
+    setFilteredStories([...storyBeginnings]);
+  }, [storyBeginnings]);
 
   return (
     <>
@@ -34,8 +56,8 @@ function LandingPage({ storyBeginnings }) {
               type="text"
               id="search"
               placeholder="Discover a tale..."
-              // value={input}
-              // onChange={handleSearchChange}
+              value={input}
+              onChange={handleSearchChange}
             />
           </div>
         </div>
@@ -45,7 +67,7 @@ function LandingPage({ storyBeginnings }) {
         >
           Contribute Your Story!
         </button>
-        <StoryBeginningsIndex storyBeginnings={storyBeginnings} />
+        <StoryBeginningsIndex filteredStories={filteredStories} />
       </div>
     </>
   );
