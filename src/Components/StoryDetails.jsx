@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 const URL = import.meta.env.VITE_BASE_URL;
 
 const StoryDetails = () => {
-  const [singleStoryBeginning, setSingleStoryBeginning] = useState([]);
+  const [singleStoryBeginning, setSingleStoryBeginning] = useState(null);
 
   // this usestate if for the modal with storyBeginning info
   const [openModal, setOpenModal] = useState(false);
@@ -170,37 +170,39 @@ const StoryDetails = () => {
           backgroundPosition: "center top, center bottom",
         }}
       >
-        <div className="flex justify-center ">
-          <div className="bg-slate-600 w-96 lg:w-192 rounded-t-3xl mt-36 mb-5 shadow-xl">
-            <span className="flex flex-row bg-slate-700 rounded-t-3xl">
-              <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl overflow-wrap-normal break-all">
-                {singleStoryBeginning.title}
-              </h2>
-              <div className="ml-auto mr-3 flex items-center">
-                <button className="ml-auto mr-3">
-                  <Info
-                    size={36}
-                    className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-slate-900 rounded-full p-1"
-                    onClick={handleModal}
-                  />
-                </button>
-                <button
-                  className=""
-                  onClick={() => navigateToNewStoryEndingFormCreate(id)}
-                >
-                  <CirclePlus
-                    size={36}
-                    className="bg-teal-400 hover:bg-slate-300 rounded-full p-1"
-                  />
-                </button>
-              </div>
-            </span>
-            <hr className="border-2 border-teal-500" />
-            <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 overflow-wrap-normal break-all">
-              {singleStoryBeginning.body}
-            </p>
+        {singleStoryBeginning && (
+          <div className="flex justify-center ">
+            <div className="bg-slate-600 w-96 lg:w-192 rounded-t-3xl mt-36 mb-5 shadow-xl">
+              <span className="flex flex-row bg-slate-700 rounded-t-3xl">
+                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl overflow-wrap-normal">
+                  {singleStoryBeginning.title}
+                </h2>
+                <div className="ml-auto mr-3 flex items-center">
+                  <button className="ml-auto mr-3">
+                    <Info
+                      size={36}
+                      className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-slate-900 rounded-full p-1"
+                      onClick={handleModal}
+                    />
+                  </button>
+                  <button
+                    className=""
+                    onClick={() => navigateToNewStoryEndingFormCreate(id)}
+                  >
+                    <CirclePlus
+                      size={36}
+                      className="bg-teal-400 hover:bg-slate-300 rounded-full p-1"
+                    />
+                  </button>
+                </div>
+              </span>
+              <hr className="border-2 border-teal-500" />
+              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 overflow-wrap-normal ">
+                {singleStoryBeginning.body}
+              </p>
+            </div>
           </div>
-        </div>
+        )}
         {/* <div className="flex justify-center">
           <hr class="border-transparent border-2 ring-8 ring-teal-400/70 w-96 lg:w-188" />
         </div> */}
@@ -213,7 +215,7 @@ const StoryDetails = () => {
               >
                 <CircleX size={36} />
               </button>
-              <h3 className="text-3xl font-semibold mb-2 text-slate-50 pt-2 overflow-wrap-normal break-all">
+              <h3 className="text-3xl font-semibold mb-2 text-slate-50 pt-2 overflow-wrap-normal ">
                 {singleStoryBeginning.title}
               </h3>
               <p className="text-xl text-slate-50 italic mb-3">
@@ -222,11 +224,11 @@ const StoryDetails = () => {
               <p className="inline-block rounded-full mb-3 items-center text-xl bg-slate-200 py-1 px-2">
                 {singleStoryBeginning.genre}
               </p>
-              <p className="text-xl text-slate-50 mb-3 overflow-wrap-normal break-all">
+              <p className="text-xl text-slate-50 mb-3 overflow-wrap-normal ">
                 {singleStoryBeginning.description}
               </p>
               <div className="flex flex-row">
-                <div className="text-xl text-slate-50 flex items-center mr-5 overflow-wrap-normal break-all">
+                <div className="text-xl text-slate-50 flex items-center mr-5 overflow-wrap-normal ">
                   Blazer:{" "}
                 </div>
                 <span className="flex flex-row bg-black/70 rounded-full items-center pr-3">
@@ -249,34 +251,35 @@ const StoryDetails = () => {
             <div className="flex justify-center mt-5">
               <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
                 <div className="flex flex-row">
-                  <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow overflow-wrap-normal break-all">
+                  <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow overflow-wrap-normal">
                     {allStoryEndingsForSingleStory[currentIndex]?.title}
                   </h2>
-                  {user.id ===
-                    allStoryEndingsForSingleStory[currentIndex]?.user_id && (
-                    <div className="ml-auto mr-2 flex items-center">
-                      <button
-                        onClick={() =>
-                          navigateToNewStoryEndingFormEdit(
-                            allStoryEndingsForSingleStory[currentIndex]?.id
-                          )
-                        }
-                        className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
-                      >
-                        <PencilLine size={26} />
-                      </button>
-                      <button
-                        onClick={() =>
-                          handleDelete(
-                            allStoryEndingsForSingleStory[currentIndex]?.id
-                          )
-                        }
-                        className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
-                      >
-                        <Trash2 size={26} />
-                      </button>
-                    </div>
-                  )}
+                  {user &&
+                    user.id ===
+                      allStoryEndingsForSingleStory[currentIndex]?.user_id && (
+                      <div className="ml-auto mr-2 flex items-center">
+                        <button
+                          onClick={() =>
+                            navigateToNewStoryEndingFormEdit(
+                              allStoryEndingsForSingleStory[currentIndex]?.id
+                            )
+                          }
+                          className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
+                        >
+                          <PencilLine size={26} />
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleDelete(
+                              allStoryEndingsForSingleStory[currentIndex]?.id
+                            )
+                          }
+                          className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                        >
+                          <Trash2 size={26} />
+                        </button>
+                      </div>
+                    )}
                 </div>
                 <hr className="border-2 border-slate-700" />
                 <div className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
@@ -298,7 +301,7 @@ const StoryDetails = () => {
                     dangerouslySetInnerHTML={{
                       __html: allStoryEndingsForSingleStory[currentIndex]?.body,
                     }}
-                    className="overflow-wrap-normal break-all"
+                    className="overflow-wrap-norma"
                   ></span>
                 </div>
               </div>

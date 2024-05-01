@@ -15,16 +15,27 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   //state for form inputs
-  const [newBeginning, SetNewBeginning] = useState({
-    user_id: user.id,
+  const [newBeginning, setNewBeginning] = useState({
+    user_id: user ? user.id : "",
     title: "",
     genre: "",
     description: "",
     body: "",
   });
 
+  const [charLimits, setCharLimits] = useState({
+    title: 100,
+    genre: 50,
+    description: 100,
+  });
+
   const handleTextChange = (event) => {
-    SetNewBeginning({ ...newBeginning, [event.target.id]: event.target.value });
+    const { id, value } = event.target;
+
+    const truncatedValue = value.slice(0, charLimits[id]); // text cut-off based on character limit key
+
+    // SetNewBeginning({ ...newBeginning, [event.target.id]: event.target.value });
+    setNewBeginning({ ...newBeginning, [id]: truncatedValue });
   };
 
   const addStoryBeginning = () => {
@@ -87,19 +98,25 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
                   type="text"
                   placeholder="name it"
                   onChange={handleTextChange}
+                  maxLength={charLimits.title} // title char limit
                   className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-orange-500"
                   required
                 />
               </div>
             </label>
+            <div className="text-center text-sm text-gray-400">
+              Remaining characters:{" "}
+              {charLimits.title - newBeginning.title.length}
+            </div>
             <label htmlFor="genre" className="grid grid-row-2">
               <span className="w-3/4 mx-auto text-lg">Genre:</span>
-              <div className="flex justify-center">
+              <div className="flex justify-center mb-10">
                 <select
                   id="genre"
                   name="genre"
                   value={newBeginning.genre}
                   onChange={handleTextChange}
+                  maxLength={charLimits.genre} // genre char limit
                   className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-orange-500"
                   required
                 >
@@ -137,11 +154,16 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
                   type="text"
                   placeholder="just a taste"
                   onChange={handleTextChange}
+                  maxLength={charLimits.description} // description char limit
                   className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-orange-500"
                   required
                 />
               </div>
             </label>
+            <div className="text-center text-sm text-gray-400">
+              Remaining characters:{" "}
+              {charLimits.description - newBeginning.description.length}
+            </div>
             <label htmlFor="body" className="grid grid-row-2">
               <span className="w-3/4 mx-auto text-lg">Body:</span>
               <div className="flex items-center justify-center">

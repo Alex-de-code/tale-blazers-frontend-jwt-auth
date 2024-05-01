@@ -17,6 +17,10 @@ const StoryEndingsForm = () => {
   //state for setting storybeginning to display next to form view
   const [storyBeginning, setStoryBeginning] = useState({});
 
+  //state for max character limit
+  const [remainingChars, setRemainingChars] = useState(100);
+  const maxChars = 100;
+
   //state for setting storyending when in edit form view
   // const [singleStoryEnding, setSingleStoryEnding] = useState({});
 
@@ -24,10 +28,16 @@ const StoryEndingsForm = () => {
   const navigate = useNavigate();
 
   const handleTextChange = (event) => {
+    const { id, value } = event.target;
+
+    const truncatedValue = value.slice(0, maxChars); // this truncates(cuts) text if char limit is exceeded
+
     setNewOrUpdatedEnding({
       ...newOrUpdatedEnding,
       [event.target.id]: event.target.value,
     });
+
+    setRemainingChars(maxChars - truncatedValue.length);
   };
 
   const addStoryEnding = () => {
@@ -143,12 +153,12 @@ const StoryEndingsForm = () => {
           <div className="flex justify-center">
             <div className="bg-slate-600 w-96 md:w-152 rounded-3xl mt-10 mb-5 shadow-xl">
               <span className="flex flex-row bg-slate-700 rounded-t-3xl">
-                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl">
+                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl overflow-wrap-normal">
                   {storyBeginning.title}
                 </h2>
               </span>
               <hr className="border-2 border-teal-500" />
-              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
+              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 overflow-wrap-normal">
                 {storyBeginning.body}
               </p>
             </div>
@@ -176,11 +186,15 @@ const StoryEndingsForm = () => {
                     type="text"
                     placeholder="name it"
                     onChange={handleTextChange}
+                    maxLength={maxChars} // char limit for title
                     className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-teal-400"
                     required
                   />
                 </div>
               </label>
+              <div className="text-center text-sm text-gray-400">
+                Remaining characters: {remainingChars}
+              </div>
               <label htmlFor="body" className="grid grid-row-2">
                 <span className="w-3/4 mx-auto text-lg">Body:</span>
                 <div className="flex items-center justify-center">
@@ -193,7 +207,7 @@ const StoryEndingsForm = () => {
                     onChange={handleTextChange}
                     // className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
                     required
-                    className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-teal-400 overflow-wrap-normal break-all"
+                    className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-teal-400 overflow-wrap-normal"
                   ></textarea>
                 </div>
               </label>
