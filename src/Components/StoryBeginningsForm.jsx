@@ -27,6 +27,7 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
     title: 100,
     genre: 50,
     description: 100,
+    body: 2000,
   });
 
   const handleTextChange = (event) => {
@@ -174,12 +175,16 @@ const StoryBeginningsForm = ({ setStoryBeginnings }) => {
                   value={newBeginning.body}
                   placeholder="craft the tale"
                   onChange={handleTextChange}
+                  maxLength={charLimits.body} // body char limit
                   // className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
                   required
                   className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-orange-500"
                 ></textarea>
               </div>
             </label>
+            <div className="text-center text-sm text-gray-400">
+              Remaining characters: {charLimits.body - newBeginning.body.length}
+            </div>
             <div className="flex justify-center">
               <button className="bg-teal-400 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4 mt-6">
                 Submit

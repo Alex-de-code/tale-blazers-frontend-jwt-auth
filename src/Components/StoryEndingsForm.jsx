@@ -18,8 +18,15 @@ const StoryEndingsForm = () => {
   const [storyBeginning, setStoryBeginning] = useState({});
 
   //state for max character limit
-  const [remainingChars, setRemainingChars] = useState(100);
-  const maxChars = 100;
+  const [remainingChars, setRemainingChars] = useState({
+    title: 100,
+    body: 2000,
+  });
+
+  const maxChars = {
+    title: 100,
+    body: 2000,
+  };
 
   //state for setting storyending when in edit form view
   // const [singleStoryEnding, setSingleStoryEnding] = useState({});
@@ -30,14 +37,17 @@ const StoryEndingsForm = () => {
   const handleTextChange = (event) => {
     const { id, value } = event.target;
 
-    const truncatedValue = value.slice(0, maxChars); // this truncates(cuts) text if char limit is exceeded
+    const truncatedValue = value.slice(0, maxChars[id]); // this truncates(cuts) text if char limit is exceeded
 
     setNewOrUpdatedEnding({
       ...newOrUpdatedEnding,
-      [event.target.id]: event.target.value,
+      [id]: truncatedValue,
     });
 
-    setRemainingChars(maxChars - truncatedValue.length);
+    setRemainingChars({
+      ...remainingChars,
+      [id]: maxChars[id] - truncatedValue.length,
+    });
   };
 
   const addStoryEnding = () => {
@@ -186,14 +196,14 @@ const StoryEndingsForm = () => {
                     type="text"
                     placeholder="name it"
                     onChange={handleTextChange}
-                    maxLength={maxChars} // char limit for title
+                    maxLength={maxChars.title} // char limit for title
                     className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-teal-400"
                     required
                   />
                 </div>
               </label>
               <div className="text-center text-sm text-gray-400">
-                Remaining characters: {remainingChars}
+                Remaining characters: {remainingChars.title}
               </div>
               <label htmlFor="body" className="grid grid-row-2">
                 <span className="w-3/4 mx-auto text-lg">Body:</span>
@@ -205,12 +215,16 @@ const StoryEndingsForm = () => {
                     value={newOrUpdatedEnding.body}
                     placeholder="tell it"
                     onChange={handleTextChange}
+                    maxLength={maxChars.body}
                     // className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
                     required
                     className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-teal-400 text-balance"
                   ></textarea>
                 </div>
               </label>
+              <div className="text-center text-sm text-gray-400">
+                Remaining characters: {remainingChars.body}
+              </div>
               <div className="flex justify-center">
                 <button className="bg-orange-500 hover:bg-slate-200 rounded px-2 py-3 shadow-md w-3/4 mt-6">
                   Submit
