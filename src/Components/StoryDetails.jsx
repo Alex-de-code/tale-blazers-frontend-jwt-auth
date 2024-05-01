@@ -174,7 +174,7 @@ const StoryDetails = () => {
           <div className="flex justify-center ">
             <div className="bg-slate-600 w-96 lg:w-192 rounded-t-3xl mt-36 mb-5 shadow-xl">
               <span className="flex flex-row bg-slate-700 rounded-t-3xl">
-                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl overflow-wrap-normal">
+                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl break-words">
                   {singleStoryBeginning.title}
                 </h2>
                 <div className="ml-auto mr-3 flex items-center">
@@ -197,7 +197,7 @@ const StoryDetails = () => {
                 </div>
               </span>
               <hr className="border-2 border-teal-500" />
-              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 overflow-wrap-normal ">
+              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 break-words">
                 {singleStoryBeginning.body}
               </p>
             </div>
@@ -215,7 +215,7 @@ const StoryDetails = () => {
               >
                 <CircleX size={36} />
               </button>
-              <h3 className="text-3xl font-semibold mb-2 text-slate-50 pt-2 overflow-wrap-normal ">
+              <h3 className="text-3xl font-semibold mb-2 text-slate-50 pt-2 text-balance">
                 {singleStoryBeginning.title}
               </h3>
               <p className="text-xl text-slate-50 italic mb-3">
@@ -224,11 +224,11 @@ const StoryDetails = () => {
               <p className="inline-block rounded-full mb-3 items-center text-xl bg-slate-200 py-1 px-2">
                 {singleStoryBeginning.genre}
               </p>
-              <p className="text-xl text-slate-50 mb-3 overflow-wrap-normal ">
+              <p className="text-xl text-slate-50 mb-3 text-balance">
                 {singleStoryBeginning.description}
               </p>
               <div className="flex flex-row">
-                <div className="text-xl text-slate-50 flex items-center mr-5 overflow-wrap-normal ">
+                <div className="text-xl text-slate-50 flex items-center mr-5 text-balance">
                   Blazer:{" "}
                 </div>
                 <span className="flex flex-row bg-black/70 rounded-full items-center pr-3">
@@ -251,7 +251,7 @@ const StoryDetails = () => {
             <div className="flex justify-center mt-5">
               <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
                 <div className="flex flex-row">
-                  <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow overflow-wrap-normal">
+                  <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow text-balance">
                     {allStoryEndingsForSingleStory[currentIndex]?.title}
                   </h2>
                   {user &&
@@ -301,7 +301,7 @@ const StoryDetails = () => {
                     dangerouslySetInnerHTML={{
                       __html: allStoryEndingsForSingleStory[currentIndex]?.body,
                     }}
-                    className="overflow-wrap-norma"
+                    className="text-balance"
                   ></span>
                 </div>
               </div>

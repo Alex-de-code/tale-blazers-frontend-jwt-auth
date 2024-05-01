@@ -153,12 +153,12 @@ const StoryEndingsForm = () => {
           <div className="flex justify-center">
             <div className="bg-slate-600 w-96 md:w-152 rounded-3xl mt-10 mb-5 shadow-xl">
               <span className="flex flex-row bg-slate-700 rounded-t-3xl">
-                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl overflow-wrap-normal">
+                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl text-balance">
                   {storyBeginning.title}
                 </h2>
               </span>
               <hr className="border-2 border-teal-500" />
-              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 overflow-wrap-normal">
+              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 text-balance">
                 {storyBeginning.body}
               </p>
             </div>
@@ -207,7 +207,7 @@ const StoryEndingsForm = () => {
                     onChange={handleTextChange}
                     // className="hover:bg-slate-100 rounded py-3 shadow-md w-3/4 pl-3 ml-4 mt-3"
                     required
-                    className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-teal-400 overflow-wrap-normal"
+                    className=" mx-10 rounded shadow-md w-3/4 h-32 py-3 pl-3 mt-3 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-teal-400 text-balance"
                   ></textarea>
                 </div>
               </label>
