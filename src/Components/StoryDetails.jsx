@@ -40,6 +40,16 @@ const StoryDetails = () => {
   // this usestate sets index of storyEndings and for carousel
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   // _____________________________________
 
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
@@ -258,7 +268,11 @@ const StoryDetails = () => {
         {allStoryEndingsForSingleStory.length > 0 && (
           <div>
             <div className="flex justify-center mt-5">
-              <div className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl">
+              <div
+                className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 <div className="flex flex-row">
                   <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow text-balance">
                     {allStoryEndingsForSingleStory[currentIndex]?.title}
@@ -293,18 +307,22 @@ const StoryDetails = () => {
                 <hr className="border-2 border-slate-700" />
                 <div className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
                   <div className="flex flex-row py-1 justify-between">
-                    <button
-                      onClick={goToPreviousEnding}
-                      className="mx-2 text-white hover:animate-ping"
-                    >
-                      <MoveLeft size={48} />
-                    </button>
-                    <button
-                      onClick={goToNextEnding}
-                      className="mx-2 text-white hover:animate-ping"
-                    >
-                      <MoveRight size={48} />
-                    </button>
+                    {isHovered && (
+                      <>
+                        <button
+                          onClick={goToPreviousEnding}
+                          className="mx-2 text-white hover:animate-ping"
+                        >
+                          <MoveLeft size={48} />
+                        </button>
+                        <button
+                          onClick={goToNextEnding}
+                          className="mx-2 text-white hover:animate-ping"
+                        >
+                          <MoveRight size={48} />
+                        </button>
+                      </>
+                    )}
                   </div>
                   <span
                     dangerouslySetInnerHTML={{
