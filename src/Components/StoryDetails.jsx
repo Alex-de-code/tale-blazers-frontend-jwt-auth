@@ -1,11 +1,20 @@
 import {
   AlignCenter,
+  ArrowBigUp,
+  ChevronUp,
+  ChevronsUp,
   CirclePlus,
   CircleX,
+  Flag,
+  Flame,
+  FlameKindling,
   Info,
+  MessageSquare,
   MoveLeft,
   MoveRight,
   PencilLine,
+  TentTree,
+  ThumbsUp,
   Trash2,
 } from "lucide-react";
 import React from "react";
@@ -303,6 +312,25 @@ const StoryDetails = () => {
                     }}
                     className="text-balance"
                   ></span>
+                  <div className="flex justify-center mt-6">
+                    <div className="flex justify-evenly  items-center rounded-full w-3/5 border-4 border-slate-700/50 ">
+                      <button className="inline-block  hover:bg-slate-500 p-1 rounded-full">
+                        <ThumbsUp size={24} />
+                      </button>
+                      {/* <button className="inline-block hover:bg-slate-500 rounded-full">
+                        <ArrowBigUp size={36} />
+                      </button> */}
+                      {/* <button className="inline-block  hover:bg-slate-500 p-1 rounded-full">
+                        <Flame size={24} className="" />
+                      </button> */}
+                      <button className="inline-block hover:bg-slate-500 p-1 rounded-full">
+                        <MessageSquare size={24} className="" />
+                      </button>
+                      <button className="inline-block hover:bg-slate-500 p-1 rounded-full">
+                        <Flag size={24} className="text-red-500" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
