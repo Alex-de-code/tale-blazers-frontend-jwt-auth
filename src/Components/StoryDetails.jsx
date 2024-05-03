@@ -40,15 +40,15 @@ const StoryDetails = () => {
   // this usestate sets index of storyEndings and for carousel
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [isHovered, setIsHovered] = useState(false);
+  // const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
+  // const handleMouseEnter = () => {
+  //   setIsHovered(true);
+  // };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  // const handleMouseLeave = () => {
+  //   setIsHovered(false);
+  // };
 
   // _____________________________________
 
@@ -191,9 +191,9 @@ const StoryDetails = () => {
       >
         {singleStoryBeginning && (
           <div className="flex justify-center ">
-            <div className="bg-slate-600 w-96 lg:w-192 rounded-t-3xl mt-36 mb-5 shadow-xl">
+            <div className="bg-slate-600/95 w-96 lg:w-192 rounded-t-3xl mt-36 mb-5 shadow-xl">
               <span className="flex flex-row bg-slate-700 rounded-t-3xl">
-                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl break-words">
+                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 break-words">
                   {singleStoryBeginning.title}
                 </h2>
                 <div className="ml-auto mr-3 flex items-center">
@@ -269,14 +269,22 @@ const StoryDetails = () => {
           <div>
             <div className="flex justify-center mt-5">
               <div
-                className="bg-slate-600 w-96 lg:w-192 shadow-xl rounded-b-3xl"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                className="bg-slate-600/95 w-96 lg:w-192 shadow-xl rounded-b-3xl"
+                // onMouseEnter={handleMouseEnter}
+                // onMouseLeave={handleMouseLeave}
               >
-                <div className="flex flex-row">
-                  <h2 className="text-2xl bg-slate-600 py-2 text-slate-200 font-semibold p-3 shadow text-balance">
+                <div className="flex flex-row bg-slate-600">
+                  <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 text-balance">
                     {allStoryEndingsForSingleStory[currentIndex]?.title}
                   </h2>
+                  {user.id !==
+                    allStoryEndingsForSingleStory[currentIndex]?.user_id && (
+                    <div className="ml-auto mr-2 flex items-center">
+                      <button className=" hover:bg-slate-300 text-red-400 hover:text-red-600 bg-slate-700 font-semibold p-1 m-1 rounded-full flex items-center ml-auto">
+                        <Flag size={26} className="" />
+                      </button>
+                    </div>
+                  )}
                   {user &&
                     user.id ===
                       allStoryEndingsForSingleStory[currentIndex]?.user_id && (
@@ -297,7 +305,7 @@ const StoryDetails = () => {
                               allStoryEndingsForSingleStory[currentIndex]?.id
                             )
                           }
-                          className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-700 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                          className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-600 font-semibold p-1 m-1 rounded-full inline-flex items-center"
                         >
                           <Trash2 size={26} />
                         </button>
@@ -306,7 +314,7 @@ const StoryDetails = () => {
                 </div>
                 <hr className="border-2 border-slate-700" />
                 <div className="pb-4 pt-3 pl-4 pr-4 text-slate-200">
-                  <div className="flex flex-row py-1 justify-between">
+                  {/* <div className="flex flex-row py-1 justify-between">
                     {isHovered && (
                       <>
                         <button
@@ -323,31 +331,40 @@ const StoryDetails = () => {
                         </button>
                       </>
                     )}
-                  </div>
+                  </div> */}
                   <span
                     dangerouslySetInnerHTML={{
                       __html: allStoryEndingsForSingleStory[currentIndex]?.body,
                     }}
                     className="text-balance"
                   ></span>
-                  <div className="flex justify-center mt-6">
-                    <div className="flex justify-evenly  items-center rounded-full w-3/5 border-4 border-slate-700/50 ">
-                      <button className="inline-block  hover:bg-slate-500 p-1 rounded-full">
+                  <div className="flex justify-evenly items-center mt-4">
+                    <button
+                      onClick={goToPreviousEnding}
+                      className=" text-slate-200 hover:animate-ping"
+                    >
+                      <MoveLeft size={42} />
+                    </button>
+                    {/* <div className="flex justify-evenly items-center rounded-full w-3/5  "> */}
+                    {/* <button className="inline-block  hover:bg-slate-500 p-1 rounded-full">
                         <ThumbsUp size={24} />
-                      </button>
-                      {/* <button className="inline-block hover:bg-slate-500 rounded-full">
+                      </button> */}
+                    {/* <button className="inline-block hover:bg-slate-500 rounded-full">
                         <ArrowBigUp size={36} />
                       </button> */}
-                      {/* <button className="inline-block  hover:bg-slate-500 p-1 rounded-full">
-                        <Flame size={24} className="" />
-                      </button> */}
-                      <button className="inline-block hover:bg-slate-500 p-1 rounded-full">
-                        <MessageSquare size={24} className="" />
-                      </button>
-                      <button className="inline-block hover:bg-slate-500 p-1 rounded-full">
-                        <Flag size={24} className="text-red-500" />
-                      </button>
-                    </div>
+                    <button className="inline-block  hover:bg-slate-500 p-1 rounded-full">
+                      <Flame size={28} className="" />
+                    </button>
+                    <button className="inline-block hover:bg-slate-500 p-1 rounded-full">
+                      <MessageSquare size={28} className="" />
+                    </button>
+                    {/* </div> */}
+                    <button
+                      onClick={goToNextEnding}
+                      className=" text-slate-200 hover:animate-ping"
+                    >
+                      <MoveRight size={42} />
+                    </button>
                   </div>
                 </div>
               </div>
