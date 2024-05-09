@@ -1,3 +1,4 @@
+import { Sprout } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams, useNavigate } from "react-router-dom";
 
@@ -27,6 +28,35 @@ const StoryEndingsComments = () => {
     body: 200,
     tag: 50,
   });
+
+  const formatTimeElapsed = (dateString) => {
+    const currentDate = new Date();
+    const date = new Date(dateString);
+    const elapsedMilliseconds = currentDate - date;
+    const elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
+    const elapsedMinutes = Math.floor(elapsedSeconds / 60);
+    const elapsedHours = Math.floor(elapsedMinutes / 60);
+    const elapsedDays = Math.floor(elapsedHours / 24);
+    const elapsedMonths = Math.floor(elapsedDays / 30);
+    const elapsedYears = Math.floor(elapsedDays / 365);
+
+    if (elapsedYears > 0) {
+      const remainingMonths = elapsedMonths - elapsedYears * 12;
+      return `${elapsedYears} year${
+        elapsedYears > 1 ? "s" : ""
+      } and ${remainingMonths} month${remainingMonths > 1 ? "s" : ""} ago`;
+    } else if (elapsedMonths > 0) {
+      return `${elapsedMonths} month${elapsedMonths > 1 ? "s" : ""} ago`;
+    } else if (elapsedDays > 0) {
+      return `${elapsedDays} day${elapsedDays > 1 ? "s" : ""} ago`;
+    } else if (elapsedHours > 0) {
+      return `${elapsedHours} hour${elapsedHours > 1 ? "s" : ""} ago`;
+    } else if (elapsedMinutes > 0) {
+      return `${elapsedMinutes} minute${elapsedMinutes > 1 ? "s" : ""} ago`;
+    } else {
+      return `${elapsedSeconds} second${elapsedSeconds > 1 ? "s" : ""} ago`;
+    }
+  };
 
   // handleTextChange = (event) => {
   //   const { id, value } = event.target;
@@ -98,24 +128,60 @@ const StoryEndingsComments = () => {
 
   return (
     <>
-      <div className="bg-slate-900">
-        <div className="text-3xl bg-red-400 text-center">
+      <div className="bg-slate-900 flex flex-col min-h-screen">
+        {/* <div className="text-3xl bg-red-400 text-center">
           StoryEndingsComments
-        </div>
-        <div>
-          <div className="flex justify-center py-10">
-            <div className="bg-slate-600/95 w-96 lg:w-192 rounded-3xl shadow-xl">
-              <span className="flex flex-row bg-slate-600 rounded-t-3xl">
-                <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 shadow rounded-t-3xl text-balance">
-                  {storyEnding.title}
-                </h2>
-              </span>
-              <hr className="border-2 border-slate-700" />
-              <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 text-balance">
-                {storyEnding.body}
-              </p>
+        </div> */}
+        <div className=" pt-36">
+          <div className="">
+            <div className="flex justify-center">
+              <div className="bg-slate-600/95 w-96 lg:w-192 rounded-3xl shadow-xl">
+                <span className="flex flex-row rounded-t-3xl">
+                  <h2 className="text-2xl py-2 text-slate-200 font-semibold p-3 text-balance">
+                    {storyEnding.title}
+                  </h2>
+                </span>
+                <hr className="border-2 border-slate-700" />
+                <p className="pb-4 pt-3 pl-4 pr-4 text-slate-200 text-balance">
+                  {storyEnding.body}
+                </p>
+              </div>
             </div>
           </div>
+          <div className="py-8">
+            <div className="flex justify-center">
+              <div className="grid grid-rows-2">
+                <div className=" text-white text-2xl font-medium ">
+                  Comments
+                </div>
+                <hr className="border-2 bg-red-400 w-96 lg:w-192 rounded mt-3" />
+              </div>
+            </div>
+          </div>
+          {allCommentsForThisStoryEnding.length > 0 && (
+            <div className="grid grid-cols-1 gap-6 pb-36">
+              {allCommentsForThisStoryEnding.map((comment) => (
+                <div key={comment.id} className="flex justify-center">
+                  <div className="bg-slate-700/30 border-2 border-slate-200 hover:border-teal-400/90 w-96 lg:w-192 rounded-xl shadow-xl">
+                    <div className="p-3">
+                      <div className="flex flex-row items-center">
+                        <span className="text-slate-200 px-2 flex flex-row items-center">
+                          <Sprout size={24} className="text-teal-400 pr-1" />
+                          <div className="">
+                            {formatTimeElapsed(comment.created_at)}
+                          </div>
+                        </span>
+                        <div className="inline-block p-1 bg-slate-200 rounded-full">
+                          {comment.tag}
+                        </div>
+                      </div>
+                      <div className="p-1 text-white">{comment.body}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>
