@@ -30,7 +30,15 @@ function LandingPage({ storyBeginnings }) {
 
   return (
     <>
-      <div className="bg-slate-900">
+      <div
+        className="bg-slate-900"
+        // style={{
+        //   backgroundImage: `url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/v1713153837/pattrern_7_ns9zmj.png'), url('https://res.cloudinary.com/dvmczcg3f/image/upload/c_crop,ar_16:9/e_mirror/v1713153837/pattrern_7_ns9zmj.png')`,
+        //   backgroundRepeat: "no-repeat, repeat-y",
+        //   backgroundSize: "100%, 100%",
+        //   backgroundPosition: "center top, center bottom",
+        // }}
+      >
         <div className=" py-20 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
             Journey Ahead:

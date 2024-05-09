@@ -93,9 +93,7 @@ const StoryEndingsForm = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((response) => {
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((storyBeginning) => {
           setStoryBeginning(storyBeginning.story);
           // return storyBeginning;
@@ -114,9 +112,7 @@ const StoryEndingsForm = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((response) => {
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((singleStoryEnding) => {
           setNewOrUpdatedEnding({
             ...newOrUpdatedEnding,
@@ -128,7 +124,7 @@ const StoryEndingsForm = () => {
           console.error("Error fetching storyEnding data:", error)
         );
     }
-  }, []);
+  }, [storyEndingId]);
 
   // console.log("new/update ending:", newOrUpdatedEnding);
   return (

@@ -12,6 +12,7 @@ import "./App.css";
 import StoryEndingsForm from "./Components/StoryEndingsForm";
 import Footer from "./Components/Footer.jsx";
 import StoryBeginningsForm from "./Components/StoryBeginningsForm.jsx";
+import StoryEndingsComments from "./Components/StoryEndingsComments.jsx";
 
 const API = import.meta.env.VITE_BASE_URL;
 
@@ -81,8 +82,12 @@ function App() {
             element={<StoryEndingsForm />}
           />
           <Route
-            path="storyendings_form/:storyBeginningId/edit/:storyEndingId"
+            path="/storyendings_form/:storyBeginningId/edit/:storyEndingId"
             element={<StoryEndingsForm />}
+          />
+          <Route
+            path="/storydetails/:id/storyendings_comments/:storyEndingId"
+            element={<StoryEndingsComments />}
           />
         </Route>
       </Routes>

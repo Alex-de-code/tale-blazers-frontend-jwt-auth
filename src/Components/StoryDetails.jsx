@@ -54,6 +54,7 @@ const StoryDetails = () => {
 
   const { user } = useOutletContext(); // Access user data provided by the Outlet's context
   const navigate = useNavigate();
+  // const storyEndingId = allStoryEndingsForSingleStory[currentIndex]?.id;
 
   const navigateToNewStoryEndingFormCreate = (storyBeginningId) => {
     navigate(`/storyendings_form/${storyBeginningId}/new`);
@@ -63,6 +64,10 @@ const StoryDetails = () => {
     navigate(
       `/storyendings_form/${singleStoryBeginning.id}/edit/${storyEndingId}`
     );
+  };
+
+  const navigateToStoryEndingComments = (StoryEndingId) => {
+    navigate(`storyendings_comments/${StoryEndingId}`);
   };
 
   const [storyCreator, setStoryCreator] = useState({
@@ -176,7 +181,7 @@ const StoryDetails = () => {
         })
         .catch((error) => console.error("Error fetching user:", error));
     }
-  }, []);
+  }, [id]);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -355,7 +360,14 @@ const StoryDetails = () => {
                     <button className="inline-block  hover:bg-slate-500 p-1 rounded-full">
                       <Flame size={28} className="" />
                     </button>
-                    <button className="inline-block hover:bg-slate-500 p-1 rounded-full">
+                    <button
+                      onClick={() =>
+                        navigateToStoryEndingComments(
+                          allStoryEndingsForSingleStory[currentIndex]?.id
+                        )
+                      }
+                      className="inline-block hover:bg-slate-500 p-1 rounded-full"
+                    >
                       <MessageSquare size={28} className="" />
                     </button>
                     {/* </div> */}
