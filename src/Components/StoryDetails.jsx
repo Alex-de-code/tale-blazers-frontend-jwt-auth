@@ -300,7 +300,7 @@ const StoryDetails = () => {
                               allStoryEndingsForSingleStory[currentIndex]?.id
                             )
                           }
-                          className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-3"
+                          className="bg-teal-400 hover:bg-slate-300 font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto mr-2"
                         >
                           <PencilLine size={26} />
                         </button>
@@ -310,9 +310,9 @@ const StoryDetails = () => {
                               allStoryEndingsForSingleStory[currentIndex]?.id
                             )
                           }
-                          className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-600 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                          className="bg-slate-900 text-teal-400 hover:bg-slate-300 hover:text-red-600 font-semibold p-1 ml-1 mb-1 mt-1 mr-2 rounded-full inline-flex items-center"
                         >
-                          <Trash2 size={26} />
+                          <Trash2 size={26} className="" />
                         </button>
                       </div>
                     )}

@@ -1,4 +1,11 @@
-import { Sprout } from "lucide-react";
+import {
+  Sprout,
+  Flag,
+  PencilLine,
+  Trash2,
+  ChevronsUp,
+  ChevronsDown,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams, useNavigate } from "react-router-dom";
 
@@ -191,7 +198,7 @@ const StoryEndingsComments = () => {
                 );
                 return (
                   <div key={comment.id} className="flex justify-center">
-                    <div className="bg-slate-700/10 border-2 border-slate-200/10 hover:border-teal-400/90 w-96 lg:w-192 rounded-xl shadow-xl">
+                    <div className="bg-slate-700/5 border-2 border-transparent hover:border-solid hover:border-teal-400/5 w-96 lg:w-192 rounded-xl shadow-xl">
                       <div className="p-2.5">
                         <div className="flex flex-row items-center">
                           <span className="text-slate-200 px-2 flex flex-row items-center">
@@ -201,10 +208,16 @@ const StoryEndingsComments = () => {
                               className="w-9 rounded-full m-0 pr-1"
                             />
                             <div className="px-1">{comment.username}</div>
-                            <Sprout
-                              size={24}
-                              className={`pr-1 ${plantColor}`}
-                            />
+
+                            <div
+                              className={`ml-1 mr-2 flex items-center px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${borderColor} ${textColor}`}
+                            >
+                              <Sprout
+                                size={24}
+                                className={`pr-1 ${plantColor}`}
+                              />
+                              {comment.tag}
+                            </div>
                             <div className="">
                               {formatTimeElapsed(comment.created_at)}
                             </div>
@@ -216,15 +229,62 @@ const StoryEndingsComments = () => {
                         <div className=" px-2 my-2 text-white">
                           {comment.body}
                         </div>
-                        <div className="flex">
-                          <div className="flex justify-start">
+                        <div className="">
+                          {/* <div className="justify-start">
                             <div
                               className={`ml-2 inline-block px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${borderColor} ${textColor}`}
                             >
                               {comment.tag}
                             </div>
+                          </div> */}
+                          {/* {user.id !== comment.user_id && ( */}
+                          <div className="">
+                            <span className="flex flex-row items-center">
+                              <div className="text-emerald-500 hover:animate-pulse hover:bg-blue-900/50 rounded-full">
+                                <ChevronsUp size={30} className="" />
+                              </div>
+                              <div className=" text-purple-500 hover:animate-pulse hover:bg-red-900/50 rounded-full">
+                                <ChevronsDown
+                                  size={30}
+                                  className="rounded-full"
+                                />
+                              </div>
+                              {user.id !== comment.user_id && (
+                                <button className=" hover:bg-slate-300 text-red-400 hover:text-red-600 font-semibold p-1 m-1 rounded-full flex items-center ml-auto">
+                                  <Flag size={20} className="" />
+                                </button>
+                              )}
+                              {user.id === comment.user_id && (
+                                <div className="ml-auto flex items-center">
+                                  <button
+                                    // NEED TO MAKE ONCLICK FOR COMMENT EDIT FORM
+                                    // onClick={() =>
+                                    //   navigateToNewStoryEndingFormEdit(
+                                    //     allStoryEndingsForSingleStory[currentIndex]
+                                    //       ?.id
+                                    //   )
+                                    // }
+                                    className="text-yellow-400 hover:bg-amber-300/55 hover:text-black font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto"
+                                  >
+                                    <PencilLine size={24} />
+                                  </button>
+                                  <button
+                                    // NEED TO MAKE ONCLICK FOR COMMENT EDIT FORM
+                                    // onClick={() =>
+                                    //   handleDelete(
+                                    //     allStoryEndingsForSingleStory[currentIndex]
+                                    //       ?.id
+                                    //   )
+                                    // }
+                                    className=" text-red-400 hover:bg-slate-300 hover:text-red-600 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                                  >
+                                    <Trash2 size={24} />
+                                  </button>
+                                </div>
+                              )}
+                            </span>
                           </div>
-                          {}
+                          {/* )} */}
                         </div>
                       </div>
                     </div>
