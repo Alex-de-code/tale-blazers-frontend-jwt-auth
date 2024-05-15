@@ -29,6 +29,29 @@ const StoryEndingsComments = () => {
     tag: 50,
   });
 
+  const getTagStyles = (tag) => {
+    switch (tag) {
+      case "praise":
+        return {
+          borderColor: "border-teal-400/30",
+          textColor: "text-teal-400/90",
+          plantColor: "text-teal-400",
+        };
+      case "feedback":
+        return {
+          borderColor: "border-orange-500/30",
+          textColor: "text-orange-500",
+          plantColor: "text-orange-500",
+        };
+      default:
+        return {
+          borderColor: "border-gray-400",
+          textColor: "text-gray-400",
+          plantColor: "text-gray-500",
+        };
+    }
+  };
+
   const formatTimeElapsed = (dateString) => {
     const currentDate = new Date();
     const date = new Date(dateString);
@@ -83,9 +106,10 @@ const StoryEndingsComments = () => {
           newStoryEndingComment,
         ]);
       })
-      .catch((error) => console.error("catch", error));
+      .catch((error) => console.error("Error adding comment:", error));
   };
 
+  // fetching story ending to display above comment section
   useEffect(() => {
     if (storyEndingId) {
       fetch(`${URL}/api/story_endings/single/${storyEndingId}`, {
@@ -103,6 +127,7 @@ const StoryEndingsComments = () => {
     }
   }, [storyEndingId]);
 
+  // fetching comments for specific story ending
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -160,26 +185,52 @@ const StoryEndingsComments = () => {
           </div>
           {allCommentsForThisStoryEnding.length > 0 && (
             <div className="grid grid-cols-1 gap-6 pb-36">
-              {allCommentsForThisStoryEnding.map((comment) => (
-                <div key={comment.id} className="flex justify-center">
-                  <div className="bg-slate-700/30 border-2 border-slate-200 hover:border-teal-400/90 w-96 lg:w-192 rounded-xl shadow-xl">
-                    <div className="p-3">
-                      <div className="flex flex-row items-center">
-                        <span className="text-slate-200 px-2 flex flex-row items-center">
-                          <Sprout size={24} className="text-teal-400 pr-1" />
-                          <div className="">
-                            {formatTimeElapsed(comment.created_at)}
-                          </div>
-                        </span>
-                        <div className="inline-block p-1 bg-slate-200 rounded-full">
+              {allCommentsForThisStoryEnding.map((comment) => {
+                const { borderColor, textColor, plantColor } = getTagStyles(
+                  comment.tag
+                );
+                return (
+                  <div key={comment.id} className="flex justify-center">
+                    <div className="bg-slate-700/10 border-2 border-slate-200/10 hover:border-teal-400/90 w-96 lg:w-192 rounded-xl shadow-xl">
+                      <div className="p-2.5">
+                        <div className="flex flex-row items-center">
+                          <span className="text-slate-200 px-2 flex flex-row items-center">
+                            <img
+                              src={`${comment.profile_picture}`}
+                              alt="profile_picture"
+                              className="w-9 rounded-full m-0 pr-1"
+                            />
+                            <div className="px-1">{comment.username}</div>
+                            <Sprout
+                              size={24}
+                              className={`pr-1 ${plantColor}`}
+                            />
+                            <div className="">
+                              {formatTimeElapsed(comment.created_at)}
+                            </div>
+                          </span>
+                          {/* <div className="inline-block px-1.5 bg-slate-800 border-2 border-dashed  border-teal-400/40 rounded-full text-white">
                           {comment.tag}
+                        </div> */}
+                        </div>
+                        <div className=" px-2 my-2 text-white">
+                          {comment.body}
+                        </div>
+                        <div className="flex">
+                          <div className="flex justify-start">
+                            <div
+                              className={`ml-2 inline-block px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${borderColor} ${textColor}`}
+                            >
+                              {comment.tag}
+                            </div>
+                          </div>
+                          {}
                         </div>
                       </div>
-                      <div className="p-1 text-white">{comment.body}</div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
