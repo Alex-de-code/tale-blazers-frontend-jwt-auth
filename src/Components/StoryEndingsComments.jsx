@@ -5,6 +5,7 @@ import {
   Trash2,
   ChevronsUp,
   ChevronsDown,
+  MessageSquarePlus,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams, useNavigate } from "react-router-dom";
@@ -24,6 +25,9 @@ const StoryEndingsComments = () => {
   const [allCommentsForThisStoryEnding, setAllCommentsForThisStoryEnding] =
     useState([]);
 
+  //state for toggling comments form visibility
+  const [showNewCommentForm, setShowNewCommentForm] = useState(false);
+
   //state for comment form inputs
   const [newStoryEndingComment, setNewStoryEndingComment] = useState({
     user_id: user ? user.id : "",
@@ -35,6 +39,10 @@ const StoryEndingsComments = () => {
     body: 200,
     tag: 50,
   });
+
+  const toggleCommentForm = () => {
+    setShowNewCommentForm(!showNewCommentForm);
+  };
 
   const getTagStyles = (tag) => {
     switch (tag) {
@@ -183,13 +191,98 @@ const StoryEndingsComments = () => {
           <div className="py-8">
             <div className="flex justify-center">
               <div className="grid grid-rows-2">
-                <div className=" text-white text-2xl font-medium ">
-                  Comments
-                </div>
+                <span className="flex flex-row items-center">
+                  <div className=" text-white text-2xl font-medium ">
+                    Comments
+                  </div>
+                  <button
+                    onClick={toggleCommentForm}
+                    className="flex items-center ml-auto rounded-full text-teal-400 border-2 border-teal-400 hover:border-white hover:text-white p-1.5"
+                  >
+                    <MessageSquarePlus size={26} />
+                  </button>
+                </span>
                 <hr className="border-2 bg-red-400 w-96 lg:w-192 rounded mt-3" />
               </div>
             </div>
           </div>
+          {showNewCommentForm && (
+            <div className="flex justify-center mb-6">
+              <div className="bg-slate-700/5 border-2 border-transparent hover:border-solid hover:border-teal-400/5 w-96 lg:w-192 rounded-xl shadow-xl">
+                <form action="" className="p-2.5">
+                  <div className="flex flex-row items-center">
+                    <span className="text-slate-200 px-2 flex flex-row items-center">
+                      <img
+                        src={`${user.profile_picture}`}
+                        alt="profile_picture"
+                        className="w-9 rounded-full m-0 pr-1"
+                      />
+                      <div className="px-1">{user.username}</div>
+
+                      <div
+                        className={`ml-1 mr-2 flex items-center px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${
+                          getTagStyles(newStoryEndingComment.tag).borderColor
+                        } ${getTagStyles(newStoryEndingComment.tag).textColor}`}
+                      >
+                        <Sprout
+                          size={24}
+                          className={`pr-1 ${
+                            getTagStyles(newStoryEndingComment.tag).plantColor
+                          }`}
+                        />
+                        {newStoryEndingComment.tag}
+                      </div>
+                      <div className="">
+                        {formatTimeElapsed(newStoryEndingComment.created_at)}
+                      </div>
+                    </span>
+                    {/* <div className="inline-block px-1.5 bg-slate-800 border-2 border-dashed  border-teal-400/40 rounded-full text-white">
+                          {comment.tag}
+                        </div> */}
+                  </div>
+                  <div className="text-white">
+                    <label htmlFor="body">Body:</label>
+                    <textarea
+                      id="body"
+                      name="body"
+                      value={newStoryEndingComment.body}
+                      // onChange={handleChange}
+                      // className="h-full flex-grow outline-none "
+                      required
+                    />
+                  </div>
+                  <div className="text-white">
+                    <label htmlFor="tag">Tag:</label>
+                    <select
+                      id="tag"
+                      name="tag"
+                      value={newStoryEndingComment.tag}
+                      // onChange={handleChange}
+                      required
+                    >
+                      <option value="">Select a tag</option>
+                      <option value="praise" style={getTagStyles("praise")}>
+                        Praise
+                      </option>
+                      <option value="feedback" style={getTagStyles("feedback")}>
+                        Feedback
+                      </option>
+                    </select>
+                  </div>
+                  <div className="flex justify-around mt-2">
+                    <input
+                      type="submit"
+                      value="Submit"
+                      className="hover:text-white p-0.5 border-2 border-emerald-500 hover:border-white rounded-lg text-emerald-500 w-3/5"
+                    />
+                    <button className="hover:text-white p-0.5 border-2 border-red-500 hover:border-white rounded-lg text-red-500 w-1/3">
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
           {allCommentsForThisStoryEnding.length > 0 && (
             <div className="grid grid-cols-1 gap-6 pb-36">
               {allCommentsForThisStoryEnding.map((comment) => {
