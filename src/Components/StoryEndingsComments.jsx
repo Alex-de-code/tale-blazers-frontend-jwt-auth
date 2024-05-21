@@ -29,14 +29,21 @@ const StoryEndingsComments = () => {
   const [showNewCommentForm, setShowNewCommentForm] = useState(false);
 
   //state for comment form inputs
-  const [newStoryEndingComment, setNewStoryEndingComment] = useState({
-    user_id: user ? user.id : "",
-    body: "",
-    tag: "",
+  const [newOrUpdatedStoryEndingComment, setNewOrUpdatedStoryEndingComment] =
+    useState({
+      user_id: user ? user.id : "",
+      body: "",
+      tag: "",
+    });
+
+  //state for remaining characters before limit is reached
+  const [remainingChars, setRemainingChars] = useState({
+    body: 500,
+    tag: 50,
   });
 
   const [charLimits, setCharLimits] = useState({
-    body: 200,
+    body: 500,
     tag: 50,
   });
 
@@ -96,32 +103,139 @@ const StoryEndingsComments = () => {
     }
   };
 
-  // handleTextChange = (event) => {
-  //   const { id, value } = event.target;
-  //   const truncatedValue = value.slice(0, charLimits[id]); // text cut-off based on character limit key
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    const truncatedValue = value.slice(0, charLimits[id]); // text cut-off based on character limit key
 
-  //   setNewStoryEndingComment({
-  //     ...newStoryEndingComment,
-  //     [id]: truncatedValue,
-  //   });
+    setNewOrUpdatedStoryEndingComment({
+      ...newOrUpdatedStoryEndingComment,
+      [id]: truncatedValue,
+    });
+
+    setRemainingChars({
+      ...remainingChars,
+      [id]: charLimits[id] - truncatedValue.length,
+    });
+  };
+
+  // const addStoryEndingComment = () => {
+  //   fetch(`${URL}/api/story_endings/comments`, {
+  //     method: "POST",
+  //     body: JSON.stringify(newOrUpdatedStoryEndingComment),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((newOrUpdatedStoryEndingComment) => {
+  //       setAllCommentsForThisStoryEnding((previousComments) => {
+  //         if (previousComments.length > 0) {
+  //           return [...previousComments, newOrUpdatedStoryEndingComment];
+  //         } else {
+  //           return [newOrUpdatedStoryEndingComment];
+  //         }
+  //       });
+  //       // Reset the comment form state after successful submission
+  //       setNewOrUpdatedStoryEndingComment({
+  //         user_id: user ? user.id : "",
+  //         body: "",
+  //         tag: "",
+  //       });
+  //       // Reset the remaining character count state as well if needed
+  //       setRemainingChars({
+  //         body: charLimits.body,
+  //         tag: charLimits.tag,
+  //       });
+  //     })
+  //     .catch((error) => console.error("Error adding comment:", error));
   // };
 
   const addStoryEndingComment = () => {
+    const commentData = {
+      ...newOrUpdatedStoryEndingComment,
+      user_id: user ? user.id : "",
+      profile_picture: user ? user.profile_picture : "",
+      username: user ? user.username : "",
+    };
+
     fetch(`${URL}/api/story_endings/comments`, {
       method: "POST",
-      body: JSON.stringify(newStoryEndingComment),
+      body: JSON.stringify(commentData),
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
-      .then((newStoryEndingComment) => {
-        setAllCommentsForThisStoryEnding((previousComments) => [
-          ...previousComments,
-          newStoryEndingComment,
-        ]);
+      .then((newOrUpdatedStoryEndingComment) => {
+        setAllCommentsForThisStoryEnding((previousComments) => {
+          if (previousComments.length > 0) {
+            return [...previousComments, newOrUpdatedStoryEndingComment];
+          } else {
+            return [newOrUpdatedStoryEndingComment];
+          }
+        });
+        // Reset the comment form state after successful submission
+        setNewOrUpdatedStoryEndingComment({
+          user_id: user ? user.id : "",
+          body: "",
+          tag: "",
+        });
+        // Reset the remaining character count state as well if needed
+        setRemainingChars({
+          body: charLimits.body,
+          tag: charLimits.tag,
+        });
       })
       .catch((error) => console.error("Error adding comment:", error));
+  };
+
+  const updateStoryEndingComment = () => {
+    fetch(
+      `${URL}/api/story_endings/comments/single/${newOrUpdatedStoryEndingComment.id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(newOrUpdatedStoryEndingComment),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to update comment");
+        }
+      })
+      .catch((error) => console.error("Error updating comment:", error));
+  };
+
+  const handleCancel = () => {
+    // Reset the comment form
+    setNewOrUpdatedStoryEndingComment({
+      user_id: user ? user.id : "",
+      body: "",
+      tag: "",
+    });
+
+    // Reset the remaining character count
+    setRemainingChars({
+      body: charLimits.body,
+      tag: charLimits.tag,
+    });
+
+    // hide form
+    setShowNewCommentForm(false);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // console.log("submit was clicked");
+    if (newOrUpdatedStoryEndingComment.id) {
+      updateStoryEndingComment();
+    } else {
+      addStoryEndingComment();
+    }
+
+    setShowNewCommentForm(false);
   };
 
   // fetching story ending to display above comment section
@@ -142,7 +256,7 @@ const StoryEndingsComments = () => {
     }
   }, [storyEndingId]);
 
-  // fetching comments for specific story ending
+  // fetching all comments for specific story ending
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -159,12 +273,44 @@ const StoryEndingsComments = () => {
     }
   }, []);
 
-  console.log("This is the story ending", storyEnding);
+  // // Add a new comment to the list of comments
+  // useEffect(() => {
+  //   if (newOrUpdatedStoryEndingComment.id) {
+  //     // New comment has been created or updated, add it to the list
+  //     setAllCommentsForThisStoryEnding((previousComments) => [
+  //       ...previousComments,
+  //       newOrUpdatedStoryEndingComment,
+  //     ]);
+  //   }
+  // }, [newOrUpdatedStoryEndingComment]);
 
-  console.log(
-    "These are the story ending comments",
-    allCommentsForThisStoryEnding
-  );
+  useEffect(() => {
+    if (newOrUpdatedStoryEndingComment.id) {
+      fetch(`${URL}/api/story_endings/single/${storyEndingId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((singleStoryEndingComment) => {
+          setNewOrUpdatedStoryEndingComment({
+            ...newOrUpdatedStoryEndingComment,
+            tag: newOrUpdatedStoryEndingComment.tag,
+            body: newOrUpdatedStoryEndingComment.body,
+          });
+        })
+        .catch((error) =>
+          console.error("Error fetching singe storyEnding comment data:", error)
+        );
+    }
+  }, [newOrUpdatedStoryEndingComment.id]);
+
+  // console.log("This is the story ending", storyEnding);
+
+  // console.log(
+  //   "These are the story ending comments",
+  //   allCommentsForThisStoryEnding
+  // );
 
   return (
     <>
@@ -209,7 +355,7 @@ const StoryEndingsComments = () => {
           {showNewCommentForm && (
             <div className="flex justify-center mb-6">
               <div className="bg-slate-700/5 border-2 border-transparent hover:border-solid hover:border-teal-400/5 w-96 lg:w-192 rounded-xl shadow-xl">
-                <form action="" className="p-2.5">
+                <form onSubmit={handleSubmit} className="p-2.5">
                   <div className="flex flex-row items-center">
                     <span className="text-slate-200 px-2 flex flex-row items-center">
                       <img
@@ -221,43 +367,41 @@ const StoryEndingsComments = () => {
 
                       <div
                         className={`ml-1 mr-2 flex items-center px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${
-                          getTagStyles(newStoryEndingComment.tag).borderColor
-                        } ${getTagStyles(newStoryEndingComment.tag).textColor}`}
+                          getTagStyles(newOrUpdatedStoryEndingComment.tag)
+                            .borderColor
+                        } ${
+                          getTagStyles(newOrUpdatedStoryEndingComment.tag)
+                            .textColor
+                        }`}
                       >
                         <Sprout
                           size={24}
                           className={`pr-1 ${
-                            getTagStyles(newStoryEndingComment.tag).plantColor
+                            getTagStyles(newOrUpdatedStoryEndingComment.tag)
+                              .plantColor
                           }`}
                         />
-                        {newStoryEndingComment.tag}
+                        {newOrUpdatedStoryEndingComment.tag}
                       </div>
                       <div className="">
-                        {formatTimeElapsed(newStoryEndingComment.created_at)}
+                        {formatTimeElapsed(
+                          newOrUpdatedStoryEndingComment.created_at
+                        )}
                       </div>
                     </span>
                     {/* <div className="inline-block px-1.5 bg-slate-800 border-2 border-dashed  border-teal-400/40 rounded-full text-white">
                           {comment.tag}
                         </div> */}
                   </div>
-                  <div className="text-white">
-                    <label htmlFor="body">Body:</label>
-                    <textarea
-                      id="body"
-                      name="body"
-                      value={newStoryEndingComment.body}
-                      // onChange={handleChange}
-                      // className="h-full flex-grow outline-none "
-                      required
-                    />
-                  </div>
-                  <div className="text-white">
-                    <label htmlFor="tag">Tag:</label>
+                  <div className="text-white mx-2 my-2">
+                    <label htmlFor="tag">Is this praise or feedback?</label>
                     <select
                       id="tag"
                       name="tag"
-                      value={newStoryEndingComment.tag}
-                      // onChange={handleChange}
+                      value={newOrUpdatedStoryEndingComment.tag}
+                      onChange={handleChange}
+                      maxLength={charLimits.tag}
+                      className="bg-transparent border-2 rounded ml-2"
                       required
                     >
                       <option value="">Select a tag</option>
@@ -269,13 +413,32 @@ const StoryEndingsComments = () => {
                       </option>
                     </select>
                   </div>
+                  <div className="text-white">
+                    <label htmlFor="body"></label>
+                    <textarea
+                      id="body"
+                      name="body"
+                      value={newOrUpdatedStoryEndingComment.body}
+                      onChange={handleChange}
+                      maxLength={charLimits.body}
+                      className="bg-transparent w-full px-2 my-2"
+                      // className="h-full flex-grow outline-none "
+                      required
+                    />
+                    <div className="text-center text-sm text-gray-400">
+                      Remaining characters: {remainingChars.body}
+                    </div>
+                  </div>
                   <div className="flex justify-around mt-2">
                     <input
                       type="submit"
                       value="Submit"
                       className="hover:text-white p-0.5 border-2 border-emerald-500 hover:border-white rounded-lg text-emerald-500 w-3/5"
                     />
-                    <button className="hover:text-white p-0.5 border-2 border-red-500 hover:border-white rounded-lg text-red-500 w-1/3">
+                    <button
+                      onClick={handleCancel}
+                      className="hover:text-white p-0.5 border-2 border-red-500 hover:border-white rounded-lg text-red-500 w-1/3"
+                    >
                       Cancel
                     </button>
                   </div>
