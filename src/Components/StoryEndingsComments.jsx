@@ -38,12 +38,12 @@ const StoryEndingsComments = () => {
 
   //state for remaining characters before limit is reached
   const [remainingChars, setRemainingChars] = useState({
-    body: 500,
+    body: 1000,
     tag: 50,
   });
 
   const [charLimits, setCharLimits] = useState({
-    body: 500,
+    body: 1000,
     tag: 50,
   });
 
@@ -118,42 +118,11 @@ const StoryEndingsComments = () => {
     });
   };
 
-  // const addStoryEndingComment = () => {
-  //   fetch(`${URL}/api/story_endings/comments`, {
-  //     method: "POST",
-  //     body: JSON.stringify(newOrUpdatedStoryEndingComment),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((newOrUpdatedStoryEndingComment) => {
-  //       setAllCommentsForThisStoryEnding((previousComments) => {
-  //         if (previousComments.length > 0) {
-  //           return [...previousComments, newOrUpdatedStoryEndingComment];
-  //         } else {
-  //           return [newOrUpdatedStoryEndingComment];
-  //         }
-  //       });
-  //       // Reset the comment form state after successful submission
-  //       setNewOrUpdatedStoryEndingComment({
-  //         user_id: user ? user.id : "",
-  //         body: "",
-  //         tag: "",
-  //       });
-  //       // Reset the remaining character count state as well if needed
-  //       setRemainingChars({
-  //         body: charLimits.body,
-  //         tag: charLimits.tag,
-  //       });
-  //     })
-  //     .catch((error) => console.error("Error adding comment:", error));
-  // };
-
   const addStoryEndingComment = () => {
     const commentData = {
       ...newOrUpdatedStoryEndingComment,
-      user_id: user ? user.id : "",
+      // user_id: user ? user.id : "",
+      story_endings_id: storyEndingId,
       profile_picture: user ? user.profile_picture : "",
       username: user ? user.username : "",
     };
@@ -169,8 +138,10 @@ const StoryEndingsComments = () => {
       .then((newOrUpdatedStoryEndingComment) => {
         setAllCommentsForThisStoryEnding((previousComments) => {
           if (previousComments.length > 0) {
+            console.log(newOrUpdatedStoryEndingComment);
             return [...previousComments, newOrUpdatedStoryEndingComment];
           } else {
+            console.log(newOrUpdatedStoryEndingComment);
             return [newOrUpdatedStoryEndingComment];
           }
         });
@@ -189,23 +160,62 @@ const StoryEndingsComments = () => {
       .catch((error) => console.error("Error adding comment:", error));
   };
 
-  const updateStoryEndingComment = () => {
-    fetch(
-      `${URL}/api/story_endings/comments/single/${newOrUpdatedStoryEndingComment.id}`,
-      {
-        method: "PUT",
-        body: JSON.stringify(newOrUpdatedStoryEndingComment),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+  const updateStoryEndingComment = (storyEndingCommentId) => {
+    const commentData = {
+      ...newOrUpdatedStoryEndingComment,
+      // user_id: user ? user.id : "",
+      story_endings_id: storyEndingId,
+      profile_picture: user ? user.profile_picture : "",
+      username: user ? user.username : "",
+    };
+    fetch(`${URL}/api/story_endings/comments/single/${storyEndingCommentId}`, {
+      method: "PUT",
+      body: JSON.stringify(commentData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
-        if (!response.ok) {
+        if (response.ok) {
+          console.log("Comment updated successfully");
+        } else {
+          console.log(storyEndingCommentId);
+          console.log(commentData);
           throw new Error("Failed to update comment");
         }
       })
       .catch((error) => console.error("Error updating comment:", error));
+  };
+
+  const handleDelete = (endingCommentId) => {
+    if (allCommentsForThisStoryEnding.length > 0) {
+      const token = localStorage.getItem("token");
+      console.log("DELETED Story Ending Comment with ID:", endingCommentId);
+      if (token) {
+        fetch(`${URL}/api/story_endings/comments/single/${endingCommentId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              // If deletion is successful, you might want to refresh the list of story endings
+              // You can either refetch the data or remove the deleted story ending from the state
+              const updatedStoryEndingComments =
+                allCommentsForThisStoryEnding.filter(
+                  (ending) => ending.id !== endingCommentId
+                );
+              setAllCommentsForThisStoryEnding(updatedStoryEndingComments);
+            } else {
+              throw new Error("Failed to delete story ending comment");
+            }
+          })
+          .catch((error) =>
+            console.error("Error deleting story ending comment:", error)
+          );
+      }
+    }
   };
 
   const handleCancel = () => {
@@ -273,30 +283,24 @@ const StoryEndingsComments = () => {
     }
   }, []);
 
-  // // Add a new comment to the list of comments
-  // useEffect(() => {
-  //   if (newOrUpdatedStoryEndingComment.id) {
-  //     // New comment has been created or updated, add it to the list
-  //     setAllCommentsForThisStoryEnding((previousComments) => [
-  //       ...previousComments,
-  //       newOrUpdatedStoryEndingComment,
-  //     ]);
-  //   }
-  // }, [newOrUpdatedStoryEndingComment]);
-
+  // this useEffect is for when a user wants to update one of their comments!!
   useEffect(() => {
     if (newOrUpdatedStoryEndingComment.id) {
-      fetch(`${URL}/api/story_endings/single/${storyEndingId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      fetch(
+        `${URL}/api/story_endings/single/${newOrUpdatedStoryEndingComment.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
         .then((response) => response.json())
         .then((singleStoryEndingComment) => {
           setNewOrUpdatedStoryEndingComment({
-            ...newOrUpdatedStoryEndingComment,
-            tag: newOrUpdatedStoryEndingComment.tag,
-            body: newOrUpdatedStoryEndingComment.body,
+            ...singleStoryEndingComment,
+            // ...newOrUpdatedStoryEndingComment,
+            // tag: newOrUpdatedStoryEndingComment.tag,
+            // body: newOrUpdatedStoryEndingComment.body,
           });
         })
         .catch((error) =>
@@ -383,11 +387,11 @@ const StoryEndingsComments = () => {
                         />
                         {newOrUpdatedStoryEndingComment.tag}
                       </div>
-                      <div className="">
+                      {/* <div className="">
                         {formatTimeElapsed(
                           newOrUpdatedStoryEndingComment.created_at
                         )}
-                      </div>
+                      </div> */}
                     </span>
                     {/* <div className="inline-block px-1.5 bg-slate-800 border-2 border-dashed  border-teal-400/40 rounded-full text-white">
                           {comment.tag}
@@ -421,7 +425,7 @@ const StoryEndingsComments = () => {
                       value={newOrUpdatedStoryEndingComment.body}
                       onChange={handleChange}
                       maxLength={charLimits.body}
-                      className="bg-transparent w-full px-2 my-2"
+                      className="bg-transparent w-full px-2 my-2 rounded-lg border-white border-2"
                       // className="h-full flex-grow outline-none "
                       required
                     />
@@ -513,25 +517,15 @@ const StoryEndingsComments = () => {
                               {user.id === comment.user_id && (
                                 <div className="ml-auto flex items-center">
                                   <button
-                                    // NEED TO MAKE ONCLICK FOR COMMENT EDIT FORM
-                                    // onClick={() =>
-                                    //   navigateToNewStoryEndingFormEdit(
-                                    //     allStoryEndingsForSingleStory[currentIndex]
-                                    //       ?.id
-                                    //   )
-                                    // }
-                                    className="text-yellow-400 hover:bg-amber-300/55 hover:text-black font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto"
+                                    onClick={() =>
+                                      updateStoryEndingComment(comment.id)
+                                    }
+                                    className="text-yellow-500 hover:bg-amber-400/55 hover:text-black font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto"
                                   >
                                     <PencilLine size={24} />
                                   </button>
                                   <button
-                                    // NEED TO MAKE ONCLICK FOR COMMENT EDIT FORM
-                                    // onClick={() =>
-                                    //   handleDelete(
-                                    //     allStoryEndingsForSingleStory[currentIndex]
-                                    //       ?.id
-                                    //   )
-                                    // }
+                                    onClick={() => handleDelete(comment.id)}
                                     className=" text-red-400 hover:bg-slate-300 hover:text-red-600 font-semibold p-1 m-1 rounded-full inline-flex items-center"
                                   >
                                     <Trash2 size={24} />
