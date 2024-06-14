@@ -21,12 +21,18 @@ const StoryEndingsComments = () => {
   // state for setting storyending to display it
   const [storyEnding, setStoryEnding] = useState({});
 
-  // state for comments for story ending
+  // // state for comments for story ending
   const [allCommentsForThisStoryEnding, setAllCommentsForThisStoryEnding] =
     useState([]);
 
   //state for toggling comments form visibility
   const [showNewCommentForm, setShowNewCommentForm] = useState(false);
+
+  //state for rendering a edit form for a comment or the comment itself, will take the ID of the comment we want to edit
+  const [isEditing, setIsEditing] = useState(null);
+
+  //state for count of all storyEndingComment reactions for a given comment id
+  const [reactionCount, setReactionCount] = useState(0);
 
   //state for comment form inputs
   const [newOrUpdatedStoryEndingComment, setNewOrUpdatedStoryEndingComment] =
@@ -34,7 +40,18 @@ const StoryEndingsComments = () => {
       user_id: user ? user.id : "",
       body: "",
       tag: "",
+      story_endings_id: "",
     });
+
+  // useState({
+  //   id: null,
+  //   story_endings_id: null,
+  //   body: "",
+  //   tag: "",
+  //   user_id: null,
+  //   is_flagged: null,
+  //   created_at: null
+  // })
 
   //state for remaining characters before limit is reached
   const [remainingChars, setRemainingChars] = useState({
@@ -168,6 +185,12 @@ const StoryEndingsComments = () => {
       profile_picture: user ? user.profile_picture : "",
       username: user ? user.username : "",
     };
+    console.log("neworUpdated Story comment:", newOrUpdatedStoryEndingComment);
+    console.log(
+      "This is the story ending comment id from update function",
+      storyEndingCommentId
+    );
+    console.log("This is commentData:", commentData);
     fetch(`${URL}/api/story_endings/comments/single/${storyEndingCommentId}`, {
       method: "PUT",
       body: JSON.stringify(commentData),
@@ -240,12 +263,29 @@ const StoryEndingsComments = () => {
     event.preventDefault();
     // console.log("submit was clicked");
     if (newOrUpdatedStoryEndingComment.id) {
-      updateStoryEndingComment();
+      updateStoryEndingComment(newOrUpdatedStoryEndingComment.id);
+      setIsEditing(null);
     } else {
       addStoryEndingComment();
     }
 
     setShowNewCommentForm(false);
+  };
+
+  const handleEditClick = (commentID) => {
+    // Find the comment with the matching ID
+    const commentToEdit = allCommentsForThisStoryEnding.find(
+      (comment) => comment.id === commentID
+    );
+    // Populate the newOrUpdatedStoryEndingComment state with the comment data
+    console.log("This is the comment to edit", commentToEdit);
+    setNewOrUpdatedStoryEndingComment(commentToEdit);
+    // Set the isEditing state to the comment ID
+    setIsEditing(commentID);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(null);
   };
 
   // fetching story ending to display above comment section
@@ -308,13 +348,6 @@ const StoryEndingsComments = () => {
         );
     }
   }, [newOrUpdatedStoryEndingComment.id]);
-
-  // console.log("This is the story ending", storyEnding);
-
-  // console.log(
-  //   "These are the story ending comments",
-  //   allCommentsForThisStoryEnding
-  // );
 
   return (
     <>
@@ -452,91 +485,194 @@ const StoryEndingsComments = () => {
           )}
           {allCommentsForThisStoryEnding.length > 0 && (
             <div className="grid grid-cols-1 gap-6 pb-36">
-              {allCommentsForThisStoryEnding.map((comment) => {
+              {allCommentsForThisStoryEnding.map((comment, index) => {
                 const { borderColor, textColor, plantColor } = getTagStyles(
                   comment.tag
                 );
                 return (
                   <div key={comment.id} className="flex justify-center">
                     <div className="bg-slate-700/5 border-2 border-transparent hover:border-solid hover:border-teal-400/5 w-96 lg:w-192 rounded-xl shadow-xl">
-                      <div className="p-2.5">
-                        <div className="flex flex-row items-center">
-                          <span className="text-slate-200 px-2 flex flex-row items-center">
-                            <img
-                              src={`${comment.profile_picture}`}
-                              alt="profile_picture"
-                              className="w-9 rounded-full m-0 pr-1"
-                            />
-                            <div className="px-1">{comment.username}</div>
-
-                            <div
-                              className={`ml-1 mr-2 flex items-center px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${borderColor} ${textColor}`}
-                            >
-                              <Sprout
-                                size={24}
-                                className={`pr-1 ${plantColor}`}
+                      {isEditing === comment.id ? (
+                        <form onSubmit={handleSubmit} className="p-2.5">
+                          <div className="flex flex-row items-center">
+                            <span className="text-slate-200 px-2 flex flex-row items-center">
+                              <img
+                                src={`${user.profile_picture}`}
+                                alt="profile_picture"
+                                className="w-9 rounded-full m-0 pr-1"
                               />
-                              {comment.tag}
-                            </div>
-                            <div className="">
-                              {formatTimeElapsed(comment.created_at)}
-                            </div>
-                          </span>
-                          {/* <div className="inline-block px-1.5 bg-slate-800 border-2 border-dashed  border-teal-400/40 rounded-full text-white">
+                              <div className="px-1">{user.username}</div>
+
+                              <div
+                                className={`ml-1 mr-2 flex items-center px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${
+                                  getTagStyles(
+                                    newOrUpdatedStoryEndingComment.tag
+                                  ).borderColor
+                                } ${
+                                  getTagStyles(
+                                    newOrUpdatedStoryEndingComment.tag
+                                  ).textColor
+                                }`}
+                              >
+                                <Sprout
+                                  size={24}
+                                  className={`pr-1 ${
+                                    getTagStyles(
+                                      newOrUpdatedStoryEndingComment.tag
+                                    ).plantColor
+                                  }`}
+                                />
+                                {newOrUpdatedStoryEndingComment.tag}
+                              </div>
+                              {/* <div className="">
+                        {formatTimeElapsed(
+                          newOrUpdatedStoryEndingComment.created_at
+                        )}
+                      </div> */}
+                            </span>
+                            {/* <div className="inline-block px-1.5 bg-slate-800 border-2 border-dashed  border-teal-400/40 rounded-full text-white">
                           {comment.tag}
                         </div> */}
-                        </div>
-                        <div className=" px-2 my-2 text-white">
-                          {comment.body}
-                        </div>
-                        <div className="">
-                          {/* <div className="justify-start">
+                          </div>
+                          <div className="text-white mx-2 my-2">
+                            <label htmlFor="tag">
+                              Is this praise or feedback?
+                            </label>
+                            <select
+                              id="tag"
+                              name="tag"
+                              value={newOrUpdatedStoryEndingComment.tag}
+                              onChange={handleChange}
+                              maxLength={charLimits.tag}
+                              className="bg-transparent border-2 rounded ml-2"
+                              required
+                            >
+                              <option value="">Select a tag</option>
+                              <option
+                                value="praise"
+                                style={getTagStyles("praise")}
+                              >
+                                Praise
+                              </option>
+                              <option
+                                value="feedback"
+                                style={getTagStyles("feedback")}
+                              >
+                                Feedback
+                              </option>
+                            </select>
+                          </div>
+                          <div className="text-white">
+                            <label htmlFor="body"></label>
+                            <textarea
+                              id="body"
+                              name="body"
+                              value={newOrUpdatedStoryEndingComment.body}
+                              onChange={handleChange}
+                              maxLength={charLimits.body}
+                              className="bg-transparent w-full px-2 my-2 rounded-lg border-white border-2"
+                              // className="h-full flex-grow outline-none "
+                              required
+                            />
+                            <div className="text-center text-sm text-gray-400">
+                              Remaining characters: {remainingChars.body}
+                            </div>
+                          </div>
+                          <div className="flex justify-around mt-2">
+                            <input
+                              type="submit"
+                              value="Submit"
+                              className="hover:text-white p-0.5 border-2 border-emerald-500 hover:border-white rounded-lg text-emerald-500 w-3/5"
+                            />
+                            <button
+                              onClick={handleCancelEdit}
+                              className="hover:text-white p-0.5 border-2 border-red-500 hover:border-white rounded-lg text-red-500 w-1/3"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </form>
+                      ) : (
+                        <div className="p-2.5">
+                          <div className="flex flex-row items-center">
+                            <span className="text-slate-200 px-2 flex flex-row items-center">
+                              <img
+                                src={`${comment.profile_picture}`}
+                                alt="profile_picture"
+                                className="w-9 rounded-full m-0 pr-1"
+                              />
+                              <div className="px-1">{comment.username}</div>
+
+                              <div
+                                className={`ml-1 mr-2 flex items-center px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${borderColor} ${textColor}`}
+                              >
+                                <Sprout
+                                  size={24}
+                                  className={`pr-1 ${plantColor}`}
+                                />
+                                {comment.tag}
+                              </div>
+                              <div className="">
+                                {formatTimeElapsed(comment.created_at)}
+                              </div>
+                            </span>
+                            {/* <div className="inline-block px-1.5 bg-slate-800 border-2 border-dashed  border-teal-400/40 rounded-full text-white">
+                          {comment.tag}
+                        </div> */}
+                          </div>
+                          <div className=" px-2 my-2 text-white">
+                            {comment.body}
+                          </div>
+                          <div className="">
+                            {/* <div className="justify-start">
                             <div
                               className={`ml-2 inline-block px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${borderColor} ${textColor}`}
                             >
                               {comment.tag}
                             </div>
                           </div> */}
-                          {/* {user.id !== comment.user_id && ( */}
-                          <div className="">
-                            <span className="flex flex-row items-center">
-                              <div className="text-emerald-500 hover:animate-pulse hover:bg-blue-900/50 rounded-full">
-                                <ChevronsUp size={30} className="" />
-                              </div>
-                              <div className=" text-purple-500 hover:animate-pulse hover:bg-red-900/50 rounded-full">
-                                <ChevronsDown
-                                  size={30}
-                                  className="rounded-full"
-                                />
-                              </div>
-                              {user.id !== comment.user_id && (
-                                <button className=" hover:bg-slate-300 text-red-400 hover:text-red-600 font-semibold p-1 m-1 rounded-full flex items-center ml-auto">
-                                  <Flag size={20} className="" />
-                                </button>
-                              )}
-                              {user.id === comment.user_id && (
-                                <div className="ml-auto flex items-center">
-                                  <button
-                                    onClick={() =>
-                                      updateStoryEndingComment(comment.id)
-                                    }
-                                    className="text-yellow-500 hover:bg-amber-400/55 hover:text-black font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto"
-                                  >
-                                    <PencilLine size={24} />
-                                  </button>
-                                  <button
-                                    onClick={() => handleDelete(comment.id)}
-                                    className=" text-red-400 hover:bg-slate-300 hover:text-red-600 font-semibold p-1 m-1 rounded-full inline-flex items-center"
-                                  >
-                                    <Trash2 size={24} />
-                                  </button>
+                            {/* {user.id !== comment.user_id && ( */}
+                            <div className="">
+                              <span className="flex flex-row items-center">
+                                <div className="text-emerald-500 hover:animate-pulse hover:bg-blue-900/50 rounded-full">
+                                  <ChevronsUp size={30} className="" />
                                 </div>
-                              )}
-                            </span>
+                                <div className=" text-purple-500 hover:animate-pulse hover:bg-red-900/50 rounded-full">
+                                  <ChevronsDown
+                                    size={30}
+                                    className="rounded-full"
+                                  />
+                                </div>
+                                {user.id !== comment.user_id && (
+                                  <button className=" hover:bg-slate-300 text-red-400 hover:text-red-600 font-semibold p-1 m-1 rounded-full flex items-center ml-auto">
+                                    <Flag size={20} className="" />
+                                  </button>
+                                )}
+                                {user.id === comment.user_id && (
+                                  <div className="ml-auto flex items-center">
+                                    <button
+                                      onClick={() => {
+                                        updateStoryEndingComment(comment.id);
+                                        handleEditClick(comment.id);
+                                      }}
+                                      className="text-yellow-500 hover:bg-amber-400/55 hover:text-black font-semibold p-1 m-1 rounded-full inline-flex items-center ml-auto"
+                                    >
+                                      <PencilLine size={24} />
+                                    </button>
+                                    <button
+                                      onClick={() => handleDelete(comment.id)}
+                                      className=" text-red-400 hover:bg-slate-300 hover:text-red-600 font-semibold p-1 m-1 rounded-full inline-flex items-center"
+                                    >
+                                      <Trash2 size={24} />
+                                    </button>
+                                  </div>
+                                )}
+                              </span>
+                            </div>
+                            {/* )} */}
                           </div>
-                          {/* )} */}
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 );

@@ -183,6 +183,23 @@ const StoryDetails = () => {
     }
   }, [id]);
 
+  // fetching all comments for specific story ending
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     fetch(`${URL}/api/story_endings/comments/${storyEndingId}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((storyEndingComments) => {
+  //         setAllCommentsForThisStoryEnding(storyEndingComments);
+  //       })
+  //       .catch((error) => console.error("catch", error));
+  //   }
+  // }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <div
