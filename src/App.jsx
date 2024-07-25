@@ -7,12 +7,12 @@ import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
-import StoryDetails from "./Components/StoryDetails";
+import StoryDetails from "./Components/Stories/StoryDetails.jsx";
 import "./App.css";
-import StoryEndingsForm from "./Components/StoryEndingsForm";
+import StoryEndingsForm from "./Components/Stories/StoryEndings/StoryEndingsForm.jsx";
 import Footer from "./Components/Footer.jsx";
-import StoryBeginningsForm from "./Components/StoryBeginningsForm.jsx";
-import StoryEndingsComments from "./Components/StoryEndingsComments.jsx";
+import StoryBeginningsForm from "./Components/Stories/StoryBeginnings/StoryBeginningsForm.jsx";
+import StoryEndingsComments from "./Components/Stories/StoryEndings/Comments/StoryEndingsComments.jsx";
 
 const API = import.meta.env.VITE_BASE_URL;
 
