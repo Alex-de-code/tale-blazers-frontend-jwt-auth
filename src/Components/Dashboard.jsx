@@ -36,18 +36,9 @@ const Dashboard = ({ handleLogout }) => {
         backgroundSize: "cover",
       }}
     >
-      {/* <h2 className="bg-red-400 py-8 text-center text-2xl">
-        Dashboard Component
-      </h2> */}
       <div className="text-center mt-16">
         <div className="flex justify-center">
           <div className="bg-slate-900/70 shadow-2xl mx-96 rounded-2xl p-10 border-2 border-teal-300/50">
-            {/* {user && (
-          <h1 className="text-2xl my-8">
-            Welcome, {user.username[0].toUpperCase()}
-            {user.username.slice(1).toLowerCase()}
-          </h1>
-        )} */}
             <div className="flex justify-center">
               <img
                 src={user.profile_picture}
@@ -72,16 +63,6 @@ const Dashboard = ({ handleLogout }) => {
             <h2 className="font-semibold bg-slate-100 rounded inline-block p-2 shadow w-96 mt-5 text-slate-900">
               {user.bio}
             </h2>
-
-            {/* {userData.map(
-        ({ id, username, email, profile_picture, bio, created_at }) => (
-          <div className="" key={id}>
-            <div>username</div>
-          </div>
-        )
-      )} */}
-
-            {/* Use user data as needed, for example: */}
           </div>
         </div>
         <div className="text-center mt-5">

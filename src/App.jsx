@@ -7,10 +7,12 @@ import Login from "./Components/Login";
 import Dashboard from "./Components/Dashboard";
 import NavBar from "./Components/NavBar";
 import LandingPage from "./Components/LandingPage";
-import StoryDetails from "./Components/StoryDetails";
+import StoryDetails from "./Components/Stories/StoryDetails.jsx";
 import "./App.css";
-import StoryEndingsForm from "./Components/StoryEndingsForm";
+import StoryEndingsForm from "./Components/Stories/StoryEndings/StoryEndingsForm.jsx";
 import Footer from "./Components/Footer.jsx";
+import StoryBeginningsForm from "./Components/Stories/StoryBeginnings/StoryBeginningsForm.jsx";
+import StoryEndingsComments from "./Components/Stories/StoryEndings/Comments/StoryEndingsComments.jsx";
 
 const API = import.meta.env.VITE_BASE_URL;
 
@@ -68,14 +70,24 @@ function App() {
             path="/dashboard"
             element={<Dashboard handleLogout={handleLogout} />}
           />
+          <Route
+            path="/storybeginnings_form/new"
+            element={
+              <StoryBeginningsForm setStoryBeginnings={setStoryBeginnings} />
+            }
+          />
           <Route path="/storydetails/:id" element={<StoryDetails />} />
           <Route
             path="/storyendings_form/:storyBeginningId/new"
             element={<StoryEndingsForm />}
           />
           <Route
-            path="storyendings_form/:storyBeginningId/edit/:storyEndingId"
+            path="/storyendings_form/:storyBeginningId/edit/:storyEndingId"
             element={<StoryEndingsForm />}
+          />
+          <Route
+            path="/storydetails/:id/storyendings_comments/:storyEndingId"
+            element={<StoryEndingsComments />}
           />
         </Route>
       </Routes>
