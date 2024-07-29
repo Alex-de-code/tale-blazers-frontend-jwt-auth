@@ -90,6 +90,15 @@ const StoryDetails = () => {
     return `Created on ${formattedDate}`;
   };
 
+  function isValidUrl(string) {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
   const handleModal = () => {
     setOpenModal(true);
     console.log(openModal);
@@ -273,11 +282,22 @@ const StoryDetails = () => {
                   Blazer:{" "}
                 </div>
                 <span className="flex flex-row bg-black/70 rounded-full items-center pr-3">
-                  <img
-                    src={storyCreator.profile_picture}
-                    alt="profile img"
-                    className=" w-14 rounded-full"
-                  />
+                  {storyCreator.profile_picture ||
+                  isValidUrl(storyCreator.profile_picture) ? (
+                    <img
+                      src={storyCreator.profile_picture}
+                      alt="profile img"
+                      className=" w-14 rounded-full"
+                    />
+                  ) : (
+                    <>
+                      <Flame
+                        size={56}
+                        className="rounded-full p-1 bg-teal-400"
+                      />
+                    </>
+                  )}
+
                   <h2 className="flex items-center ml-3 text-slate-100 text-2xl pr-14">
                     {storyCreator.username[0].toUpperCase()}
                     {storyCreator.username.slice(1).toLowerCase()}
