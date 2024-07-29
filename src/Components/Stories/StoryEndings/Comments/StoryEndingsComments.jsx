@@ -721,11 +721,22 @@ const StoryEndingsComments = () => {
                           <form onSubmit={handleSubmit} className="p-2.5">
                             <div className="flex flex-row items-center">
                               <span className="text-slate-200 px-2 flex flex-row items-center">
-                                <img
-                                  src={`${user.profile_picture}`}
-                                  alt="profile_picture"
-                                  className="w-9 rounded-full m-0 pr-1"
-                                />
+                                {user.profile_picture ||
+                                isValidUrl(user.profile_picture) ? (
+                                  <img
+                                    src={`${user.profile_picture}`}
+                                    alt="profile_picture"
+                                    className="w-9 rounded-full m-0 pr-1"
+                                  />
+                                ) : (
+                                  <div className="rounded-full mr-1">
+                                    <Flame
+                                      size={32}
+                                      className="bg-slate-800 rounded-full p-1 text-teal-600"
+                                    />
+                                  </div>
+                                )}
+
                                 <div className="px-1">{user.username}</div>
 
                                 <div
@@ -815,12 +826,19 @@ const StoryEndingsComments = () => {
                           <div className="p-2.5">
                             <div className="flex flex-row items-center">
                               <span className="text-slate-200 px-2 flex flex-row items-center">
-                                {comment.profile_picture && (
+                                {comment.profile_picture ? (
                                   <img
                                     src={`${comment.profile_picture}`}
                                     alt="profile_picture"
                                     className="w-9 rounded-full m-0 pr-1"
                                   />
+                                ) : (
+                                  <div className="rounded-full mr-1">
+                                    <Flame
+                                      size={32}
+                                      className="bg-slate-800 rounded-full p-1 text-teal-600"
+                                    />
+                                  </div>
                                 )}
                                 <div className="px-1">{comment.username}</div>
 
