@@ -622,19 +622,26 @@ const StoryEndingsComments = () => {
                         </div>
                       )}
                       <div className="px-1">{user.username}</div>
-                      <div
-                        className={`ml-1 mr-2 flex items-center px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${
-                          getTagStyles(newStoryEndingComment.tag).borderColor
-                        } ${getTagStyles(newStoryEndingComment.tag).textColor}`}
-                      >
-                        <Sprout
-                          size={24}
-                          className={`pr-1 ${
-                            getTagStyles(newStoryEndingComment.tag).plantColor
+                      {newStoryEndingComment.tag ? (
+                        <div
+                          className={`ml-1 mr-2 flex items-center px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${
+                            getTagStyles(newStoryEndingComment.tag).borderColor
+                          } ${
+                            getTagStyles(newStoryEndingComment.tag).textColor
                           }`}
-                        />
-                        {newStoryEndingComment.tag}
-                      </div>
+                        >
+                          <Sprout
+                            size={24}
+                            className={`pr-1 ${
+                              getTagStyles(newStoryEndingComment.tag).plantColor
+                            }`}
+                          />
+                          {newStoryEndingComment.tag}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+
                       {/* <div className="">
                         {formatTimeElapsed(
                           newStoryEndingComment.created_at
