@@ -473,20 +473,22 @@ const StoryEndingsComments = () => {
 
   // fetching all comments for specific story ending
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      fetch(`${URL}/api/story_endings/comments/${storyEndingId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((storyEndingComments) => {
-          setAllCommentsForThisStoryEnding(storyEndingComments);
+    if (storyEndingId) {
+      const token = localStorage.getItem("token");
+      if (token) {
+        fetch(`${URL}/api/story_endings/comments/${storyEndingId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         })
-        .catch((error) => console.error("catch", error));
+          .then((response) => response.json())
+          .then((storyEndingComments) => {
+            setAllCommentsForThisStoryEnding(storyEndingComments);
+          })
+          .catch((error) => console.error("catch", error));
+      }
     }
-  }, []);
+  }, [storyEndingId, allCommentsForThisStoryEnding]);
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
   //   if (token) {
@@ -687,7 +689,8 @@ const StoryEndingsComments = () => {
               </div>
             </div>
           )}
-          {allCommentsForThisStoryEnding.length > 0 && (
+          {allCommentsForThisStoryEnding &&
+          allCommentsForThisStoryEnding.length > 0 ? (
             <div className="grid grid-cols-1 gap-6 pb-36">
               {allCommentsForThisStoryEnding
                 .slice() // create a copy to avoid mutating state
@@ -893,6 +896,16 @@ const StoryEndingsComments = () => {
                   );
                 })}
             </div>
+          ) : (
+            <>
+              {!showNewCommentForm && (
+                <div className="flex justify-center">
+                  <div className="border-2 border-solid border-teal-400/5 w-96 lg:w-192 rounded-xl shadow-xl text-slate-200 text-center text-xl p-3 mb-24">
+                    There are no comments at this time{" "}
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
