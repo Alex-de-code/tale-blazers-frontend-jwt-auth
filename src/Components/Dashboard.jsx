@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+import { Flame } from "lucide-react";
 const URL = import.meta.env.VITE_BASE_URL;
 
 const Dashboard = ({ handleLogout }) => {
@@ -11,6 +12,14 @@ const Dashboard = ({ handleLogout }) => {
   };
   // console.log("This is first user:", user);
   // const [userData, setUserData] = useState();
+  function isValidUrl(string) {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -40,11 +49,20 @@ const Dashboard = ({ handleLogout }) => {
         <div className="flex justify-center">
           <div className="bg-slate-900/70 shadow-2xl mx-96 rounded-2xl p-10 border-2 border-teal-300/50">
             <div className="flex justify-center">
-              <img
-                src={user.profile_picture}
-                alt="user image"
-                className="w-48 rounded-full border-4 border-white"
-              />
+              {user.profile_picture || isValidUrl(user.profile_picutre) ? (
+                <img
+                  src={user.profile_picture}
+                  alt="user image"
+                  className="w-48 rounded-full border-4 border-white"
+                />
+              ) : (
+                <div>
+                  <Flame
+                    size={192}
+                    className="rounded-full border-4 border-white p-3 bg-teal-400"
+                  />
+                </div>
+              )}
             </div>
             <h1 className="text-2xl font-bold my-5 text-slate-200">
               Username:
