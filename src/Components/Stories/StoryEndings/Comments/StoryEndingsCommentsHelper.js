@@ -49,3 +49,12 @@ export const formatTimeElapsed = (dateString) => {
     return `${elapsedSeconds} second${elapsedSeconds > 1 ? "s" : ""} ago`;
   }
 };
+
+export function isValidUrl(string) {
+  try {
+    new URL(string);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}

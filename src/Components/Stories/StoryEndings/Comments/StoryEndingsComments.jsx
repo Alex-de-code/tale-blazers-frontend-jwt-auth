@@ -6,6 +6,7 @@ import {
   ChevronsUp,
   ChevronsDown,
   MessageSquarePlus,
+  Flame,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams, useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ import { useOutletContext, useParams, useNavigate } from "react-router-dom";
 import {
   formatTimeElapsed,
   getTagStyles,
+  isValidUrl,
 } from "./StoryEndingsCommentsHelper.js";
 import { comment } from "postcss";
 import StoryEndingStory from "./StoryEndingStory.jsx";
@@ -604,13 +606,22 @@ const StoryEndingsComments = () => {
                 <form onSubmit={handleSubmit} className="p-2.5">
                   <div className="flex flex-row items-center">
                     <span className="text-slate-200 px-2 flex flex-row items-center">
-                      <img
-                        src={`${user.profile_picture}`}
-                        alt="profile_picture"
-                        className="w-9 rounded-full m-0 pr-1"
-                      />
+                      {user.profile_picture ||
+                      isValidUrl(user.profile_picture) ? (
+                        <img
+                          src={`${user.profile_picture}`}
+                          alt="profile_picture"
+                          className="w-9 rounded-full m-0 pr-1"
+                        />
+                      ) : (
+                        <div className="rounded-full mr-1">
+                          <Flame
+                            size={32}
+                            className="bg-slate-800 rounded-full p-1 text-teal-600"
+                          />
+                        </div>
+                      )}
                       <div className="px-1">{user.username}</div>
-
                       <div
                         className={`ml-1 mr-2 flex items-center px-1.5 bg-slate-900/30 border-2 border-dashed rounded-full ${
                           getTagStyles(newStoryEndingComment.tag).borderColor
