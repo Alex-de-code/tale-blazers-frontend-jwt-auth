@@ -78,9 +78,17 @@ const Dashboard = ({ handleLogout }) => {
               {formatDate(user.created_at)}
             </h2>
             <h1 className="text-2xl font-bold mt-5 text-slate-200">Bio:</h1>
-            <h2 className="font-semibold bg-slate-100 rounded inline-block p-2 shadow w-96 mt-5 text-slate-900">
-              {user.bio}
-            </h2>
+            {user.bio ? (
+              <h2 className="font-semibold bg-slate-100 rounded inline-block p-2 shadow w-96 mt-5 text-slate-900">
+                {user.bio}
+              </h2>
+            ) : (
+              <h2 className="font-semibold bg-slate-900 rounded inline-block p-2 shadow w-96 mt-5 text-slate-100 border-2 border-slate-700">
+                {" "}
+                No bio yet? No problem! Enjoy being a captivating mystery for a
+                little while longer.
+              </h2>
+            )}
           </div>
         </div>
         <div className="text-center mt-5">
