@@ -29,7 +29,7 @@ const StoryBeginnings = ({ filteredStories }) => {
           )
         ) : (
           <>
-            <div className="text-slate-100  shadow-2xl mb-10 w-5/6 mx-auto md:w-1/2 text-center px-3 py-8 bg-slate-700 rounded-lg text-xl border-2 border-slate-800">
+            <div className="text-slate-100  shadow-2xl mb-10 w-5/6 mx-auto md:w-1/2 text-center px-3 py-8 bg-slate-700 rounded-lg text-xl border-2 border-slate-800 ">
               There are no existing stories with that title
             </div>
           </>
