@@ -490,7 +490,8 @@ const StoryEndingsComments = () => {
           .catch((error) => console.error("catch", error));
       }
     }
-  }, [storyEndingId, allCommentsForThisStoryEnding]);
+  }, [storyEndingId]);
+  // consider for dependency array --> allCommentsForThisStoryEnding
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
   //   if (token) {
